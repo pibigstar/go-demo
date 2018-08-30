@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net"
 	"os"
-	"log"
 )
 
 // 存放客户端连接切片
@@ -51,7 +51,7 @@ func main() {
 			name := string(data[:length])
 			connName := name + " enter the room"
 			// 通知其他客户端 我进来了
-			notify(con,connName)
+			notify(con, connName)
 
 			// 监听其他客户端的消息
 			for {
@@ -59,16 +59,16 @@ func main() {
 				if err != nil {
 					log.Printf("client : %s quit", con.RemoteAddr())
 					con.Close()
-					disconnect(con,name)
+					disconnect(con, name)
 					return
 				}
 				res := string(data[:length])
-				msg := fmt.Sprintf("%s said: %s",name,res)
+				msg := fmt.Sprintf("%s said: %s", name, res)
 				fmt.Println(msg)
 
-				res = fmt.Sprintf("You said:%s",res)
+				res = fmt.Sprintf("You said:%s", res)
 				con.Write([]byte(res))
-				notify(con,msg)
+				notify(con, msg)
 			}
 		}(conn)
 	}
@@ -84,7 +84,7 @@ func notify(conn net.Conn, msg string) {
 }
 
 // 断开连接，并通知其他客户端
-func disconnect(conn net.Conn,name string) {
+func disconnect(conn net.Conn, name string) {
 	for index, con := range clients {
 		if con.RemoteAddr() == conn.RemoteAddr() {
 			// 移除此 客户端_

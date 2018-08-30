@@ -1,11 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"log"
 	"net"
 	"os"
-	"bufio"
-	"log"
 )
 
 var (
@@ -35,16 +35,16 @@ func main() {
 	go read(conn)
 
 	for {
-		fmt.Scanf("%s",&senddata)
+		fmt.Scanf("%s", &senddata)
 
-		if string(senddata)== "quit" {
+		if string(senddata) == "quit" {
 			fmt.Println("quit the client.......")
 			os.Exit(-1)
 		}
 
 		len, err := conn.Write(senddata)
-		if err!=nil {
-			fmt.Errorf("Error when send server:%s",len)
+		if err != nil {
+			fmt.Errorf("Error when send server:%s", len)
 			os.Exit(0)
 		}
 	}
@@ -56,7 +56,7 @@ func read(conn net.Conn) {
 
 		length, err := conn.Read(receivedata)
 		if err != nil {
-			log.Printf("Error when receive from server:%s",err)
+			log.Printf("Error when receive from server:%s", err)
 			os.Exit(0)
 		}
 		data := string(receivedata[:length])
