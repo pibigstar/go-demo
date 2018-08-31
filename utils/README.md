@@ -6,3 +6,4 @@
 - retry : 方法重试
 - errutil : 异常工具类
 - xml : 对象转 xml 文本
+- zip : zip文件解压与压缩

@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="59185dd1-80be-4910-afe4-d46aaaf4d2be" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcp/client.go" beforeDir="false" afterPath="$PROJECT_DIR$/tcp/client.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcp/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/tcp/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/utils/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/zip/zip_demo.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/zip/zip_demo.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,29 +22,29 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="36" />
+          <entry key="go" value="37" />
           <entry key="md" value="7" />
           <entry key="text" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="36" />
+          <entry key="Go" value="37" />
           <entry key="Markdown" value="7" />
           <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="6777" />
-          <entry key="md" value="276" />
+          <entry key="go" value="7510" />
+          <entry key="md" value="300" />
           <entry key="text" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="6777" />
-          <entry key="Markdown" value="276" />
+          <entry key="Go" value="7510" />
+          <entry key="Markdown" value="300" />
           <entry key="PLAIN_TEXT" value="23" />
         </counts>
       </usages-collector>
@@ -73,8 +73,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/xml/xml_main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+            <state relative-caret-position="393">
+              <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
               <folding>
                 <element signature="e#14#54#0" expanded="true" />
               </folding>
@@ -82,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/restful/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="49">
+              <caret line="44" column="49" lean-forward="true" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
               <folding>
                 <element signature="e#14#79#0" expanded="true" />
               </folding>
@@ -97,10 +97,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/zip/zip_demo.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+            <state relative-caret-position="41">
+              <caret line="70" column="16" lean-forward="true" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
               <folding>
-                <element signature="e#14#37#0" expanded="true" />
+                <element signature="e#14#84#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/utils/encrypt/base64.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+              <folding>
+                <element signature="e#14#50#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -110,8 +122,8 @@
         <entry file="file://$PROJECT_DIR$/utils/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="105">
-                <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+              <first_editor relative-caret-position="120">
+                <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
               </first_editor>
               <second_editor />
             </state>
@@ -171,10 +183,12 @@
         <option value="$PROJECT_DIR$/utils/errutil/print_stack.go" />
         <option value="$PROJECT_DIR$/singleton/README.md" />
         <option value="$PROJECT_DIR$/mail/send_email.go" />
-        <option value="$PROJECT_DIR$/utils/README.md" />
         <option value="$PROJECT_DIR$/utils/xml/xml_main.go" />
         <option value="$PROJECT_DIR$/restful/main.go" />
         <option value="$PROJECT_DIR$/utils/zip/zip_demo.go" />
+        <option value="$PROJECT_DIR$/utils/README.md" />
+        <option value="$PROJECT_DIR$/utils/encryption/base64.go" />
+        <option value="$PROJECT_DIR$/utils/encrypt/base64.go" />
       </list>
     </option>
   </component>
@@ -185,8 +199,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="218" />
-    <option name="y" value="26" />
+    <option name="x" value="160" />
+    <option name="y" value="172" />
     <option name="width" value="1480" />
     <option name="height" value="977" />
   </component>
@@ -205,11 +219,6 @@
             <path>
               <item name="go-demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="go-demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="go-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="go-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="restful" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="go-demo" type="b2602c69:ProjectViewProjectNode" />
@@ -248,23 +257,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go">
+  <component name="RunManager" selected="Go Build.go build base64.go">
+    <configuration name="go build base64.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="go-demo" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/utils/encrypt/base64.go" />
+      <package value="go-demo" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build client.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="go-demo" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/tcp/client.go" />
-      <package value="go-demo" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build client_main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="go-demo" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/net/client_main.go" />
       <package value="go-demo" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -300,19 +309,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build client_main.go" />
       <item itemvalue="Go Build.go build client.go" />
       <item itemvalue="Go Build.go build server.go" />
       <item itemvalue="Go Build.go build xml_main.go" />
       <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Build.go build base64.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build base64.go" />
         <item itemvalue="Go Build.go build main.go" />
         <item itemvalue="Go Build.go build xml_main.go" />
         <item itemvalue="Go Build.go build client.go" />
         <item itemvalue="Go Build.go build server.go" />
-        <item itemvalue="Go Build.go build client_main.go" />
       </list>
     </recent_temporary>
   </component>
@@ -326,7 +335,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="218" y="26" width="1480" height="977" extended-state="0" />
+    <frame x="160" y="172" width="1480" height="977" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -335,11 +344,11 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" weight="0.3299435" />
-      <window_info active="true" anchor="bottom" id="Terminal" sideWeight="0.4993046" visible="true" weight="0.32881355" />
+      <window_info anchor="bottom" id="Terminal" sideWeight="0.4993046" weight="0.32881355" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.5006954" side_tool="true" weight="0.32881355" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32881355" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32881355" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4993046" weight="0.34350282" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -633,42 +642,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="105">
-            <caret line="7" column="18" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/restful/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="49">
+          <caret line="44" column="49" lean-forward="true" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
+          <folding>
+            <element signature="e#14#79#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/utils/xml/xml_main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        <state relative-caret-position="393">
+          <caret line="47" column="25" lean-forward="true" selection-start-line="47" selection-start-column="25" selection-end-line="47" selection-end-column="25" />
           <folding>
             <element signature="e#14#54#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/utils/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="120">
+            <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils/zip/zip_demo.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state relative-caret-position="41">
+          <caret line="70" column="16" lean-forward="true" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
           <folding>
-            <element signature="e#14#37#0" expanded="true" />
+            <element signature="e#14#84#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/restful/main.go">
+    <entry file="file://$PROJECT_DIR$/utils/encrypt/base64.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="135">
+          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding>
-            <element signature="e#14#79#0" expanded="true" />
+            <element signature="e#14#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
