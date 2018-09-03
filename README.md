@@ -1,8 +1,6 @@
 # go语言例子
 
 ```
-├── README.md
-├── demo.text
 ├── file
 │   ├── main.go
 │   └── rw
@@ -14,6 +12,8 @@
 │   ├── main.go
 │   └── server
 │       └── helloServer.go
+├── mail
+│   └── send_email.go
 ├── net
 │   ├── client
 │   │   └── talkClient.go
@@ -21,22 +21,44 @@
 │   ├── server
 │   │   └── talkServer.go
 │   └── server_main.go
+├── restful
+│   └── main.go
 ├── singleton
+│   ├── README.md
 │   ├── go_single.go
 │   └── other_single.go
+├── sort
+│   ├── sort_demo.go
+│   └── sort_struct
+│       └── sort.go
+├── spider
+│   └── spider.go
 ├── tcp
+│   ├── README.md
 │   ├── client.go
 │   └── server.go
 ├── test.text
-└── utils
-    ├── errutil
-    │   └── check_error.go
-    ├── json
-    │   └── json_demo.go
-    ├── retry
-    │   └── retry.go
-    └── time
-        └── time_format.go
+├── utils
+│   ├── README.md
+│   ├── encrypt
+│   │   ├── base64.go
+│   │   └── md5_util.go
+│   ├── errutil
+│   │   ├── check_error.go
+│   │   └── print_stack.go
+│   ├── flag
+│   │   └── flag_demo.go
+│   ├── json
+│   │   └── json_demo.go
+│   ├── retry
+│   │   └── retry.go
+│   ├── time
+│   │   └── time_format.go
+│   ├── xml
+│   │   └── xml_main.go
+│   └── zip
+│       └── zip_demo.go
+└── vendor
         
         
 ```
