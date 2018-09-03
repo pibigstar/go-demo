@@ -7,3 +7,5 @@
 - errutil : 异常工具类
 - xml : 对象转 xml 文本
 - zip : zip文件解压与压缩
+- encrypt: 使用md5加密，base64加密解密
+- flag : 命令行参数使用
