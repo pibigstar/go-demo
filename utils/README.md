@@ -9,3 +9,4 @@
 - zip : zip文件解压与压缩
 - encrypt: 使用md5加密，base64加密解密
 - flag : 命令行参数使用
+- cron : 定时任务
