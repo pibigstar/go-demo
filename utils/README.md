@@ -12,3 +12,4 @@
 - cron : 定时任务
 - string: 字符串使用
 - image: 图片常用操作
+- ip: 获取本地IP与公网IP

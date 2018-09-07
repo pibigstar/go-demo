@@ -17,7 +17,7 @@ func TimeFormat() string {
 func TestTimeParse()  {
 	t := time.Now()
 	format := t.Format("2006-01-02 15:04:05")
-	parse, err := time.Parse("2006-01-02 15:04:05", format)
+	parse, err := time.Parse(defaultTime, format)
 	if err!=nil {
 		log.Println("error:",err)
 	}
@@ -30,4 +30,8 @@ func main() {
 	log.Println(parse)
 	log.Println(time.Now().Format(defaultTime))
 	TestTimeParse()
+
+	// 获取当前时间戳
+	log.Println(time.Now().Unix())
+
 }
