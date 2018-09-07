@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-const fileName = "demo.text"
+const fileName = "file/demo.text"
 
 // 使用ioutil读取文件
 func ReadFile() {
