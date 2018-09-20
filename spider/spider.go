@@ -1,64 +1,90 @@
 package main
 
 import (
-	"github.com/PuerkitoBio/goquery"
-	"github.com/mnhkahn/maodou"
-	"github.com/mnhkahn/maodou/cygo"
-	"github.com/mnhkahn/maodou/dao"
-	"github.com/mnhkahn/maodou/models"
+	"encoding/xml"
+	"fmt"
+	"go-demo/spider/agent"
+	"io/ioutil"
 	"log"
-	"strconv"
+	"net/http"
+	"regexp"
+	"runtime"
 	"strings"
 )
 
-type Haixiu struct {
-	maodou.MaoDou
-}
+//chan中存入string类型的href属性,缓冲200
+var urlChannel = make(chan string, 200)
 
-func (this *Haixiu) Start() {
-	response, err := this.Cawl("http://www.douban.com/group/haixiuzu/discussion")
-	if err != nil {
-		log.Println("Error when cawl", err.Error())
+//以Must前缀的方法或函数都是必须保证一定能执行成功的,否则将引发一次panic
+var atagRegExp = regexp.MustCompile(`<a[^>]+[(href)|(HREF)]\s*\t*\n*=\s*\t*\n*[(".+")|('.+')][^>]*>[^<]*</a>`)
+
+func Spy(url string) {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Println("[E]", r)
+		}
+	}()
+	req, _ := http.NewRequest("GET", url, nil)
+	req.Header.Set("User-Agent", agent.GetRandomUserAgent())
+	client := http.DefaultClient
+	res, e := client.Do(req)
+	if e != nil {
+		fmt.Errorf("Get请求%s返回错误:%s", url, e)
+		return
 	}
-	this.Index(response)
-}
 
-func (this *Haixiu) Index(resp *maodou.Response) {
-	resp.Doc(`#content > div > div.article > div:nth-child(2) > table > tbody > tr > td.title > a`).Each(func(i int, s *goquery.Selection) {
-		href, has := s.Attr("href")
-		if has {
-			res, err := this.Cawl(href)
-			if err != nil {
-				log.Println("Error when cawl", err)
+	if res.StatusCode == 200 {
+		body := res.Body
+		defer body.Close()
+		bodyByte, _ := ioutil.ReadAll(body)
+		resStr := string(bodyByte)
+		atag := atagRegExp.FindAllString(resStr, -1)
+		for _, a := range atag {
+			href, _ := GetHref(a)
+			if strings.Contains(href, "article/details/") {
+				fmt.Println("☆", href)
+			} else {
+				fmt.Println("□", href)
 			}
-			this.Detail(res)
+			urlChannel <- href
 		}
-	})
-}
-
-func (this *Haixiu) Detail(resp *maodou.Response) {
-	res := new(models.Result)
-	res.Id = strconv.ParseUint(strings.Split(resp.Url, "/")[5], 64, 11)
-	res.Title = resp.Doc("#content > h1").Text()
-	res.Author = resp.Doc("#content > div > div.article > div.topic-content.clearfix > div.topic-doc > h3 > span.from > a").Text()
-	res.Figure, _ = resp.Doc("#link-report > div.topic-content > div.topic-figure.cc > img").Attr("src")
-	res.Link = resp.Url
-	res.Source = "www.douban.com/group/haixiuzu/discussion"
-	res.ParseDate = cygo.Now()
-	res.Description = "haixiuzu"
-	this.Result(res)
-}
-
-func (this *Haixiu) Result(result *models.Result) {
-	if result.Figure != "" {
-		Dao, err := dao.NewDao("duoshuo", `{"short_name":"cyeam","secret":"df66f048bd56cba5bf219b51766dec0d"}`)
-		if err != nil {
-			panic(err)
-		}
-		Dao.AddResult(result)
 	}
+}
+
+func GetHref(atag string) (href, content string) {
+	inputReader := strings.NewReader(atag)
+	decoder := xml.NewDecoder(inputReader)
+	for t, err := decoder.Token(); err == nil; t, err = decoder.Token() {
+		switch token := t.(type) {
+		// 处理元素开始（标签）
+		case xml.StartElement:
+			for _, attr := range token.Attr {
+				attrName := attr.Name.Local
+				attrValue := attr.Value
+				if strings.EqualFold(attrName, "href") || strings.EqualFold(attrName, "HREF") {
+					href = attrValue
+				}
+			}
+			// 处理元素结束（标签）
+		case xml.EndElement:
+			// 处理字符数据（这里就是元素的文本）
+		case xml.CharData:
+			content = string([]byte(token))
+		default:
+			href = ""
+			content = ""
+		}
+	}
+	return href, content
 }
 
 func main() {
-	maodou.Register(new(Haixiu), 30)
+	go Spy("http:/blog.csdn.net")
+	//go Spy("http://www.iteye.com/")
+	for url := range urlChannel {
+		//通过runtime可以获取当前运行时的一些相关参数等
+		fmt.Println("routines num = ", runtime.NumGoroutine(), "chan len = ", len(urlChannel))
+		go Spy(url)
+	}
+	fmt.Println("a")
 }
