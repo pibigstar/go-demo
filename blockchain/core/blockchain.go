@@ -48,8 +48,7 @@ func (bc *BlockChain) isValid(block *Block) bool {
 	if prevBlock.Index != block.Index-1 {
 		return false
 	}
-
-	if prevBlock.Hash != block.PrevBlockHash {
+	if prevBlock.Hash != block.prevBlockHash {
 		return false
 	}
 
