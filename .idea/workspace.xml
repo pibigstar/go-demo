@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="59185dd1-80be-4910-afe4-d46aaaf4d2be" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spider/spider.go" beforeDir="false" afterPath="$PROJECT_DIR$/spider/spider.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,16 +14,17 @@
     <session id="1305242835">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.1" value="2" />
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.1" value="3" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="go" value="67" />
+          <entry key="gitignore" value="1" />
+          <entry key="go" value="76" />
           <entry key="jpg" value="2" />
           <entry key="md" value="13" />
           <entry key="text" value="2" />
@@ -32,29 +32,31 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Go" value="67" />
+          <entry key="Go" value="76" />
           <entry key="Image" value="2" />
           <entry key="Markdown" value="13" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="PLAIN_TEXT" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="12054" />
+          <entry key="gitignore" value="7" />
+          <entry key="go" value="14343" />
           <entry key="md" value="450" />
           <entry key="text" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="12054" />
+          <entry key="Go" value="14343" />
           <entry key="Markdown" value="450" />
-          <entry key="PLAIN_TEXT" value="23" />
+          <entry key="PLAIN_TEXT" value="30" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger">
         <counts>
-          <entry key=".append" value="2" />
+          <entry key=".append" value="5" />
+          <entry key=".len" value="1" />
           <entry key=".p" value="1" />
           <entry key=".print" value="1" />
           <entry key=".println" value="1" />
@@ -65,43 +67,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/utils/flag/flag_demo.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="14" column="16" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="16" />
-              <folding>
-                <element signature="e#14#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/suit_demo.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spider/spider.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-              <folding>
-                <element signature="e#14#135#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reflect/reflact_demo.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+            <state relative-caret-position="94">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#14#44#0" expanded="true" />
               </folding>
@@ -110,19 +79,52 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spider/agent/user_agents.go">
+        <entry file="file://$PROJECT_DIR$/blockchain/core/block.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+            <state relative-caret-position="161">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="e#14#65#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/time/time.go">
+        <entry file="file://$PROJECT_DIR$/blockchain/test/block_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16575">
-              <caret line="1105" column="14" selection-start-line="1105" selection-start-column="14" selection-end-line="1105" selection-end-column="14" />
+            <state relative-caret-position="315">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blockchain/server/server.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+              <folding>
+                <element signature="e#14#93#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blockchain/core/blockchain.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="6" selection-start-column="6" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -143,12 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/file/rwfile.go" />
-        <option value="$PROJECT_DIR$/file/demo.text" />
-        <option value="$PROJECT_DIR$/file/read/rwfile.go" />
-        <option value="$PROJECT_DIR$/file/main.go" />
-        <option value="$PROJECT_DIR$/http/server/helloServer.go" />
-        <option value="$PROJECT_DIR$/utils/errutil/check_error.go" />
         <option value="$PROJECT_DIR$/http/get_post/get_demo.go" />
         <option value="$PROJECT_DIR$/http/main.go" />
         <option value="$PROJECT_DIR$/http/get_post/post_demo.go" />
@@ -194,6 +190,12 @@
         <option value="$PROJECT_DIR$/spider/user_agents.go" />
         <option value="$PROJECT_DIR$/spider/spider.go" />
         <option value="$PROJECT_DIR$/reflect/reflact_demo.go" />
+        <option value="$PROJECT_DIR$/blockchain/test/block_test.go" />
+        <option value="$PROJECT_DIR$/http/server/helloServer.go" />
+        <option value="$PROJECT_DIR$/blockchain/server/server.go" />
+        <option value="$PROJECT_DIR$/blockchain/core/block.go" />
+        <option value="$PROJECT_DIR$/blockchain/core/blockchain.go" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -204,8 +206,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="238" />
-    <option name="y" value="23" />
+    <option name="x" value="132" />
+    <option name="y" value="35" />
     <option name="width" value="1521" />
     <option name="height" value="977" />
   </component>
@@ -264,27 +266,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.go build reflact_demo.go">
-    <configuration name="go build fire_base_demo.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="go-demo" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/firebase/fire_base_demo.go" />
-      <package value="go-demo" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build image_demo.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="go-demo" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/utils/images/image_demo.go" />
-      <package value="go-demo" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Go Test.Test_BlockChain in go-demo/blockchain/test">
     <configuration name="go build reflact_demo.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="go-demo" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -305,32 +287,86 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go build xlsx_demo.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_Block in go-demo/blockchain/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-demo" />
-      <working_directory value="$PROJECT_DIR$/" />
+      <working_directory value="$PROJECT_DIR$/blockchain/test" />
       <go_parameters value="-i" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/xlsx/xlsx_demo.go" />
-      <package value="go-demo" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="go-demo/blockchain/test" />
       <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^Test_Block$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Test_BlockChain in go-demo/blockchain/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-demo" />
+      <working_directory value="$PROJECT_DIR$/blockchain/test" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="go-demo/blockchain/test" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^Test_BlockChain$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test go-demo/blockchain/test" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-demo" />
+      <working_directory value="$PROJECT_DIR$/blockchain/test" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="go-demo/blockchain/test" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build xlsx_demo.go" />
-      <item itemvalue="Go Build.go build image_demo.go" />
-      <item itemvalue="Go Build.go build fire_base_demo.go" />
       <item itemvalue="Go Build.go build spider.go" />
       <item itemvalue="Go Build.go build reflact_demo.go" />
+      <item itemvalue="Go Test.go test go-demo/blockchain/test" />
+      <item itemvalue="Go Test.Test_Block in go-demo/blockchain/test" />
+      <item itemvalue="Go Test.Test_BlockChain in go-demo/blockchain/test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.Test_BlockChain in go-demo/blockchain/test" />
+        <item itemvalue="Go Test.Test_Block in go-demo/blockchain/test" />
+        <item itemvalue="Go Test.go test go-demo/blockchain/test" />
         <item itemvalue="Go Build.go build reflact_demo.go" />
         <item itemvalue="Go Build.go build spider.go" />
-        <item itemvalue="Go Build.go build fire_base_demo.go" />
-        <item itemvalue="Go Build.go build image_demo.go" />
-        <item itemvalue="Go Build.go build xlsx_demo.go" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="TestHistory">
+    <history-entry file="go_test_go-demo_blockchain_test - 2018.09.25 at 16h 25m 10s.xml">
+      <configuration name="go test go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_go-demo_blockchain_test - 2018.09.25 at 16h 25m 55s.xml">
+      <configuration name="go test go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_go-demo_blockchain_test - 2018.09.25 at 16h 29m 14s.xml">
+      <configuration name="go test go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_Block_in_go-demo_blockchain_test - 2018.09.25 at 16h 29m 56s.xml">
+      <configuration name="Test_Block in go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_BlockChain_in_go-demo_blockchain_test - 2018.09.25 at 16h 58m 49s.xml">
+      <configuration name="Test_BlockChain in go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_BlockChain_in_go-demo_blockchain_test - 2018.09.25 at 16h 59m 36s.xml">
+      <configuration name="Test_BlockChain in go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_BlockChain_in_go-demo_blockchain_test - 2018.09.25 at 17h 04m 39s.xml">
+      <configuration name="Test_BlockChain in go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_BlockChain_in_go-demo_blockchain_test - 2018.09.25 at 17h 05m 06s.xml">
+      <configuration name="Test_BlockChain in go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="Test_BlockChain_in_go-demo_blockchain_test - 2018.09.25 at 18h 14m 37s.xml">
+      <configuration name="Test_BlockChain in go-demo/blockchain/test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -342,15 +378,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="238" y="23" width="1521" height="977" extended-state="0" />
-    <editor active="true" />
+    <frame x="132" y="35" width="1521" height="977" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.224476" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22718053" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299435" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32881355" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32881355" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4993046" weight="0.34350282" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -358,7 +393,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3299435" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4993046" weight="0.32881355" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.4993046" visible="true" weight="0.32881355" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5006954" side_tool="true" weight="0.32881355" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -373,62 +408,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/net/server_main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="true" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/net/client_main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/net/server/talkServer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/retry/retry.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/utils/json/json_demo.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="43" column="42" selection-start-line="43" selection-start-column="42" selection-end-line="43" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/singleton/other_single.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/singleton/go_single.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/net/client/talkClient.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="26" column="46" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../github.com/smallnest/rpcx/log/default_logger.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -688,13 +667,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/flag/flag_demo.go">
+    <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/reflect/value.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="16" />
-          <folding>
-            <element signature="e#14#39#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="189">
+          <caret line="774" selection-start-line="774" selection-end-line="774" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spider/spider.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18">
+          <caret line="6" column="15" lean-forward="true" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -702,6 +685,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/flag/flag_demo.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+          <folding>
+            <element signature="e#14#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -714,35 +707,80 @@
     </entry>
     <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/time/time.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16575">
+        <state relative-caret-position="517">
           <caret line="1105" column="14" selection-start-line="1105" selection-start-column="14" selection-end-line="1105" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spider/spider.go">
+    <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/builtin/builtin.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding>
-            <element signature="e#14#135#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="189">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/reflect/value.go">
+    <entry file="file:///usr/local/Cellar/go/1.10.3/libexec/src/net/http/server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="774" selection-start-line="774" selection-end-line="774" />
+        <state relative-caret-position="185">
+          <caret line="1725" selection-start-line="1725" selection-end-line="1725" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http/server/helloServer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blockchain/server/server.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="e#14#93#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/reflect/reflact_demo.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        <state relative-caret-position="94">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#14#44#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blockchain/test/block_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blockchain/core/block.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#14#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blockchain/core/blockchain.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6" selection-start-column="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
