@@ -6,6 +6,7 @@ import (
 )
 
 // 创建一个简单的web服务器
+// 首字母必须大写
 func HelloServer() {
 	http.HandleFunc("/hello", HelloHandler)
 	http.ListenAndServe(":8088", nil)
