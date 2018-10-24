@@ -1,4 +1,4 @@
-package main
+package ip
 
 import (
 	"net"
@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"io/ioutil"
 	"log"
+	"strings"
 )
 // 获取公网地址
 func GetInternetIP() string  {
@@ -16,7 +17,7 @@ func GetInternetIP() string  {
 	}
 	defer resp.Body.Close()
 	content, _ := ioutil.ReadAll(resp.Body)
-	return string(content)
+	return strings.TrimSpace(string(content))
 }
 // 获取本地IP地址
 func GetLocalIp() string {
@@ -29,7 +30,7 @@ func GetLocalIp() string {
 		// 检查ip地址判断是否回环地址
 		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
 			if ipnet.IP.To4() != nil {
-				return ipnet.IP.String()
+				return strings.TrimSpace(ipnet.IP.String())
 			}
 		}
 	}
