@@ -28,3 +28,22 @@
 new DataInputStream(new FileInputStream("test.txt");
 ```
 2. 人穿衣服，人则为被装饰对象，衣服为装饰器
+
+## 3. 适配器模式 (adaptor)
+> 适配器适合用于解决新旧系统（或新旧接口）之间的兼容问题，而不建议在一开始就直接使用
+
+**意图:**
+适配器模式将一个类的接口，转换成客户期望的另一个接口。适配器让原本接口不兼容的类可以合作无间
+
+**关键代码:**
+适配器中持有旧接口对象，并实现新接口
+
+- 应用实例:
+1. 充电器转接口头
+2. 安卓的ListView
+```java
+ListView lv=(ListView) findViewById(R.id.lv);
+String []data ={"hi","nihao","yes","no"};
+ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+lv.setAdapter(adapter);
+```
