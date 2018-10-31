@@ -8,7 +8,7 @@
 **关键代码:**
 实现同一个接口
 
-- 应用实例： 
+**应用实例:**
 1. 主题的更换，每个主题都是一种策略
 2. 旅行的出游方式，选择骑自行车、坐汽车，每一种旅行方式都是一个策略。 
 3. JAVA AWT 中的 LayoutManager。
@@ -22,7 +22,7 @@
 **关键代码:**
 装饰器和被装饰对象实现同一个接口，装饰器中使用了被装饰对象
 
-- 应用实例:
+**应用实例:**
 1. JAVA中的IO流 
 ```java
 new DataInputStream(new FileInputStream("test.txt");
@@ -38,7 +38,7 @@ new DataInputStream(new FileInputStream("test.txt");
 **关键代码:**
 适配器中持有旧接口对象，并实现新接口
 
-- 应用实例:
+**应用实例:**
 1. 充电器转接口头
 2. 安卓的ListView
 ```java
@@ -47,3 +47,18 @@ String []data ={"hi","nihao","yes","no"};
 ArrayAdapter<String> adapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
 lv.setAdapter(adapter);
 ```
+
+## 4. 单例 (singleton)
+**意图:**
+使程序运行期间只存在一个实例对象
+
+## 5. 观察者模式 (observer)
+**意图:**
+定义对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。
+
+**关键代码:**
+被观察者持有了集合存放观察者(收通知的为观察者)
+
+**应用实例:**
+1. 报纸订阅，报社为被观察者，订阅的人为观察者
+2. MVC模式，当model改变时，View视图会自动改变，model为被观察者，View为观察者
