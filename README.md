@@ -1,4 +1,5 @@
 # go语言例子
+[![Build Status](https://travis-ci.org/pibigstar/go-demo.svg?branch=master)](https://travis-ci.org/pibigstar/go-demo)
 
 - blockchain: 一个简单的区块链项目
 - design: Go实现常用设计模式
