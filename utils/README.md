@@ -12,4 +12,11 @@
 - cron : 定时任务
 - string: 字符串使用
 - image: 图片常用操作
-- ip: 获取本地IP与公网IP
+- ip: 获取本地IP与公网IP并得到地址
+- uuid: 获取不重复的uuid
+- encrypt: 加密工具类
+- name: 自动生成姓名
+- pool: 批量操作线程池
+- token: jwt加密token
+- metadata: 上下文Context操作
+

@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func main()  {
+func main() {
 
 	random := uuid.NewRandom()
 	log.Println(random)
