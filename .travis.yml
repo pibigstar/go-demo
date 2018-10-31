@@ -1,0 +1,24 @@
+# 执行语言 go
+language: go
+
+
+# true表示不执行任何脚本，状态直接设为成功。
+
+# 安装脚本
+# install: ./script/build install
+install: true
+
+
+# 执行脚本
+#script:
+#  - go_test.go
+#  - main_test.go
+script: true
+
+#  before_install：install 阶段之前执行
+#  before_script：script 阶段之前执行
+#  after_failure：script 阶段失败时执行
+#  after_success：script 阶段成功时执行
+#  before_deploy：deploy 步骤之前执行
+#  after_deploy：deploy 步骤之后执行
+#  after_script：script 阶段之后执行
