@@ -5,7 +5,7 @@
 - design: Go实现常用设计模式
 - elastic: Go操作elasticSearch
 - http: http相关操作
-- mai了: Go发送邮件
+- mail: Go发送邮件
 - mock: gomock的使用
 - multiconfig: Go读取配置文件
 - net: Go写一个简单的聊天程序
