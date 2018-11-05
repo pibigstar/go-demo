@@ -1,43 +1,59 @@
 package template
 
+import "fmt"
 
 type Cooker interface {
 	open()
 	fire()
-	doCook(name string)
+	cooke()
 	outfire()
 	close()
 }
 
-
-type xihongshi struct {
-
+// 类似于一个抽象类
+type CookMenu struct {
 }
 
-func (xihongshi) doCook(name string) {
-	panic("implement me")
+func (CookMenu) open() {
+	fmt.Println("打开开关")
 }
 
-func (xihongshi) open() {
-	panic("implement me")
+func (CookMenu) fire() {
+	fmt.Println("开火")
+}
+// 做菜，交给具体的子类实现
+func (CookMenu) cooke() {
 }
 
-func (xihongshi) fire() {
-	panic("implement me")
+func (CookMenu) outfire() {
+	fmt.Println("关火")
 }
 
-func (xihongshi) outfire() {
-	panic("implement me")
+func (CookMenu) close() {
+	fmt.Println("关闭开关")
 }
 
-func (xihongshi) close() {
-	panic("implement me")
+// 封装具体步骤
+func doCook(cook Cooker) {
+	cook.open()
+	cook.fire()
+	cook.cooke()
+	cook.outfire()
+	cook.close()
 }
 
-func (xi xihongshi) do(name string)  {
-	xi.open()
-	xi.fire()
-	xi.doCook(name)
-	xi.outfire()
-	xi.close()
+type XiHongShi struct {
+	CookMenu
+}
+
+func (*XiHongShi) cooke()  {
+	fmt.Println("做西红柿")
+}
+
+type ChaoJiDan struct {
+	CookMenu
+}
+
+func (ChaoJiDan) cooke()  {
+	fmt.Println("做炒鸡蛋")
 }
