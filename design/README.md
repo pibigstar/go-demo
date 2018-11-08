@@ -25,7 +25,7 @@
 **应用实例:**
 1. JAVA中的IO流 
 ```java
-new DataInputStream(new FileInputStream("test.txt");
+new DataInputStream(new FileInputStream("test.txt"));
 ```
 2. 人穿衣服，人则为被装饰对象，衣服为装饰器
 
@@ -90,5 +90,13 @@ lv.setAdapter(adapter);
 1. 做饭，打开煤气，开火，（做饭）， 关火，关闭煤气。除了做饭其他步骤都是相同的，抽到抽象类中实现
 2. spring 中对 Hibernate 的支持，将一些已经定好的方法封装起来，比如开启事务、获取 Session、关闭 Session 
 
+## 8. 外观模式 (facade)
+**意图:**
+提供了一个统一的接口，用来访问子系统中的一群接口。外观定义了一个高层接口，让子系统更容易使用。
 
+**关键代码:**
+外观层中依次调用子系统的接口
 
+**应用实例:**
+1. 电脑开机时，点击开机按钮，但同时启动了CPU，内存，硬盘等
+2. 用 Java 开发我们经常使用三层结构：controller 控制器层，service 服务层，dao 数据访问层
