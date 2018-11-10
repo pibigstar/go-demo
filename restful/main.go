@@ -1,15 +1,16 @@
 package main
 
 import (
-	"net/http"
-	"github.com/gorilla/mux"
 	"encoding/json"
 	"log"
+	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 /**
-	restful APi风格
- */
+restful APi风格
+*/
 type Person struct {
 	ID        string   `json:"id,omitemty"`
 	Firstname string   `json:"firstname,omitempty"`
@@ -23,6 +24,7 @@ type Address struct {
 }
 
 var people []Person
+
 // 根据ID得到用户
 func GetPerson(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
@@ -34,10 +36,12 @@ func GetPerson(w http.ResponseWriter, req *http.Request) {
 	}
 	json.NewEncoder(w).Encode(people)
 }
+
 // 得到所有用户
 func GetPeople(w http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(w).Encode(people)
 }
+
 // 新增用户
 func PostPerson(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
@@ -47,6 +51,7 @@ func PostPerson(w http.ResponseWriter, req *http.Request) {
 	people = append(people, person)
 	json.NewEncoder(w).Encode(people)
 }
+
 // 删除用户
 func DeletePerson(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
