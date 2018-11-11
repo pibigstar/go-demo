@@ -9,6 +9,7 @@ import (
 
 /**
 排它锁sync.Mutex
+只能加一次锁，重复加锁会导致死锁
  */
 var locker = new(sync.Mutex)
 func main() {

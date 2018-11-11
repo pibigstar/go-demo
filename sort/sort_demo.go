@@ -1,13 +1,13 @@
 package main
 
 import (
-		"log"
+	"log"
 	"sort"
 )
 
 func main() {
 
-	ids := []int{1,5,6,11,19,2,7}
+	ids := []int{1, 5, 6, 11, 19, 2, 7}
 
 	//递增排序
 	//sort.Ints(ids)
@@ -17,7 +17,7 @@ func main() {
 	reverse := sort.Reverse(sort.IntSlice(ids))
 	sort.Sort(reverse)
 
-	for _,id := range ids{
+	for _, id := range ids {
 		log.Println(id)
 	}
 
