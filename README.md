@@ -4,6 +4,8 @@
 - blockchain: 一个简单的区块链项目
 - design: Go实现常用设计模式
 - elastic: Go操作elasticSearch
+- file: Go常见文件操作
+- goroutine: Go中goroutine超时处理
 - http: http相关操作
 - interview: Go易错知识点
 - mail: Go发送邮件
