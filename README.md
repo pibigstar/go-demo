@@ -11,6 +11,7 @@
 - mail: Go发送邮件
 - mock: gomock的使用
 - multiconfig: Go读取配置文件
+- mysql: Go链接MySQL
 - net: Go写一个简单的聊天程序
 - reflect: Go反射相关操作
 - regexp: Go正则表达式操作
