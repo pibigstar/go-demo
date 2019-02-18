@@ -43,7 +43,7 @@ func main()  {
 		}
 		now := time.Now()
 		date := now.Format("2006-01-02")
-		fmt.Printf(date+" 获得礼物:"+gift.Name)
+		fmt.Println(date+" 获得礼物:"+gift.Name)
 	})
 	c.Start()
 
