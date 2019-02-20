@@ -22,6 +22,16 @@ func main() {
 		log.Println("every 1s run ....")
 	})
 
+	// 每秒执行一次
+	c.AddFunc("*/1 * * * * *", func() {
+		log.Println("every 1s run ....")
+	})
+
+	// 凌晨2点执行
+	c.AddFunc("0 0 5 * * *", func() {
+		log.Println("when 5:0:0 执行....")
+	})
+
 	// 新建job任务
 	myJob := new(myJob)
 	c.AddJob("@every 1s",myJob)
