@@ -26,7 +26,7 @@ func main() {
 	client := http.Client{}
 	req,_ := http.NewRequest("GET","https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url=https%3A%2F%2Fhuifu.qq.com%2Findex.html&style=20&appid=715021417&proxy_url=https%3A%2F%2Fhuifu.qq.com%2Fproxy.html",nil)
 	response, err := client.Do(req)
-	if err != nil && response.Status != "200" {
+	if err != nil{
 		fmt.Printf("第一次请求失败：status:%s, err:%s \n",response.Status,err.Error())
 	}
 	ptLocalToken := processStr(response.Header["Set-Cookie"],"pt_local_token")
@@ -55,12 +55,12 @@ func main() {
 	if !flag {
 		return
 	}
-	// 3. 获取set-cookie
+	// 3. 获取clientkey
 	req, _ = http.NewRequest("GET", fmt.Sprintf("https://localhost.ptlogin2.qq.com:4301/pt_get_st?clientuin=%s&callback=ptui_getst_CB&r=0.7284667321181328&pt_local_tk=%s", user.Account, ptLocalToken), nil)
 	req.Header.Set("cookie",fmt.Sprintf("pt_local_token=%s",ptLocalToken))
 	req.Header.Set("referer","https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https%3A//qzs.qq.com/qzone/v6/portal/proxy.html&daid=5&&hide_title_bar=1&low_login=0&qlogin_auto_login=1&no_verifyimg=1&link_target=blank&appid=549000912&style=22&target=self&s_url=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&pt_qr_app=%E6%89%8B%E6%9C%BAQQ%E7%A9%BA%E9%97%B4&pt_qr_link=http%3A//z.qzone.com/download.html&self_regurl=https%3A//qzs.qq.com/qzone/v6/reg/index.html&pt_qr_help_link=http%3A//z.qzone.com/download.html&pt_no_auth=1")
 	res, err := client.Do(req)
-	if err != nil || res.Status != "200 OK" {
+	if err != nil{
 		fmt.Printf("第三次请求失败：status:%s, err:%s \n",res.Status,err.Error())
 	}
 	clientkey := processStr(res.Header["Set-Cookie"],"clientkey")
@@ -72,7 +72,7 @@ func main() {
 	req.Header.Set("referer","https://xui.ptlogin2.qq.com/cgi-bin/xlogin?proxy_url=https%3A//qzs.qq.com/qzone/v6/portal/proxy.html&daid=5&&hide_title_bar=1&low_login=0&qlogin_auto_login=1&no_verifyimg=1&link_target=blank&appid=549000912&style=22&target=self&s_url=https%3A%2F%2Fqzs.qzone.qq.com%2Fqzone%2Fv5%2Floginsucc.html%3Fpara%3Dizone&pt_qr_app=%E6%89%8B%E6%9C%BAQQ%E7%A9%BA%E9%97%B4&pt_qr_link=http%3A//z.qzone.com/download.html&self_regurl=https%3A//qzs.qq.com/qzone/v6/reg/index.html&pt_qr_help_link=http%3A//z.qzone.com/download.html&pt_no_auth=1")
 
 	res, err = client.Do(req)
-	if err != nil && res.Status != "200" {
+	if err != nil{
 		fmt.Printf("第四次请求失败：status:%s, err:%s \n",res.Status,err.Error())
 	}
 	// 获取uin和skey uin=o0741047261;Path=/;Domain=qq.com; skey=@FTNucEdxr;
