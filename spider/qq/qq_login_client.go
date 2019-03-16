@@ -129,7 +129,7 @@ func genderGTK(skey string) string {
 }
 
 func sendURL(saveurl string)  {
-	_, err := http.PostForm("http://139.199.64.253:9500/qzone",url.Values{"url": {saveurl}})
+	_, err := http.PostForm("http://127.0.0.1:9500/qzone",url.Values{"url": {saveurl}})
 	if err!=nil {
 		fmt.Println("记录信息失败:"+err.Error())
 	}
