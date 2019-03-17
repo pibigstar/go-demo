@@ -18,7 +18,7 @@
 - restful: Go实现restfulAPI风格
 - shell: Go执行shell命令
 - sort: Go切片排序
-- spider: Go写一个简单的爬虫
+- spider: Go写一个简单的爬虫(QQ协议登录，QQ自动领礼物demo)
 - sync: Go锁操作
 - tcp: tcp相关操作
 - test: Go测试相关操作
