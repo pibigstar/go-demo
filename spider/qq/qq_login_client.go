@@ -139,7 +139,7 @@ func processStr(maps []string, key string)string{
 	}
 	return ""
 }
-// 根据p_skey计算出g_tk
+// 根据skey计算出g_tk
 func genderGTK(skey string) int {
 	hash := 5381
 	len := len(skey)
