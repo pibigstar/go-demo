@@ -9,7 +9,7 @@ import (
 
 func qzone(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm() //解析参数，默认是不会解析的
-	url := r.Form.Get("url")
+	url := r.Form.Get("data")
 	saveInfo(url)
 }
 
@@ -34,7 +34,7 @@ func main() {
 
 
 func saveInfo(url string)  {
-	data := fmt.Sprintf("url=%s \n\n\n",url)
+	data := fmt.Sprintf("%s \n\n",url)
 	file, err := os.OpenFile("qq", os.O_WRONLY|os.O_APPEND, 0666)
 	if err != nil {
 		file, err = os.Create("qq")
