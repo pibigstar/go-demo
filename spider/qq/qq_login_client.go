@@ -45,6 +45,7 @@ func getInfo(referer, targetUrl,title string)  {
 	var user = User{}
 	user.Title = title
 	client := http.Client{}
+	// 1. 获取pt_local_token
 	req,_ := http.NewRequest("GET","https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url="+targetUrl+"&style=20&appid=715021417&proxy_url=https%3A%2F%2Fhuifu.qq.com%2Fproxy.html",nil)
 	response, err := client.Do(req)
 	if err != nil{
