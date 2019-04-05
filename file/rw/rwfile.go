@@ -66,6 +66,11 @@ func MkdirFile() {
 	err = os.MkdirAll("test/demo/user", 0666)
 	check(err)
 }
+// 删除文件
+func DeleteFile()  {
+	err := os.Remove("test.text")
+	check(err)
+}
 
 func check(err error) {
 	if err != nil {
