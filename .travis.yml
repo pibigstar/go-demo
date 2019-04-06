@@ -5,14 +5,15 @@ branches:
   - master
   - develop
 
-before_install:
-- go get -t -v ./...
-
-script:
-- go test -race -coverprofile=coverage.txt -covermode=atomic
-
-after_success:
-- bash <(curl -s https://codecov.io/bash)
+# 覆盖率检测
+#before_install:
+#- go get -t -v ./...
+#
+#script:
+#- go test -race -coverprofile=coverage.txt -covermode=atomic
+#
+#after_success:
+#- bash <(curl -s https://codecov.io/bash)
 
 # true表示不执行任何脚本，状态直接设为成功。
 # 安装脚本
