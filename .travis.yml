@@ -18,12 +18,12 @@ branches:
 # true表示不执行任何脚本，状态直接设为成功。
 # 安装脚本
 # install: ./script/build install
-# install: true
+install: true
 # 执行脚本
 #script:
 #  - go_test.go
 #  - main_test.go
-# script: true
+script: true
 #  before_install：install 阶段之前执行
 #  before_script：script 阶段之前执行
 #  after_failure：script 阶段失败时执行
