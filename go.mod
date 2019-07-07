@@ -19,6 +19,7 @@ require (
 	github.com/gorilla/mux v1.6.2
 	github.com/gosexy/to v0.0.0-20141221203644-c20e083e3123
 	github.com/iikira/BaiduPCS-Go v3.5.6+incompatible
+	github.com/iikira/Baidu-Login v1.2.1
 	github.com/jinzhu/gorm v1.9.2
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
 	github.com/json-iterator/go v1.1.5 // indirect
@@ -36,7 +37,7 @@ require (
 	github.com/olivere/elastic v6.2.11+incompatible // indirect
 	github.com/pborman/uuid v1.2.0
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
-	github.com/pkg/errors v0.8.1 // indirect
+	github.com/pkg/errors v0.8.1
 	github.com/rcrowley/go-metrics v0.0.0-20181016184325-3113b8401b8a // indirect
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113

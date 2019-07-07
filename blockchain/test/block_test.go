@@ -1,21 +1,20 @@
 package test
 
 import (
-	. "go-demo/blockchain/core"
+	"go-demo/blockchain/core"
+	"strconv"
 	"testing"
-  "strconv"
 )
 
-func Test_Block(t *testing.T) {
-
-	t.Log(GenerateGenesisBlock())
+func TestBlock(t *testing.T) {
+	t.Log(core.GenerateGenesisBlock())
 }
 
-func Test_BlockChain(t *testing.T) {
+func TestBlockChain(t *testing.T) {
 
-	chain := NewBlockChain()
+	chain := core.NewBlockChain()
 	for i := 0; i < 10; i++ {
-		chain.SendData("block:"+strconv.Itoa(i))
+		chain.SendData("block:" + strconv.Itoa(i))
 	}
 
 	for _, value := range chain.Blocks {
