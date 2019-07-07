@@ -25,10 +25,9 @@ func main() {
 	fmt.Println("Connection is OK.")
 	fmt.Print("Please enter your name:")
 	fmt.Scanf("%s", &senddata)
-	in, err := conn.Write([]byte(senddata))
+	_, err = conn.Write([]byte(senddata))
 	if err != nil {
-		log.Printf("Error when write to server:%s \n", in)
-		os.Exit(0)
+		log.Printf("Error when write to server:%s \n", err.Error())
 	}
 	fmt.Println("Now you can talk......")
 	// 启动一个goroutine监听从服务端传递过来的消息
@@ -42,10 +41,9 @@ func main() {
 			os.Exit(-1)
 		}
 
-		len, err := conn.Write(senddata)
+		_, err := conn.Write(senddata)
 		if err != nil {
-			fmt.Errorf("Error when send server:%s", len)
-			os.Exit(0)
+			fmt.Printf("Error when send server,err:%s \n", err.Error())
 		}
 	}
 }

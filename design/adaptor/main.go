@@ -10,12 +10,12 @@ type MusicPlayer interface {
 // 在网上找的已实现好的库 音乐播放
 // ( 旧接口）
 type ExistPlayer struct {
-
 }
-func (*ExistPlayer) playMp3(fileName string)  {
+
+func (*ExistPlayer) playMp3(fileName string) {
 	fmt.Println("play mp3 :", fileName)
 }
-func (*ExistPlayer) playWma(fileName string)  {
+func (*ExistPlayer) playWma(fileName string) {
 	fmt.Println("play wma :", fileName)
 }
 
@@ -24,8 +24,9 @@ type PlayerAdaptor struct {
 	// 持有一个旧接口
 	existPlayer ExistPlayer
 }
+
 // 实现新接口
-func (player *PlayerAdaptor) play(fileType string, fileName string)  {
+func (player *PlayerAdaptor) play(fileType string, fileName string) {
 	switch fileType {
 	case "mp3":
 		player.existPlayer.playMp3(fileName)
@@ -35,5 +36,3 @@ func (player *PlayerAdaptor) play(fileType string, fileName string)  {
 		fmt.Println("暂时不支持此类型文件播放")
 	}
 }
-
-

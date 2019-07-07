@@ -8,7 +8,7 @@ type BlockChain struct {
 
 /**
 创建一个新的区块链
- */
+*/
 func NewBlockChain() *BlockChain {
 	block := GenerateGenesisBlock()
 	bc := new(BlockChain)
@@ -18,7 +18,7 @@ func NewBlockChain() *BlockChain {
 
 /**
 根据data生成一个新的区块并加入到区块链中
- */
+*/
 func (bc *BlockChain) SendData(data string) {
 	preBlock := bc.Blocks[len(bc.Blocks)-1]
 	nextBlock := GenerateNewBlock(preBlock, data)
@@ -27,7 +27,7 @@ func (bc *BlockChain) SendData(data string) {
 
 /**
 将区块加入到区块链中
- */
+*/
 func (bc *BlockChain) AppendBlock(block *Block) {
 	if len(bc.Blocks) == 0 {
 		bc.Blocks = append(bc.Blocks, block)
@@ -42,7 +42,7 @@ func (bc *BlockChain) AppendBlock(block *Block) {
 
 /**
 验证区块是否有效
- */
+*/
 func (bc *BlockChain) isValid(block *Block) bool {
 	prevBlock := bc.Blocks[len(bc.Blocks)-1]
 	if prevBlock.Index != block.Index-1 {

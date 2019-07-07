@@ -2,7 +2,7 @@ package simple
 
 import "testing"
 
-func TestSimple(t *testing.T)  {
+func TestSimple(t *testing.T) {
 
 	// 创建工厂
 	girlFactory := new(GirlFactory)

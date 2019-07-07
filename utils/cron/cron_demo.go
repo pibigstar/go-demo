@@ -1,14 +1,14 @@
 package main
 
 import (
-	"log"
 	"github.com/robfig/cron"
+	"log"
 	"time"
 )
 
 /**
 定时任务
- */
+*/
 func main() {
 	c := cron.New()
 
@@ -34,18 +34,18 @@ func main() {
 
 	// 新建job任务
 	myJob := new(myJob)
-	c.AddJob("@every 1s",myJob)
+	c.AddJob("@every 1s", myJob)
 
 	c.Start()
 
-	time.Sleep(5*time.Second)
+	time.Sleep(5 * time.Second)
 
 	c.Stop()
 }
 
-type myJob struct {}
+type myJob struct{}
 
-func (myJob) Run ()  {
+func (myJob) Run() {
 	log.Println("job run ....")
 }
 

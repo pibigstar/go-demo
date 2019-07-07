@@ -1,12 +1,11 @@
 package decorator
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
-
-func TestDecorator(t *testing.T)  {
+func TestDecorator(t *testing.T) {
 
 	laowang := &laowang{}
 

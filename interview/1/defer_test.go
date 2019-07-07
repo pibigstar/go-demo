@@ -17,7 +17,7 @@ func TestDefer(t *testing.T) {
 	defer fmt.Println("2")
 	defer fmt.Println("3")
 	// 发生恐慌，结束执行，结束执行前会先运行defer中的语句
-	panic("发现恐慌")
+	//panic("发现恐慌")
 }
 
 /**

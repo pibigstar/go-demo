@@ -1,4 +1,4 @@
-package main
+package spider
 
 import (
 	"encoding/xml"
@@ -8,8 +8,8 @@ import (
 	"log"
 	"net/http"
 	"regexp"
-	"runtime"
 	"strings"
+	"testing"
 )
 
 //chan中存入string类型的href属性,缓冲200
@@ -18,7 +18,16 @@ var urlChannel = make(chan string, 200)
 //以Must前缀的方法或函数都是必须保证一定能执行成功的,否则将引发一次panic
 var atagRegExp = regexp.MustCompile(`<a[^>]+[(href)|(HREF)]\s*\t*\n*=\s*\t*\n*[(".+")|('.+')][^>]*>[^<]*</a>`)
 
-func Spy(url string) {
+func TestSpider(t *testing.T) {
+	go Spider("http:/blog.csdn.net")
+	//for url := range urlChannel {
+	//	//通过runtime可以获取当前运行时的一些相关参数等
+	//	fmt.Println("routines num = ", runtime.NumGoroutine(), "chan len = ", len(urlChannel))
+	//	go Spider(url)
+	//}
+}
+
+func Spider(url string) {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Println("[E]", r)
@@ -76,15 +85,4 @@ func GetHref(atag string) (href, content string) {
 		}
 	}
 	return href, content
-}
-
-func main() {
-	go Spy("http:/blog.csdn.net")
-	//go Spy("http://www.iteye.com/")
-	for url := range urlChannel {
-		//通过runtime可以获取当前运行时的一些相关参数等
-		fmt.Println("routines num = ", runtime.NumGoroutine(), "chan len = ", len(urlChannel))
-		go Spy(url)
-	}
-	fmt.Println("a")
 }

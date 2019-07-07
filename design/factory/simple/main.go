@@ -11,6 +11,7 @@ type Girl interface {
 // 胖女孩
 type FatGirl struct {
 }
+
 func (FatGirl) weight() {
 	fmt.Println("80kg")
 }
@@ -23,9 +24,7 @@ func (ThinGirl) weight() {
 	fmt.Println("50kg")
 }
 
-
 type GirlFactory struct {
-
 }
 
 func (*GirlFactory) CreateGirl(like string) Girl {

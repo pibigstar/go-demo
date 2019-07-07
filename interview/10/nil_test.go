@@ -18,6 +18,7 @@ func TestNil(t *testing.T) {
 	fmt.Println(&stu1 == nil)
 	fmt.Println(&stu1 == &stu2)
 }
+
 /**
 false
 false

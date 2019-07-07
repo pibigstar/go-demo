@@ -34,6 +34,7 @@ func TestHttpPost(t *testing.T) {
 	}
 	fmt.Println(string(body))
 }
+
 // 有复杂请求，设置Header，cookie等需要使用这个
 func TesHttpDo(t *testing.T) {
 	client := &http.Client{}
@@ -56,4 +57,3 @@ func TesHttpDo(t *testing.T) {
 	}
 	fmt.Println(string(body))
 }
-

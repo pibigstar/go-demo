@@ -79,7 +79,7 @@ func get(id string) {
 	if result.Found {
 		bytes, _ := result.Source.MarshalJSON()
 		json.Unmarshal(bytes, &employee)
-		fmt.Printf("%+v \n",employee)
+		fmt.Printf("%+v \n", employee)
 	}
 }
 

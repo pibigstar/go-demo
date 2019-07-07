@@ -27,13 +27,13 @@ func ReadAllDir(path string) {
 }
 
 // 这种会覆盖掉原先内容
-func WriteFile(fileName,data string) {
+func WriteFile(fileName, data string) {
 	err := ioutil.WriteFile(fileName, []byte(data), 0666)
 	check(err)
 }
 
 // 追加内容到文件末尾
-func AppendToFile(fileName,data string) {
+func AppendToFile(fileName, data string) {
 	file, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, 0666)
 	defer file.Close()
 	check(err)
@@ -53,15 +53,16 @@ func MkOneDir(dir string) {
 	check(err)
 	os.RemoveAll(dir)
 }
+
 // 创建多层文件夹
 func MkAllDir(dirs string) {
 	err := os.MkdirAll(dirs, 0666)
 	check(err)
-	os.RemoveAll(strings.Split(dirs,"/")[0])
+	os.RemoveAll(strings.Split(dirs, "/")[0])
 }
 
 // 删除文件
-func DeleteFile(fileName string)  {
+func DeleteFile(fileName string) {
 	err := os.Remove(fileName)
 	check(err)
 }

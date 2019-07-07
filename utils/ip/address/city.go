@@ -1,11 +1,11 @@
 package address
 
 import (
-	"io/ioutil"
-	"os"
 	"encoding/binary"
-	"net"
 	"fmt"
+	"io/ioutil"
+	"net"
+	"os"
 	"strings"
 )
 
@@ -104,4 +104,3 @@ func (db *City) Find(s string) ([]string, error) {
 
 	return nil, fmt.Errorf("%s", "not found")
 }
-

@@ -1,16 +1,17 @@
 package ip
 
 import (
-	"net"
 	"fmt"
-	"os"
-	"net/http"
 	"io/ioutil"
 	"log"
+	"net"
+	"net/http"
+	"os"
 	"strings"
 )
+
 // 获取公网地址
-func GetInternetIP() string  {
+func GetInternetIP() string {
 	resp, err := http.Get("http://myexternalip.com/raw")
 	if err != nil {
 		return ""
@@ -19,6 +20,7 @@ func GetInternetIP() string  {
 	content, _ := ioutil.ReadAll(resp.Body)
 	return strings.TrimSpace(string(content))
 }
+
 // 获取本地IP地址
 func GetLocalIp() string {
 	address, err := net.InterfaceAddrs()
@@ -37,7 +39,7 @@ func GetLocalIp() string {
 	return ""
 }
 
-func main()  {
-	log.Println("本地IP:",GetLocalIp())
-	log.Println("公网IP:",GetInternetIP())
+func main() {
+	log.Println("本地IP:", GetLocalIp())
+	log.Println("公网IP:", GetInternetIP())
 }

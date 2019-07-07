@@ -23,7 +23,7 @@ func main() {
 	listener, err := net.Listen("tcp", remote)
 	defer listener.Close()
 	if err != nil {
-		log.Println("Error when listen:%s", err.Error())
+		log.Printf("Error when listen:%s \n", err.Error())
 		os.Exit(-1)
 	}
 	fmt.Println("Ok!")
@@ -32,7 +32,7 @@ func main() {
 		conn, err := listener.Accept()
 		defer conn.Close()
 		if err != nil {
-			log.Println("Error when get connect:%s", err.Error())
+			log.Printf("Error when get connect:%s \n", err.Error())
 		}
 
 		clients = append(clients, conn)

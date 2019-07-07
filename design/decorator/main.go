@@ -6,11 +6,12 @@ type Person interface {
 	cost() int
 	show()
 }
+
 // 被装饰对象
 type laowang struct {
-
 }
-func (*laowang) show()  {
+
+func (*laowang) show() {
 	fmt.Println("赤裸裸的老王。。。")
 }
 func (*laowang) cost() int {
@@ -38,22 +39,20 @@ type Jacket struct {
 func (j *Jacket) cost() int {
 	return j.person.cost() + 10
 }
-func (j *Jacket) show()  {
+func (j *Jacket) show() {
 	// 执行已有的方法
 	j.person.show()
 	fmt.Println("穿上夹克的老王。。。")
 }
+
 // 帽子
 type Hat struct {
 	clothesDecorator
 }
+
 func (h *Hat) cost() int {
 	return h.person.cost() + 5
 }
 func (h *Hat) show() {
 	fmt.Println("戴上帽子的老王。。。")
 }
-
-
-
-

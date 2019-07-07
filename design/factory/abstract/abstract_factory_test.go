@@ -2,7 +2,7 @@ package abstract
 
 import "testing"
 
-func TestAbstractFactory(t *testing.T)  {
+func TestAbstractFactory(t *testing.T) {
 
 	store := new(GirlFactoryStore)
 	// 提供美国工厂

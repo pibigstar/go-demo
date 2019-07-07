@@ -10,7 +10,7 @@ func TestGetOne(t *testing.T) {
 	t.Log(GetOne())
 }
 
-func TestGetAll(t *testing.T)  {
+func TestGetAll(t *testing.T) {
 	t.Log(GetAll())
 }
 

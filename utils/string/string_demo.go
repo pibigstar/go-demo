@@ -25,41 +25,36 @@ func main() {
 
 	// 使用（多个）空格分割字符串
 	fields := strings.Fields(str)
-	log.Println("fields:",fields)
+	log.Println("fields:", fields)
 
 	// 以特殊字符进行分割
 	split := strings.Split(str, "o")
-	log.Println("split:",split)
-
+	log.Println("split:", split)
 
 	// 查看字符串是否包含 一个字符串
-	log.Println("是否包含字符串 llo  :",strings.Contains(str,"llo"))
+	log.Println("是否包含字符串 llo  :", strings.Contains(str, "llo"))
 
 	// 查看字符串是否以某个字符串开头
-	log.Println("是否以字符串 He 开头：",strings.HasPrefix(str,"He"))
+	log.Println("是否以字符串 He 开头：", strings.HasPrefix(str, "He"))
 
 	// 查看字符串是否以某个字符串结尾
-	log.Println("是否以字符串 星 开头：",strings.HasSuffix(str,"星"))
+	log.Println("是否以字符串 星 开头：", strings.HasSuffix(str, "星"))
 
 	// 查看字符串中另一个字符串出现的次数
-	log.Println("l 在str字符串中出现了：",strings.Count(str,"l"))
+	log.Println("l 在str字符串中出现了：", strings.Count(str, "l"))
 
 	// 返回字符串中另一个字符串出现的位置
-	log.Println("派 在str字符串中第一次出现的位置为：",strings.Index(str,"派"))
+	log.Println("派 在str字符串中第一次出现的位置为：", strings.Index(str, "派"))
 	// 字符串替换  n 为替换几次 如果为-1 则全部替换
-	log.Println("字符串替换：",strings.Replace(str,"l","g",-1))
-
+	log.Println("字符串替换：", strings.Replace(str, "l", "g", -1))
 
 	// 去除字符串首尾空格
-	log.Println("去空格：",strings.TrimSpace(str))
+	log.Println("去空格：", strings.TrimSpace(str))
 	// 去除字符串左边特定字符
-	log.Println("去左边：",strings.TrimLeft(str,"He"))
+	log.Println("去左边：", strings.TrimLeft(str, "He"))
 	// 去除字符串右边边特定字符
-	log.Println("去左边：",strings.TrimRight(str,"大星"))
+	log.Println("去左边：", strings.TrimRight(str, "大星"))
 	// 去除字符串首位的字符
-	log.Println("去首位：",strings.Trim(str,"H"))
-
-
-
+	log.Println("去首位：", strings.Trim(str, "H"))
 
 }

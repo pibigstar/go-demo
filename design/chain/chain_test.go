@@ -2,7 +2,7 @@ package chain
 
 import "testing"
 
-func TestChain(t *testing.T)  {
+func TestChain(t *testing.T) {
 	adHandler := &AdHandler{}
 	yellowHandler := &YellowHandler{}
 	sensitiveHandler := &SensitiveHandler{}

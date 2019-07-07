@@ -11,11 +11,11 @@ func TestCreateFile(t *testing.T) {
 }
 
 func TestWriteFile(t *testing.T) {
-	WriteFile(fileName,"Hello,World")
+	WriteFile(fileName, "Hello,World")
 }
 
 func TestAppendToFile(t *testing.T) {
-	AppendToFile(fileName,"Hello,Pibigstar")
+	AppendToFile(fileName, "Hello,Pibigstar")
 }
 
 func TestReadFile(t *testing.T) {
@@ -34,7 +34,3 @@ func TestReadAllDir(t *testing.T) {
 func TestDeleteFile(t *testing.T) {
 	DeleteFile(fileName)
 }
-
-
-
-

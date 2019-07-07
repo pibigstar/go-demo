@@ -1,11 +1,11 @@
 package main
 
 import (
-	"time"
 	"log"
+	"time"
 )
 
-const defaultTime  = "2006-01-02 15:04:05"
+const defaultTime = "2006-01-02 15:04:05"
 
 // 时间格式化
 func TimeFormat() string {
@@ -14,14 +14,14 @@ func TimeFormat() string {
 	return nowTime
 }
 
-func TestTimeParse()  {
+func TestTimeParse() {
 	t := time.Now()
 	format := t.Format("2006-01-02 15:04:05")
 	parse, err := time.Parse(defaultTime, format)
-	if err!=nil {
-		log.Println("error:",err)
+	if err != nil {
+		log.Println("error:", err)
 	}
-	log.Println("parse:",parse)
+	log.Println("parse:", parse)
 }
 
 func main() {

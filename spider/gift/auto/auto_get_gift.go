@@ -10,7 +10,11 @@ import (
 	"time"
 )
 
-func main()  {
+type Gift struct {
+	Name string `json:"name"`
+}
+//自动获取
+func main() {
 	c := cron.New()
 	// 每天凌晨5点执行一次
 	spec := "0 0 5 * * ?"
@@ -33,22 +37,22 @@ func main()  {
 		defer resp.Body.Close()
 		var gift = Gift{}
 		err = json.Unmarshal(body, &gift)
-		if err!=nil {
-			fmt.Println("JSON解析失败",err.Error())
+		if err != nil {
+			fmt.Println("JSON解析失败", err.Error())
 		}
 		now := time.Now()
 		date := now.Format("2006-01-02")
-		fmt.Println(date+" 获得礼物:"+gift.Name)
+		fmt.Println(date + " 获得礼物:" + gift.Name)
 	})
 	c.Start()
 
-	select{}
+	select {}
 }
 
 func getCookie2() string {
 	bytes, err := ioutil.ReadFile("cookie")
 	if err != nil {
-		fmt.Println("读取Cookie失败:",err.Error())
+		fmt.Println("读取Cookie失败:", err.Error())
 	}
 	return string(bytes)
 }

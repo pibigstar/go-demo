@@ -30,7 +30,7 @@ func main() {
 	}
 
 	sort.Sort(PersonSwapper{persons, func(p, q *Person) bool {
-		return p.Name < q.Name  //按姓名递增
+		return p.Name < q.Name //按姓名递增
 	}})
 
 }

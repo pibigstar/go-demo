@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 )
+
 // goroutine超时处理
 // 一个请求会触发调用三个服务，每个服务输出一个 int,
 // 请求要求结果为三个服务输出 int 之和
@@ -14,7 +15,7 @@ func main() {
 	// 超时上下文
 	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
 
-	data := make(chan int,3)
+	data := make(chan int, 3)
 	done := make(chan bool)
 	var result int
 
@@ -47,10 +48,10 @@ func main() {
 			// 当data通道有值时
 			case d := <-data:
 				result += d
-				fmt.Println("result",result)
+				fmt.Println("result", result)
 			// 当超过3秒时
 			case <-ctx.Done():
-				fmt.Println("time out, the result:",result)
+				fmt.Println("time out, the result:", result)
 				done <- true
 			}
 		}

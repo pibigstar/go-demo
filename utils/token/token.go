@@ -88,7 +88,7 @@ func ParseJwtToken(tokenString string) (*jwt.Token, error) {
 // 从token中拿到uid
 func GetUIDFromToken(tokenString string) (value interface{}, found bool) {
 	token, err := ParseJwtToken(tokenString)
-	if err!=nil {
+	if err != nil {
 		return nil, false
 	}
 

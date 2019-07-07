@@ -1,15 +1,12 @@
-package main
+package utils
 
 import (
 	"encoding/base64"
-	"fmt"
 )
 
 // 使用base64 加密
 func encrypt(msg string) string {
-
 	enctry := base64.StdEncoding.EncodeToString([]byte(msg))
-
 	return enctry
 }
 
@@ -19,11 +16,8 @@ func UnEncrypt(encrypt string) string {
 	return string(s)
 }
 
-
 func main() {
 
-	fmt.Println(encrypt("hello world"))
 
-	fmt.Println(UnEncrypt("aGVsbG8gd29ybGQ="))
 
 }

@@ -21,6 +21,7 @@ func (CookMenu) open() {
 func (CookMenu) fire() {
 	fmt.Println("开火")
 }
+
 // 做菜，交给具体的子类实现
 func (CookMenu) cooke() {
 }
@@ -46,7 +47,7 @@ type XiHongShi struct {
 	CookMenu
 }
 
-func (*XiHongShi) cooke()  {
+func (*XiHongShi) cooke() {
 	fmt.Println("做西红柿")
 }
 
@@ -54,6 +55,6 @@ type ChaoJiDan struct {
 	CookMenu
 }
 
-func (ChaoJiDan) cooke()  {
+func (ChaoJiDan) cooke() {
 	fmt.Println("做炒鸡蛋")
 }
