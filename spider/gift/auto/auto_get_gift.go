@@ -13,6 +13,7 @@ import (
 type Gift struct {
 	Name string `json:"name"`
 }
+
 //自动获取
 func main() {
 	c := cron.New()

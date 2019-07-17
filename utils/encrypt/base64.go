@@ -18,6 +18,4 @@ func UnEncrypt(encrypt string) string {
 
 func main() {
 
-
-
 }

@@ -5,25 +5,24 @@ branches:
   - master
   - develop
 
-# 覆盖率检测
-#before_install:
-#- go get -t -v ./...
-#
+env:
+- GO111MODULE=on
+
+# 代码风格检查
+before_script:
+- find . -name "*.go" | xargs gofmt -w
+- git diff --exit-code
+
 #script:
-#- go test -race -coverprofile=coverage.txt -covermode=atomic
+#- cd g
+#- GOARCH=386 go test -v ./...
+#- GOARCH=amd64 go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
 #
 #after_success:
 #- bash <(curl -s https://codecov.io/bash)
 
+
 # true表示不执行任何脚本，状态直接设为成功。
-# 安装脚本
-# install: ./script/build install
-install: true
-# 执行脚本
-#script:
-#  - go_test.go
-#  - main_test.go
-script: true
 #  before_install：install 阶段之前执行
 #  before_script：script 阶段之前执行
 #  after_failure：script 阶段失败时执行

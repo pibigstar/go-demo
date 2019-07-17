@@ -8,15 +8,14 @@ import (
 	"time"
 )
 
-
 var (
-	locker sync.Mutex
- 	rwLocker sync.RWMutex
+	locker   sync.Mutex
+	rwLocker sync.RWMutex
 )
 
 /**
-	排它锁sync.Mutex
-	只能加一次锁，重复加锁会导致死锁
+排它锁sync.Mutex
+只能加一次锁，重复加锁会导致死锁
 */
 func TestMutex(t *testing.T) {
 	go mutex("1")
@@ -31,7 +30,6 @@ func TestRWMutex(t *testing.T) {
 	time.Sleep(time.Millisecond * 10)
 }
 
-
 func mutex(str string) string {
 	log.Printf("first:%s", str)
 	locker.Lock()
@@ -40,11 +38,10 @@ func mutex(str string) string {
 		return "1"
 	}
 	time.Sleep(1 * time.Second) //模拟数据库耗时操作
-	os.Exit(0)           //直接退出，验证2 是否执行了
+	os.Exit(0)                  //直接退出，验证2 是否执行了
 	locker.Unlock()
 	return "2"
 }
-
 
 func rwMutex(str string) string {
 	log.Printf("first:%s", str)
@@ -58,7 +55,7 @@ func rwMutex(str string) string {
 		return "1"
 	}
 	time.Sleep(1 * time.Second) //模拟数据库耗时操作
-	defer rwLocker.RUnlock()   // 释放读锁
+	defer rwLocker.RUnlock()    // 释放读锁
 	defer rwLocker.RUnlock()
 
 	return "2"

@@ -22,7 +22,8 @@ func TestSelectChan(t *testing.T) {
 	case value := <-int_chan:
 		fmt.Println(value)
 	case value := <-string_chan:
-		panic(value)
+		//panic(value)
+		fmt.Println(value)
 	}
 }
 

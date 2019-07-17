@@ -15,6 +15,7 @@ type Gift struct {
 
 // 尝试次数
 const TryTime = 3
+
 //手动
 func main() {
 	now := time.Now()
