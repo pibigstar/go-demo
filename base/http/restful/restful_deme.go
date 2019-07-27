@@ -8,9 +8,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-/**
-restful APi风格
-*/
+// restful APi风格
 type Person struct {
 	ID        string   `json:"id,omitemty"`
 	Firstname string   `json:"firstname,omitempty"`

@@ -2,7 +2,6 @@ package get_post
 
 import (
 	"fmt"
-	"go-demo/utils/errutil"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -11,12 +10,21 @@ import (
 )
 
 func TestPostForm(t *testing.T) {
-	response, err := http.PostForm("http://www.baidu.com", url.Values{"username": {"rob"}, "password": {"abc123_"}})
-	errutil.Check(err)
+	response, err := http.PostForm(
+		"http://www.baidu.com",
+		url.Values{
+			"username": {"rob"},
+			"password": {"abc123_"},
+		})
+	if err != nil {
+		t.Error(err)
+	}
 	defer response.Body.Close()
 	data, err := ioutil.ReadAll(response.Body)
-	errutil.Check(err)
-	fmt.Println(string(data))
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(string(data))
 }
 
 func TestHttpPost(t *testing.T) {
@@ -30,30 +38,32 @@ func TestHttpPost(t *testing.T) {
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		// handle error
+		t.Error(err)
 	}
-	fmt.Println(string(body))
+	t.Log(string(body))
 }
 
 // 有复杂请求，设置Header，cookie等需要使用这个
-func TesHttpDo(t *testing.T) {
+func TestHttpDo(t *testing.T) {
 	client := &http.Client{}
 
-	req, err := http.NewRequest("POST", "http://www.baidu.com", strings.NewReader("name=pibigstar"))
+	req, err := http.NewRequest(
+		"POST",
+		"http://www.baidu.com",
+		strings.NewReader("name=pibigstar"),
+	)
 	if err != nil {
-		// handle error
+		t.Error(err)
 	}
 
 	req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36")
 	req.Header.Set("Cookie", "name=anny")
-
 	resp, err := client.Do(req)
-
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		// handle error
+		t.Error(err)
 	}
-	fmt.Println(string(body))
+	t.Log(string(body))
 }

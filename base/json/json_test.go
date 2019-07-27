@@ -3,6 +3,7 @@ package json
 import (
 	"encoding/json"
 	"fmt"
+	"testing"
 )
 
 type ColorGroup struct {
@@ -12,7 +13,7 @@ type ColorGroup struct {
 }
 
 // 对象转Json字符串 json.Marshal
-func ObjectToJson() {
+func TestObjectToJson(t *testing.T) {
 	group := ColorGroup{
 		ID:     1,
 		Name:   "Reds",
@@ -20,14 +21,13 @@ func ObjectToJson() {
 	}
 	b, err := json.Marshal(group)
 	if err != nil {
-		fmt.Println("error:", err)
+		t.Error(err)
 	}
-	fmt.Println(string(b))
-
+	t.Log(string(b))
 }
 
 // Json字符串转对象 json.Unmarshal
-func JsonToObjcet() {
+func TestJsonToObject(t *testing.T) {
 	var jsonBlob = []byte(`[
         {"Name": "Platypus", "Order": "Monotremata"},
         {"Name": "Quoll",    "Order": "Dasyuromorphia"}
@@ -41,5 +41,5 @@ func JsonToObjcet() {
 	if err != nil {
 		fmt.Println("error:", err)
 	}
-	fmt.Printf("%+v", animals) // 添加一个 + 号可以输出key值
+	t.Logf("%+v", animals) // 添加一个 + 号可以输出key值
 }
