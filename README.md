@@ -12,7 +12,7 @@
 ## 项目结构
 <details>
 <summary>展开查看</summary>
-<pre><code>.
+<pre><code>
 ├─base
 │  ├─file
 │  ├─flag
@@ -106,6 +106,7 @@
     └─xlsx
 </pre></code>
 </details>
+
 ## 交流 && 疑问
 如果有任何错误或不懂的地方欢迎给我提 [issue](https://github.com/pibigstar/go-demo/issues)
 
