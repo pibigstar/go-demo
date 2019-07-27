@@ -40,7 +40,8 @@ func TestHttpPost(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(string(body))
+	//t.Log(string(body))
+	_ = string(body)
 }
 
 // 有复杂请求，设置Header，cookie等需要使用这个
@@ -65,5 +66,6 @@ func TestHttpDo(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(string(body))
+	//t.Log(string(body))
+	_ = string(body)
 }
