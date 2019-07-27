@@ -1,13 +1,12 @@
-package interview
+package main
 
 import (
 	"fmt"
 	"runtime"
 	"sync"
-	"testing"
 )
 
-func TestGoFunc(t *testing.T) {
+func main() {
 	runtime.GOMAXPROCS(1) // 将CPU设置为 1 个
 	wg := sync.WaitGroup{}
 	wg.Add(10)
