@@ -1,6 +1,7 @@
 //+build !test
 
 package elastic
+
 import (
 	"context"
 	"fmt"

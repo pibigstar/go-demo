@@ -7,15 +7,15 @@ import (
 )
 
 var (
-	addr = "127.0.0.1:4150"
+	addr          = "127.0.0.1:4150"
 	defaultConfig = nsq.NewConfig()
 )
 
 // 主函数
 func main() {
-	Producer("test-dev",[]byte("Hello Pibigstar"))
+	Producer("test-dev", []byte("Hello Pibigstar"))
 
-	Consumer("test-dev","default",HandleMessage)
+	Consumer("test-dev", "default", HandleMessage)
 	time.Sleep(time.Second * 3)
 }
 
@@ -25,7 +25,7 @@ func HandleMessage(msg *nsq.Message) error {
 }
 
 // nsq发布消息
-func Producer(topic string,data []byte) error {
+func Producer(topic string, data []byte) error {
 	// 新建生产者
 	p, err := nsq.NewProducer(addr, defaultConfig)
 	if err != nil {
@@ -36,7 +36,7 @@ func Producer(topic string,data []byte) error {
 }
 
 // 消费消息
-func Consumer(topic,channel string,handlerFunc nsq.HandlerFunc) error {
+func Consumer(topic, channel string, handlerFunc nsq.HandlerFunc) error {
 	//新建一个消费者
 	c, err := nsq.NewConsumer(topic, channel, defaultConfig)
 	if err != nil {
@@ -47,7 +47,5 @@ func Consumer(topic,channel string,handlerFunc nsq.HandlerFunc) error {
 	//建立连接
 	return c.ConnectToNSQD(addr)
 }
-
-
 
 // 运行将会打印： hello NSQ!!!

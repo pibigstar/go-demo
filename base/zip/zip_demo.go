@@ -72,7 +72,7 @@ type zipFile struct {
 }
 
 // 压缩zip
-func zipfile(fileName string,files []zipFile) {
+func zipfile(fileName string, files []zipFile) {
 	buf := new(bytes.Buffer)
 
 	w := zip.NewWriter(buf)

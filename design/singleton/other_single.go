@@ -3,21 +3,23 @@ package singleton
 import "sync"
 
 //传统方式实现单例模式
-var singleton *Singleton
+var (
+	instance *Instance
+	lock     sync.Mutex
+)
 
-type Singleton struct {
+type Instance struct {
 	Name string
-	sync.Mutex
 }
 
 // 双重检查
-func Instance(name string) *Singleton {
-	if singleton == nil {
-		singleton.Mutex.Lock()         //加锁
-		defer singleton.Mutex.Unlock() // 在return的时候释放锁
-		if singleton == nil {
-			return &Singleton{Name: name}
+func GetInstance(name string) *Instance {
+	if instance == nil {
+		lock.Lock()
+		defer lock.Unlock()
+		if instance == nil {
+			instance = &Instance{Name: name}
 		}
 	}
-	return singleton
+	return instance
 }

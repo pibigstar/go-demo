@@ -30,8 +30,8 @@ func TestXml(t *testing.T) {
 	addr := Address{City: "上海", State: "中国"}
 	p := &Person{Id: 13,
 		FirstName: "Pi",
-		LastName: "bigstar",
-		Age: 20, Height: 17.8,
+		LastName:  "bigstar",
+		Age:       20, Height: 17.8,
 		Married: true,
 		Address: addr,
 		Comment: "我是注释",
@@ -44,6 +44,6 @@ func TestXml(t *testing.T) {
 	t.Log(string(personXml))
 	//xml 文本转 对象
 	obj := &Person{}
-	xml.Unmarshal(personXml,obj)
-	t.Logf("%+v",obj)
+	xml.Unmarshal(personXml, obj)
+	t.Logf("%+v", obj)
 }

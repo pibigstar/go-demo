@@ -31,5 +31,5 @@ func TestTimeParse(t *testing.T) {
 	t1 := parse.Unix()
 	// 获取纳秒级时间戳
 	t2 := parse.UnixNano()
-	t.Log(t1,t2)
+	t.Log(t1, t2)
 }
