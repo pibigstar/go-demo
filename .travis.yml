@@ -20,8 +20,9 @@ env:
 install:
 - go mod download
 
-# 代码风格检查
+
 before_script:
+- mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
 - find . -name "*.go" | xargs gofmt -w
 - git diff --exit-code
 
