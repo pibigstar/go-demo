@@ -1,6 +1,7 @@
 package redis
 
 import (
+	"fmt"
 	goRedis "github.com/go-redis/redis"
 	"time"
 )
@@ -20,9 +21,9 @@ func NewRedisClient() error {
 		return nil
 	}
 	client := goRedis.NewClient(&goRedis.Options{
-		Addr:     "localhost:6379",
+		Addr:     "127.0.0.1:6379",
 		Password: "",
-		DB:       0,
+		DB:       1,
 		//the pool config
 		PoolSize:    10,
 		PoolTimeout: 3000,
@@ -37,14 +38,12 @@ func NewRedisClient() error {
 	return nil
 }
 
-// 为了通过CI，这里把init方法给注释掉了
-// 如果想运行请记得去掉注释
 // init the redis  client
 func init() {
-	//err := NewRedisClient()
-	//if err != nil {
-	//	fmt.Println("failed to connect redis client")
-	//}
+	err := NewRedisClient()
+	if err != nil {
+		fmt.Println("failed to connect redis client")
+	}
 }
 
 // set the string to redis，the expire default is seven days

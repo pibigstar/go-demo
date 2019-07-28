@@ -17,7 +17,7 @@ type esClient struct {
 	ctx context.Context
 }
 
-const host = "http://localhost:9200"
+const host = "http://127.0.0.1:9200"
 
 // build the elasticSearch the client
 func NewElasticSearchClient() error {

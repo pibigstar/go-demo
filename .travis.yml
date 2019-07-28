@@ -9,6 +9,11 @@ branches:
   - master
   - develop
 
+services:
+  - mysql
+  - redis-server
+  - elasticsearch
+
 env:
 - GO111MODULE=on
 

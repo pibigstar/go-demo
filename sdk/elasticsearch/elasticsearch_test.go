@@ -2,7 +2,6 @@ package elastic
 
 import (
 	"encoding/json"
-	"fmt"
 	"testing"
 )
 
@@ -17,15 +16,15 @@ func TestElasticSearch(t *testing.T) {
 
 	response, err := client.Insert("test", "user", user)
 	if err != nil {
-		fmt.Println(err.Error())
+		t.Error(err)
 	}
-	fmt.Printf("%+v", response)
+	t.Logf("%+v", response)
 
 	bytes, err := client.GetById("test", "user", response.Id)
 	if err != nil {
-		fmt.Println(err.Error())
+		t.Error(err)
 	}
 	result := new(User)
 	json.Unmarshal(bytes, result)
-	fmt.Printf("%+v", result)
+	t.Logf("%+v", result)
 }
