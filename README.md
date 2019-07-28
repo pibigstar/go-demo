@@ -1,5 +1,8 @@
 # go语言例子
 [![Build Status](https://travis-ci.org/pibigstar/go-demo.svg?branch=master)](https://travis-ci.org/pibigstar/go-demo)
+[![Code Coverage](https://codecov.io/gh/pibigstar/go-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/pibigstar/go-demo/branch/master)
+[![License](https://img.shields.io/github/license/pibigstar/go-demo.svg?style=flat)](https://github.com/pibigstar/go-demo)
+[![go-demo](https://img.shields.io/badge/go-demo-green)](https://github.com/pibigstar/go-demo)
 
 - bash: Go语言基础（file、goroutine、http、net...)
 - blockchain: 用Go设计一个简单的区块链项目
