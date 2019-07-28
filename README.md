@@ -1,4 +1,4 @@
-# go语言例子
+# Go语言学习
 [![Build Status](https://travis-ci.org/pibigstar/go-demo.svg?branch=master)](https://travis-ci.org/pibigstar/go-demo)
 [![Code Coverage](https://codecov.io/gh/pibigstar/go-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/pibigstar/go-demo/branch/master)
 [![License](https://img.shields.io/github/license/pibigstar/go-demo.svg?style=flat)](https://github.com/pibigstar/go-demo)
