@@ -1,4 +1,4 @@
-package test
+package blockchain
 
 import (
 	"go-demo/blockchain/core"
