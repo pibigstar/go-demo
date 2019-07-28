@@ -1,7 +1,6 @@
-package main
+package name
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -66,16 +65,8 @@ func getLastName() string {
 // GenerateUserName random generate one user name with specific length
 func GenerateUserName(length int) string {
 	name := getSurname() + getLastName()
-	if length == 2 {
-		// 2个字的人名
-	} else {
-		// 3个字的人名
+	if length == 3 {
 		name += getLastName()
 	}
-
 	return name
-}
-
-func main() {
-	fmt.Println("name:", GenerateUserName(3))
 }

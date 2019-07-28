@@ -2,9 +2,7 @@ package utils
 
 import (
 	"errors"
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
-	"time"
 )
 
 //  使用jwt 生成token 与使用
@@ -21,28 +19,6 @@ const (
 	// 将用户uid存放到token中
 	TokenClaimUID = "uid"
 )
-
-func main() {
-	claims := make(jwt.MapClaims)
-	// 有效期
-	claims[TokenClaimEXP] = time.Now().Add(time.Hour * time.Duration(1)).Unix()
-	claims[TokenClaimUID] = "this is user id"
-
-	token, err := GenJwtToken(claims)
-	if err != nil {
-		fmt.Printf("generate jwt token failed:%e", err)
-	}
-
-	fmt.Println("token:", token)
-
-	isToken := CheckJwtToken(token)
-	fmt.Println("isToken:", isToken)
-
-	if uid, found := GetUIDFromToken(token); found {
-		fmt.Println("用户id：", uid)
-	}
-
-}
 
 // 生成token
 func GenJwtToken(claims jwt.MapClaims) (string, error) {

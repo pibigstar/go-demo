@@ -28,8 +28,8 @@ func main() {
 	})
 
 	// 凌晨2点执行
-	c.AddFunc("0 0 5 * * *", func() {
-		log.Println("when 5:0:0 执行....")
+	c.AddFunc("0 0 2 * * *", func() {
+		log.Println("when 2:0:0 执行....")
 	})
 
 	// 新建job任务

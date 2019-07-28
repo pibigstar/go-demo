@@ -1,4 +1,4 @@
-package main
+package images
 
 import (
 	"image"
@@ -9,20 +9,8 @@ import (
 	"github.com/nfnt/resize"
 )
 
-const imgPath = "utils/images/image.jpg"
-
-func main() {
-
-	width, height := getImageSize(imgPath)
-
-	log.Printf("width:%d, height:%d", width, height)
-
-	Resize(imgPath, 100, 100)
-
-}
-
 // 得到图片的宽和高
-func getImageSize(imagePath string) (width, height int) {
+func GetImageSize(imagePath string) (width, height int) {
 	file, err := os.Open(imagePath)
 	if err != nil {
 		log.Println("open file failed:", err)
@@ -36,7 +24,7 @@ func getImageSize(imagePath string) (width, height int) {
 }
 
 // 修改图片尺寸
-func Resize(imagePath string, width, height uint) {
+func Resize(imagePath, targePath string, width, height uint) {
 	file, err := os.Open(imagePath)
 	if err != nil {
 		log.Println("open file failed:", err)
@@ -50,7 +38,7 @@ func Resize(imagePath string, width, height uint) {
 
 	newImg := resize.Resize(width, height, img, resize.Lanczos3)
 
-	newFile, err := os.Create("utils/images/new.jpg")
+	newFile, err := os.Create(targePath)
 	if err != nil {
 		log.Println("create file failed:", err)
 	}
