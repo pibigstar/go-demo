@@ -10,6 +10,7 @@
 - multiconfig: 读取配置文件操作
 - name: 自动生成姓名
 - pool: 批量操作线程池
+- qrcode: 二维码生成工具
 - retry  方法重试
 - seq: id和uuid生成器
 - token: jwt加密token

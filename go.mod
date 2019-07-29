@@ -32,6 +32,7 @@ require (
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
 	github.com/pkg/errors v0.8.1
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
+	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
 	github.com/smartwalle/alipay v1.0.2
 	github.com/sony/sonyflake v1.0.0
