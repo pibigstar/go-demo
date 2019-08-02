@@ -15,7 +15,7 @@ type student struct {
 	Age  int
 }
 
-func pase_student() map[string]*student {
+func parseStudent() map[string]*student {
 	m := make(map[string]*student)
 	stus := []student{
 		{Name: "zhou", Age: 24},
@@ -31,14 +31,32 @@ func pase_student() map[string]*student {
 }
 
 func TestForRange(t *testing.T) {
-	students := pase_student()
+	students := parseStudent()
 	for k, v := range students {
-		fmt.Printf("key=%s,value=%v \n", k, v)
+		fmt.Printf("key=%s,value=%+v \n", k, v)
 	}
 }
 
-/**
-key=li,value=&{wang 22}
-key=wang,value=&{wang 22}
-key=zhou,value=&{wang 22}
-*/
+// 下面是解决方案
+// 遍历时重新赋值
+func parseStudentTrue() map[string]*student {
+	m := make(map[string]*student)
+	stus := []student{
+		{Name: "zhou", Age: 24},
+		{Name: "li", Age: 23},
+		{Name: "wang", Age: 22},
+	}
+	//用中间变量来过渡它
+	for _, stu := range stus {
+		s := stu
+		m[stu.Name] = &s
+	}
+	return m
+}
+
+func TestParseStudentTrue(t *testing.T) {
+	students := parseStudentTrue()
+	for k, v := range students {
+		fmt.Printf("key=%s,value=%+v \n", k, v)
+	}
+}
