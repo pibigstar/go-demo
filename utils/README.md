@@ -14,6 +14,7 @@
 - retry  方法重试
 - seq: id和uuid生成器
 - token: jwt加密token
+- word: Go操作docx文件
 - xlsx: Go操作xlsx文件
 
 

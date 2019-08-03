@@ -1,6 +1,7 @@
 module go-demo
 
 require (
+	baliance.com/gooxml v1.0.1 // indirect
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
 	github.com/Shopify/sarama v1.20.0
@@ -26,6 +27,7 @@ require (
 	github.com/mattn/go-isatty v0.0.7 // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
+	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/olivere/elastic v6.2.18+incompatible
 	github.com/pibigstar/go-sdk v0.0.0-20190727082016-c4f5d238d8f5
@@ -37,6 +39,7 @@ require (
 	github.com/smartwalle/alipay v1.0.2
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
+	github.com/unidoc/unioffice v1.2.0
 	github.com/xuri/excelize v1.4.0
 	github.com/youzan/go-nsq v1.3.1
 	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529 // indirect
