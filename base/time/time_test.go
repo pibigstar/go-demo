@@ -1,6 +1,7 @@
 package time
 
 import (
+	"fmt"
 	"testing"
 	"time"
 )
@@ -19,7 +20,7 @@ func TestTimeParse(t *testing.T) {
 	format := TimeFormat(now)
 	t.Log(format)
 	// 字符串转时间
-	parse, err := time.Parse(defaultTime, format)
+	parse, err := time.Parse(time.RFC3339, format)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -32,4 +33,23 @@ func TestTimeParse(t *testing.T) {
 	// 获取纳秒级时间戳
 	t2 := parse.UnixNano()
 	t.Log(t1, t2)
+}
+
+func TestTimeout(t *testing.T) {
+	done := make(chan struct{})
+	deadLine := time.Now().Add(time.Second * 1)
+
+	dur := time.Until(deadLine)
+	if dur <= 0 {
+		fmt.Println("当前已超过deadLine,停止方法")
+	}
+
+	time.AfterFunc(dur, func() {
+		fmt.Println("到达deadLine，停止方法")
+		done <- struct{}{}
+
+	})
+	select {
+	case <-done:
+	}
 }
