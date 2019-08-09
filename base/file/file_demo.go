@@ -56,9 +56,12 @@ func MkOneDir(dir string) {
 
 // 创建多层文件夹
 func MkAllDir(dirs string) {
-	err := os.MkdirAll(dirs, 0666)
-	check(err)
-	os.RemoveAll(strings.Split(dirs, "/")[0])
+	// 如果不存在，才创建
+	if !IsExist(dirs) {
+		err := os.MkdirAll(dirs, 0666)
+		check(err)
+		os.RemoveAll(strings.Split(dirs, "/")[0])
+	}
 }
 
 // 删除文件
@@ -71,4 +74,15 @@ func check(err error) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+func IsExist(filePath string) bool {
+	_,err := os.Stat(filePath)
+	if err != nil {
+		if os.IsExist(err) {
+			return true
+		}
+		return false
+	}
+	return true
 }
