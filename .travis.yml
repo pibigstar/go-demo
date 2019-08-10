@@ -29,7 +29,7 @@ install:
 before_script:
 - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
 - find . -name "*.go" | xargs gofmt -w
-- git diff --name-only --exit-code || echo -e "\033[31mPlease format above files\033[0m" && exit 1
+- git diff --name-only --exit-code || exit 1
 
 script:
 - GOARCH=386 go test -v ./... || echo "test Failed" && exit 1
