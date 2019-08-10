@@ -1,4 +1,4 @@
-# 文档http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
+# 文档 http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
 language: go
 
 go:
@@ -9,10 +9,6 @@ branches:
   only:
   - master
   - develop
-
-cache:
-  directories:
-    - $GOPATH/pkg/mod/
 
 services:
   - mysql
@@ -32,7 +28,7 @@ before_script:
 - git diff --name-only --exit-code || exit 1
 
 script:
-- GOARCH=386 go test -v ./... || echo "test Failed" && exit 1
+- GOARCH=386 go test -v ./... || exit 1
 - GOARCH=amd64 go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
