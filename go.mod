@@ -1,7 +1,6 @@
 module go-demo
 
 require (
-	baliance.com/gooxml v1.0.1 // indirect
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
 	github.com/Shopify/sarama v1.20.0
