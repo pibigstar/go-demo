@@ -14,10 +14,10 @@ import (
 func TestContextWithCancel(t *testing.T) {
 	rand.Seed(time.Now().Unix())
 	ctx := context.Background()
-	ctx,cancel := context.WithCancel(ctx)
+	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
-	getIP := func(ctx context.Context) <-chan string{
+	getIP := func(ctx context.Context) <-chan string {
 		ipChan := make(chan string)
 		go func() {
 			for {
@@ -25,7 +25,7 @@ func TestContextWithCancel(t *testing.T) {
 				select {
 				case <-ctx.Done():
 					return
-				case <- time.After(time.Microsecond * time.Duration(i)):
+				case <-time.After(time.Microsecond * time.Duration(i)):
 					t.Log("模拟耗时操作...")
 					ipChan <- seq.UUID()
 				}
@@ -35,21 +35,21 @@ func TestContextWithCancel(t *testing.T) {
 	}
 
 	for ip := range getIP(ctx) {
-		t.Logf("Get IP:%s \n",ip)
+		t.Logf("Get IP:%s \n", ip)
 		return
 	}
 }
 
 // 带Value的Context
-func TestContextWithValue(t *testing.T)  {
+func TestContextWithValue(t *testing.T) {
 	ctx := context.Background()
-	ctx = context.WithValue(ctx,"name","pibigstar")
+	ctx = context.WithValue(ctx, "name", "pibigstar")
 	for i := 0; i < 2; i++ {
 		go PrintKey(ctx)
 	}
 }
 
-func PrintKey(ctx context.Context)  {
+func PrintKey(ctx context.Context) {
 	time.Sleep(time.Microsecond * 2)
 	fmt.Println(ctx.Value("name"))
 }
@@ -57,8 +57,8 @@ func PrintKey(ctx context.Context)  {
 // 当到达某一时刻，取消执行
 func TestContextWithDeadLine(t *testing.T) {
 	ctx := context.Background()
-	ctx = context.WithValue(ctx,"name","time dead line")
-	ctx, cancel := context.WithDeadline(ctx, time.Now().Add(50 * time.Millisecond))
+	ctx = context.WithValue(ctx, "name", "time dead line")
+	ctx, cancel := context.WithDeadline(ctx, time.Now().Add(50*time.Millisecond))
 	defer cancel()
 	select {
 	case <-time.After(1 * time.Second):
@@ -71,8 +71,8 @@ func TestContextWithDeadLine(t *testing.T) {
 // 带超时的Context，如果超时之后，将会结束执行
 func TestContextWithTimeout(t *testing.T) {
 	ctx := context.Background()
-	ctx = context.WithValue(ctx,"name","time dead line")
-	ctx, cancel := context.WithTimeout(ctx, 50 * time.Millisecond)
+	ctx = context.WithValue(ctx, "name", "time dead line")
+	ctx, cancel := context.WithTimeout(ctx, 50*time.Millisecond)
 	defer cancel()
 	select {
 	case <-time.After(1 * time.Second):

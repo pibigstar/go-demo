@@ -77,7 +77,7 @@ func check(err error) {
 }
 
 func IsExist(filePath string) bool {
-	_,err := os.Stat(filePath)
+	_, err := os.Stat(filePath)
 	if err != nil {
 		if os.IsExist(err) {
 			return true
