@@ -22,7 +22,7 @@ func TestTimeParse(t *testing.T) {
 	// 字符串转时间
 	parse, err := time.Parse(time.RFC3339, format)
 	if err != nil {
-		t.Fatal(err)
+		t.Error(err)
 	}
 	// 三小时后
 	parse.Add(time.Hour * 3)

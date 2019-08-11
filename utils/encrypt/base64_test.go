@@ -9,6 +9,6 @@ func TestBase64(t *testing.T) {
 	encryptStr := encrypt(str)
 	unEncrypt := UnEncrypt(encryptStr)
 	if str != unEncrypt {
-		t.Fatal("Failed to encrypt")
+		t.Error("Failed to encrypt")
 	}
 }
