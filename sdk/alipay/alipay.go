@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 	"os/exec"
 	"strings"
 	"time"
@@ -35,6 +36,11 @@ func WebPageAlipay() {
 	pay.ProductCode = "FAST_INSTANT_TRADE_PAY"
 	//金额
 	pay.TotalAmount = "0.01"
+	v := url.Values{}
+	v.Add("orgId", "123456")
+	body := v.Encode()
+	// 支付宝回传参数，需要经过UrlEncode
+	pay.PassbackParams = body
 
 	url, err := client.TradePagePay(pay)
 	if err != nil {
@@ -65,6 +71,11 @@ func WapAlipay() {
 	pay.ProductCode = time.Now().String()
 	//金额
 	pay.TotalAmount = "0.01"
+	v := url.Values{}
+	v.Add("orgId", "123456")
+	body := v.Encode()
+	// 支付宝回传参数，需要经过UrlEncode
+	pay.PassbackParams = body
 
 	url, err := client.TradeWapPay(pay)
 	if err != nil {
@@ -76,6 +87,32 @@ func WapAlipay() {
 	//打开默认浏览器
 	payURL = strings.Replace(payURL, "&", "^&", -1)
 	exec.Command("cmd", "/c", "start", payURL).Start()
+}
+
+// https://docs.open.alipay.com/api_1/alipay.trade.pay/
+// 扫码支付(生成支付的二维码的链接）
+func GetQrPayURL() {
+	pay := alipay.AliPayTradePreCreate{}
+	// 支付宝回调地址（需要在支付宝后台配置）
+	// 支付成功后，支付宝会发送一个POST消息到该地址
+	pay.NotifyURL = "http://www.pibigstar/alipay"
+	// 支付成功之后，浏览器将会重定向到该 URL
+	pay.ReturnURL = "http://localhost:8088/return"
+	//支付标题
+	pay.Subject = "支付宝支付测试"
+
+	//二维码使用的Code
+	pay.ProductCode = "FACE_TO_FACE_PAYMENT"
+	pay.TotalAmount = "10.00"
+	//订单号，一个订单号只能支付一次
+	pay.OutTradeNo = time.Now().String()
+
+	url, err := client.TradePreCreate(pay)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//二维码链接，可用此链接生成一个二维码扫码支付
+	fmt.Println(url.AliPayPreCreateResponse.QRCode)
 }
 
 func main() {
@@ -91,13 +128,23 @@ func main() {
 	})
 	//支付成功之后的通知页面
 	http.HandleFunc("/alipay", func(rep http.ResponseWriter, req *http.Request) {
-		var noti, _ = client.GetTradeNotification(req)
-		if noti != nil {
-			fmt.Println("支付成功")
-			//修改订单状态。。。。
-		} else {
+		var notification, err = client.GetTradeNotification(req)
+		if err != nil {
 			fmt.Println("支付失败")
+			rep.WriteHeader(http.StatusForbidden)
+			return
 		}
+		values, err := url.ParseQuery(notification.PassbackParams)
+		if err != nil {
+			fmt.Println("解析参数失败")
+			rep.WriteHeader(http.StatusForbidden)
+			return
+		}
+		fmt.Println(values.Get("orgId"))
+		//支付宝支付成功之后的信息
+		fmt.Printf("%+v", notification)
+		fmt.Println("支付成功")
+		//修改订单状态。。。。
 		alipay.AckNotification(rep) // 确认收到通知消息
 	})
 
