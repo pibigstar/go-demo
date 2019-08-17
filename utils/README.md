@@ -1,6 +1,7 @@
 ### 常用工具包
 
 - cron: 定时任务
+- disk: 获取系统和U盘盘符
 - encrypt: 使用md5加密，base64加密解密
 - error: 异常工具类,打印异常栈
 - image: 图片常用操作
