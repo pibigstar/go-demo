@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// 名字生成器
+// 名
 var surnames = []string{
 	"赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "褚", "卫", "蒋",
 	"沈", "韩", "杨", "朱", "秦", "尤", "许", "何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏",
@@ -27,7 +27,8 @@ var surnames = []string{
 	"太叔", "申屠", "公孙", "仲孙", "轩辕", "令狐", "徐离", "宇文", "长孙", "慕容", "司徒", "司空",
 }
 
-var lastnames = []string{
+// 姓
+var lastNames = []string{
 	"伟", "刚", "勇", "毅", "俊", "峰", "强", "军", "平", "保", "东", "文", "辉", "力", "明", "永", "健", "世", "广", "志", "义",
 	"兴", "良", "海", "山", "仁", "波", "宁", "贵", "福", "生", "龙", "元", "全", "国", "胜", "学", "祥", "才", "发", "武", "新",
 	"利", "清", "飞", "彬", "富", "顺", "信", "子", "杰", "涛", "昌", "成", "康", "星", "光", "天", "达", "安", "岩", "中", "茂",
@@ -47,19 +48,16 @@ var lastnames = []string{
 	"宗", "曼", "紫", "逸", "贤", "蝶", "菡", "绿", "蓝", "儿", "翠", "烟", "小", "轩",
 }
 
-var (
-	lastnamesLength = len(lastnames)
-	surnamesLength  = len(surnames)
-	source          = rand.NewSource(time.Now().Unix())
-	random          = rand.New(source)
-)
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func getSurname() string {
-	return surnames[random.Intn(surnamesLength-1)]
+	return surnames[rand.Intn(len(surnames)-1)]
 }
 
 func getLastName() string {
-	return lastnames[random.Intn(lastnamesLength-1)]
+	return lastNames[rand.Intn(len(lastNames)-1)]
 }
 
 // GenerateUserName random generate one user name with specific length
