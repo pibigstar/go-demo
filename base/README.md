@@ -15,7 +15,7 @@
 - shell: Go执行shell命令
 - sort: Go切片排序
 - string: Go字符串操作
-- sync: Go锁操作
+- sync: Go并发相关包使用
 - time: 时间操作
 - xml: xml操作
 - zip: 压缩解压文件
