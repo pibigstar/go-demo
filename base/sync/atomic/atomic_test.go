@@ -61,3 +61,7 @@ func TestUseAtomicCAS(t *testing.T) {
 	wg.Wait()
 	t.Log(sum)
 }
+
+func TestSpinLock(t *testing.T) {
+	t.Log(SpinLock())
+}
