@@ -4,6 +4,7 @@ require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
 	github.com/Shopify/sarama v1.20.0
+	github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190827030439-84d9962c10d3
 	github.com/aliyun/aliyun-oss-go-sdk v2.0.1+incompatible
 	github.com/denisenkom/go-mssqldb v0.0.0-20190515213511-eb9f6a1743f3 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
