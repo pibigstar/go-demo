@@ -3,7 +3,8 @@
 - [x] Redis
 - [x] ElasticSearch
 - [x] Kafka
-- [ ] Nsq
+- [x] Nsq
+- [x] SMS短信发送
 - [x] RabbitMQ
 - [x] 阿里云OSS
 - [ ] QQ登录
