@@ -16,6 +16,7 @@ require (
 	github.com/go-sql-driver/mysql v1.4.1 // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/golang/mock v1.2.0
+	github.com/google/go-cmp v0.3.1
 	github.com/google/uuid v1.0.0
 	github.com/gorilla/mux v1.6.2
 	github.com/jinzhu/gorm v1.9.2
