@@ -28,13 +28,13 @@ func ReadAllDir(path string) {
 
 // 这种会覆盖掉原先内容
 func WriteFile(fileName, data string) {
-	err := ioutil.WriteFile(fileName, []byte(data), 0666)
+	err := ioutil.WriteFile(fileName, []byte(data), os.ModePerm)
 	check(err)
 }
 
 // 追加内容到文件末尾
 func AppendToFile(fileName, data string) {
-	file, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, 0666)
+	file, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, os.ModePerm)
 	defer file.Close()
 	check(err)
 	file.Write([]byte("data"))
@@ -49,7 +49,7 @@ func CreateFile(fileName string) {
 
 // 创建单个文件夹
 func MkOneDir(dir string) {
-	err := os.Mkdir(dir, 0666)
+	err := os.Mkdir(dir, os.ModePerm)
 	check(err)
 	os.RemoveAll(dir)
 }
@@ -58,7 +58,7 @@ func MkOneDir(dir string) {
 func MkAllDir(dirs string) {
 	// 如果不存在，才创建
 	if !IsExist(dirs) {
-		err := os.MkdirAll(dirs, 0666)
+		err := os.MkdirAll(dirs, os.ModePerm)
 		check(err)
 		os.RemoveAll(strings.Split(dirs, "/")[0])
 	}
