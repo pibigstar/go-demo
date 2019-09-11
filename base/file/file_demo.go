@@ -42,6 +42,8 @@ func AppendToFile(fileName, data string) {
 
 // 创建文件并返回文件指针
 func CreateFile(fileName string) {
+	// 如果源文件已存在，会清空该文件的内容
+	// 如果多级目录，某一个目录不存在，则会返回PathError
 	file, err := os.Create(fileName)
 	defer file.Close()
 	check(err)
