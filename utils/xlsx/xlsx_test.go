@@ -11,7 +11,7 @@ import (
 
 type Record struct {
 	Name string `xlsx:"A-姓名"`
-	Age  string `xlsx:"B-年齡"`
+	Age  int32  `xlsx:"B-年齡"`
 }
 
 func TestXlsx(t *testing.T) {
@@ -23,14 +23,14 @@ func TestXlsx(t *testing.T) {
 	var records []*Record
 	records = append(records, &Record{
 		Name: "小明",
-		Age:  "11",
+		Age:  11,
 	})
 	records = append(records, &Record{
 		Name: "小华",
-		Age:  "12",
+		Age:  12,
 	})
 	// 反射写
-	RefactorWrite(records...)
+	RefactorWrite(records)
 }
 
 // 读取 xlsx
@@ -70,7 +70,7 @@ func WriteXlsx() {
 	}
 }
 
-func RefactorWrite(records ...*Record) {
+func RefactorWrite(records []*Record) {
 	xlsx := excelize.NewFile()
 	index := xlsx.NewSheet("Sheet1")
 
@@ -85,7 +85,21 @@ func RefactorWrite(records ...*Record) {
 			}
 			// 设置内容
 			column := strings.Split(d.Field(j).Tag.Get("xlsx"), "-")[0]
-			xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).String())
+			switch d.Field(j).Type.String() {
+			case "string":
+				xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).String())
+			case "int32":
+				xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).Int())
+			case "int64":
+				xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).Int())
+			case "bool":
+				xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).Bool())
+			case "float32":
+				xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).Float())
+			case "float64":
+				xlsx.SetCellValue("Sheet1", fmt.Sprintf("%s%d", column, i+2), reflect.ValueOf(t).Elem().Field(j).Float())
+			}
+
 		}
 	}
 
