@@ -13,16 +13,23 @@ import (
 
 var (
 	appId = "2016091800540000"
-	//支付宝提供给我们用于签名验证的公钥，通过支付宝管理后台获取
+	//生成CSR文件中的公钥
 	aliPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwJzVFXpsfHUpMzITq2C/bdWeQEbUkScnOxVIn5N/vjV4IVYWjaP9cIL/pMwiKfQ62TP/TTBMfQ2KALMQSvJ0JYOyxqaQ/y5mfkXhgoWLrEoZX8lM1BsQzHmpWuqKhc2yX8hjR0QkdCzc/q0z9qgy5Tlvi2a7ptXCZg+Wf0fnl75R9iXFE+YEcnXmg/7+9+5NykiswR9+gzhKWcwT6/SeDSoqX1tdU+VAU6HoqasMG1mpPo8XTBXUTjQ07HAkDKNorYZaQq7QOE0l1MSIsHvaIRIsf/jgtiP+YnQNpZpvg5uewfIovb1W0CUZNd7Ev0Wc0z0IZWtWY4oSZD705WqM2wIDAQAB"
-	//上一步中使用 RSA签名验签工具 生成的私钥
+	//生成CSR文件中的私钥
 	privateKey = "MIIEowIBAAKCAQEA5hhBBH4CSO1AySXprGazNZKVR/+G87GHt1U2SQL33WCFPKFYqE0qlpdLKECLb6xgOlSGFD676hxJcBH//l+A16Wb0WjVAbIIc7ichjantyg9t3FQP97t9wI5mYlUGMsTu2TqzFu/0hq/KAhSeNlg15m3v+4g81qITnTapzFAbC/6LLw9Sznq+eKi3bK3scAWZtkpJRyT/UqEXDsixskMzezISqYOQW9xHdfBvkzcGKuxi/N0z6rfoxyG2D1fNQ6dQ91vb54Ph0rdojDKUB29CdY92KoxPvAumXBgVf6k3MRpF4di0c9lR5cqgpbTUkotcuidCWgx8w13HNenpF2dKQIDAQABAoIBAASZa4NJeYY3p9nddiRKET765R0BUJNCczII9ALVmlrEeSVTHFCQ6k8ESy5My/y5d1rzIZL6BguR8S3aTkGpawvkdY7kB433HxAhGo/cO9H/bexiyXXdYOhVFQ2qnxG3zXcrdz4Kf3UVr8h/Ehb0UWk921xsyB/VKXBYCZ7Z7y26ZhO6J+ZRHqGgAW7vXeXmhhAyIixIuUQnVkRSXrKKnx+HHYxhioIgKUtny9N/636jnC9rMi2mKK5cjgPjgX4EVJMNTn/jdTNrYZxgg6F+innwvyHpMGggxiCMpTjtC3efujOocMmMgNSb1J7NVdqOW22n2MNlG5JLgAktLs4HYnkCgYEA9X15fkrQYqahNuvgUZtGofZQHPwXXOLcP/t4rZcdunwKuyjMaiFnhBX3p8WBaVi0zwIXe86OkaLWZhalbDpmcGnZRaUVJq9KLnIaA9QDectnoqDpiR1IxFfKM2IsIYRU8Y5+OKQwXtAHfuEbySnb++McTUPUB9poZI6BswxWngsCgYEA7/IMfgejlRPQpysecyDx1y5x6ndnZ2VapJdaS5Q/g+1j/ZjX52oo3qeEA3DVBmDGQnvo8voCcdtLIp+vITEEsEtiDWrJk3giGF73HaPvRqrYtH5uhLLQy1Ehub0Nc/jWSrV3S2bSir6Qmk9ptu4ndGSOeiFziS/iwrFF70ayFhsCgYBGfDVjBpYYjSFixI0OwVehbziHafZHTDfTAyAeL3Jwteba4Bb5Lggry6bk+/dxSO/5M++MM72JoUiP3Va34XjCNBIXRhPxnIjfFxHTIY+x664g6rTDEq5u+YnsAPcM1JMTHEevea0NvAs66eVxd9xa0VWx9ZSugI5SuPwSbat9CwKBgQCaVNx2H6G23GTjcReHw5Pp7OS2g5CN76IKpZMdc8AashETZ0DPhve8ppCBygwqqwo6bwqZZfc2lm9QWNdDCQ1T+1iY+qum36lGdaaKeQwJLxBtn7ikP4OOkqOXnSLPCimDKg8N/5fCR+ooZpW/ZJUaByehJGz0u0kmIvGxgo4/KwKBgAYbhMiE0IMsAYr5dPhX52FWaSRzcF/5WALFIOes5jCctSrMFMVPMq0xp1QWFK6iHeA1nv8Uk2NOQXbn13iTr+LTD01aT0WUJ7r5fhatrvfqIUHm7tcTzgwjui6QYv0y2m3hUXA1wCwMW9OL4Eadk32x4okssyMxWbJdCRvX4Ssz"
-	client     = alipay.New(appId, aliPublicKey, privateKey, false)
+	client     *alipay.Client
 )
 
-//网站扫码支付
+func init() {
+	client, _ = alipay.New(appId, aliPublicKey, privateKey, false)
+	client.LoadAppPublicCertFromFile("appPublic.crt")
+	client.LoadAliPayPublicCertFromFile("aliPayPublic.crt")
+	client.LoadAliPayRootCertFromFile("aliPayRoot.crt")
+}
+
+// 调转支付宝网站支付
 func WebPageAlipay() {
-	pay := alipay.AliPayTradePagePay{}
+	pay := alipay.TradePagePay{}
 	// 支付宝回调地址（需要在支付宝后台配置）
 	// 支付成功后，支付宝会发送一个POST消息到该地址
 	pay.NotifyURL = "http://www.pibigstar/alipay"
@@ -55,9 +62,10 @@ func WebPageAlipay() {
 	exec.Command("cmd", "/c", "start", payURL).Start()
 }
 
-//手机客户端支付
+// https://docs.open.alipay.com/204/105695/
+// 手机网页支付(可转到APP支付）
 func WapAlipay() {
-	pay := alipay.AliPayTradeWapPay{}
+	pay := alipay.TradeWapPay{}
 	// 支付宝回调地址（需要在支付宝后台配置）
 	// 支付成功后，支付宝会发送一个POST消息到该地址
 	pay.NotifyURL = "http://www.pibigstar/alipay"
@@ -68,7 +76,9 @@ func WapAlipay() {
 	//订单号，一个订单号只能支付一次
 	pay.OutTradeNo = time.Now().String()
 	//商品code
-	pay.ProductCode = time.Now().String()
+	pay.ProductCode = "QUICK_WAP_WAY"
+	//支付失败后返回地址
+	pay.QuitURL = "http://www.pibigstar/alipay"
 	//金额
 	pay.TotalAmount = "0.01"
 	v := url.Values{}
@@ -92,7 +102,7 @@ func WapAlipay() {
 // https://docs.open.alipay.com/api_1/alipay.trade.pay/
 // 扫码支付(生成支付的二维码的链接）
 func GetQrPayURL() {
-	pay := alipay.AliPayTradePreCreate{}
+	pay := alipay.TradePreCreate{}
 	// 支付宝回调地址（需要在支付宝后台配置）
 	// 支付成功后，支付宝会发送一个POST消息到该地址
 	pay.NotifyURL = "http://www.pibigstar/alipay"
@@ -112,7 +122,7 @@ func GetQrPayURL() {
 		fmt.Println(err)
 	}
 	//二维码链接，可用此链接生成一个二维码扫码支付
-	fmt.Println(url.AliPayPreCreateResponse.QRCode)
+	fmt.Println(url.Content.QRCode)
 }
 
 func main() {
