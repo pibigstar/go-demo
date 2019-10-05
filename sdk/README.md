@@ -4,7 +4,7 @@
 - [x] ElasticSearch
 - [x] Kafka
 - [x] Nsq
-- [ ] Mqtt
+- [x] Mqtt
 - [x] SMS短信发送
 - [x] RabbitMQ
 - [x] 阿里云OSS
