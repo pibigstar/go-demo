@@ -3,9 +3,12 @@ module go-demo
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
+	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/Shopify/sarama v1.20.0
+	github.com/TruthHun/html2md v0.0.0-20190507142218-8352cc68f88e
 	github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190827030439-84d9962c10d3
 	github.com/aliyun/aliyun-oss-go-sdk v2.0.1+incompatible
+	github.com/astaxie/beego v1.12.0 // indirect
 	github.com/denisenkom/go-mssqldb v0.0.0-20190515213511-eb9f6a1743f3 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.2.0
@@ -14,7 +17,6 @@ require (
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-redis/redis v6.15.3+incompatible
-	github.com/go-sql-driver/mysql v1.4.1 // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/golang/mock v1.2.0
 	github.com/google/go-cmp v0.3.1
@@ -27,7 +29,6 @@ require (
 	github.com/lib/pq v1.1.1 // indirect
 	github.com/mattn/go-colorable v0.1.1 // indirect
 	github.com/mattn/go-isatty v0.0.7 // indirect
-	github.com/mattn/go-sqlite3 v1.10.0 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.2
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
@@ -39,6 +40,7 @@ require (
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/russross/blackfriday v2.0.0+incompatible
 	github.com/satori/go.uuid v1.2.0
+	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
