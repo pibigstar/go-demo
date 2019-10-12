@@ -1,12 +1,26 @@
-package main
+package handpick
 
 import (
 	"fmt"
 	"runtime"
 	"sync"
+	"testing"
 )
 
-func main() {
+/**
+go2中i:  4
+go1中i:  5
+go1中i:  5
+go1中i:  5
+go1中i:  5
+go1中i:  5
+go2中i:  0
+go2中i:  1
+go2中i:  2
+go2中i:  3
+*/
+
+func Test3(t *testing.T) {
 	runtime.GOMAXPROCS(1) // 将CPU设置为 1 个
 	wg := sync.WaitGroup{}
 	wg.Add(10)
@@ -27,16 +41,3 @@ func main() {
 	}
 	wg.Wait()
 }
-
-/**
-go2中i:  4
-go1中i:  5
-go1中i:  5
-go1中i:  5
-go1中i:  5
-go1中i:  5
-go2中i:  0
-go2中i:  1
-go2中i:  2
-go2中i:  3
-*/

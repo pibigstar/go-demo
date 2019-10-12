@@ -1,4 +1,4 @@
-package interview
+package handpick
 
 import (
 	"fmt"
@@ -7,6 +7,10 @@ import (
 
 /**
 即使空对象，长度为0，可对象依然是合法存在的，拥有合法的内存地址，这与nil的定义不符合
+
+输出:
+false
+false
 */
 type Student struct {
 }
@@ -18,8 +22,3 @@ func TestNil(t *testing.T) {
 	fmt.Println(&stu1 == nil)
 	fmt.Println(&stu1 == &stu2)
 }
-
-/**
-false
-false
-*/

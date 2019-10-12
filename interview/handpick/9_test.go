@@ -1,4 +1,4 @@
-package interview
+package handpick
 
 import (
 	"fmt"
@@ -11,13 +11,14 @@ import (
 
 修改方法：
 定义为指针 go var peo People = &Student{}
-方法定义在值类型上,指针类型本身是包含值类型的方法。 go func (stu Student) Speak(think string) (talk string) { //... }
+方法定义在值类型上,指针类型本身是包含值类型的方法
+go func (stu Student) Speak(think string) (talk string) { //... }
+
+解析: 类型T方法集包含所有 receiver T 方法, 类型*T方法集包含所有 receiver T 和 receiver *T 方法
 */
 type People interface {
 	Speak(string) string
 }
-
-type Student struct{}
 
 func (stu *Student) Speak(think string) (talk string) {
 	if think == "bitch" {
@@ -34,8 +35,3 @@ func TestInterface(t *testing.T) {
 	think := "bitch"
 	fmt.Println(peo.Speak(think))
 }
-
-/**
-类型T方法集包含所有 receiver T 方法
-类型*T方法集包含所有 receiver T 和 receiver *T 方法
-*/

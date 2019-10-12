@@ -1,4 +1,4 @@
-package interview
+package handpick
 
 import (
 	"runtime"

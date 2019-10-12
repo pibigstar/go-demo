@@ -7,7 +7,8 @@
 - bash: Go语言基础（file、goroutine、http、net...)
 - blockchain: 用Go设计一个简单的区块链项目
 - design: Go实现常用设计模式
-- interview: Go面试易错知识点
+- interview: Go面试题及详解
+- leetcode: Go实现LeetCode中的算法题
 - sdk: Go对接第三方工具（nsq、kafka、oss、redis...)
 - spider: Go实现爬虫(QQ协议登录，QQ自动领礼物demo)
 - utils: Go常用工具类
