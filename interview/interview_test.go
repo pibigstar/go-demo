@@ -203,3 +203,118 @@ func Test31(t *testing.T) {
 
 	person.age = 29
 }
+
+func Test34(t *testing.T) {
+	s1 := []int{1, 2, 3}
+	s2 := s1[1:]
+	s2[1] = 4
+	fmt.Println(s1)
+	s2 = append(s2, 5, 6, 7)
+	fmt.Println(s1)
+}
+
+func Test35(t *testing.T) {
+	if a := 1; false {
+	} else if b := 2; false {
+	} else {
+		println(a, b)
+	}
+}
+
+func Test36(t *testing.T) {
+	a := 1
+	b := 2
+	defer calc("A", a, calc("10", a, b))
+	a = 0
+	defer calc("B", a, calc("20", a, b))
+	b = 1
+}
+
+func calc(index string, a, b int) int {
+	ret := a + b
+	fmt.Println(index, a, b, ret)
+	return ret
+}
+
+func Test37(t *testing.T) {
+	m := map[int]string{0: "zero", 1: "one"}
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+}
+
+const (
+	a = iota
+	b = iota
+)
+const (
+	name  = "name"
+	name2 = "name"
+	c     = iota
+	d     = iota
+)
+
+func Test39(t *testing.T) {
+	fmt.Println(a)
+	fmt.Println(b)
+	fmt.Println(c)
+	fmt.Println(d)
+}
+
+type People interface {
+	Show()
+}
+
+type Student struct{}
+
+func (stu *Student) Show() {
+
+}
+
+func Test40(t *testing.T) {
+	var s *Student
+	if s == nil {
+		fmt.Println("s is nil")
+	} else {
+		fmt.Println("s is not nil")
+	}
+	var p People = s
+	if p == nil {
+		fmt.Println("p is nil")
+	} else {
+		fmt.Println("p is not nil")
+	}
+}
+
+type Direction int
+
+const (
+	North Direction = iota
+	East
+	South
+	West
+)
+
+func (d Direction) String() string {
+	return [...]string{"North", "East", "South", "West"}[d]
+}
+
+func Test41(t *testing.T) {
+	fmt.Println(South)
+}
+
+type Square struct {
+	x, y int
+}
+
+var m = map[string]Square{
+	"foo": Square{2, 3},
+}
+
+func Test42(t *testing.T) {
+	// error
+	// m["foo"].x = 1
+	square := m["foo"]
+	square.x = 1
+	fmt.Println(m["foo"].x)
+}

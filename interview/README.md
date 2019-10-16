@@ -1,7 +1,4 @@
 # Go面试题及详解
-> 每个文件包含5个左右面试题，下面是面试题汇总
-
-## 汇总
 
 ### 1. 下面这段代码的输出什么?
 ```go
@@ -299,7 +296,7 @@ C. map
 
 D. channel
 #### 答案
-> A C
+> A B D
 
 ### 18. 下面代码输出什么？
 ```go
@@ -633,3 +630,226 @@ func Test33(t *testing.T) {
 > 函数参数为 interface{} 时可以接收任何类型的参数，包括用户自定义类型等，
 > 即使是接收指针类型也用 interface{}，而不是使用 *interface{}
 > 永远不要使用一个指针指向一个接口类型，因为它已经是一个指针。
+
+### 34. 下面代码输出什么？
+```go
+func Test34(t *testing.T) {
+	s1 := []int{1, 2, 3}
+	s2 := s1[1:]
+	s2[1] = 4
+	fmt.Println(s1)
+	s2 = append(s2, 5, 6, 7)
+	fmt.Println(s1)
+}
+```
+#### 答案
+> [1 2 4]
+>
+> [1 2 4]
+>
+> golang 中切片底层的数据结构是数组。当使用 s1[1:] 获得切片 s2，和 s1 共享同一个底层数组
+> 这会导致 s2[1] = 4 语句影响 s1。 
+> 而 append 操作会导致底层数组扩容，生成新的数组，因此追加数据后的 s2 不会影响 s1
+
+### 35. 下列代码输出什么？
+```go
+func Test35(t *testing.T) {
+	if a := 1; false {
+	} else if b := 2; false {
+	} else {
+		println(a, b)
+	}
+}
+```
+#### 答案
+> 1 2
+
+### 36. 下列代码输出什么？
+```go
+func Test36(t *testing.T) {
+	a := 1
+	b := 2
+	defer calc("A", a, calc("10", a, b))
+	a = 0
+	defer calc("B", a, calc("20", a, b))
+	b = 1
+}
+
+func calc(index string, a, b int) int {
+	ret := a + b
+	fmt.Println(index, a, b, ret)
+	return ret
+}
+```
+#### 答案
+> 10 1 2 3
+>
+> 20 0 2 2
+>  
+> B 0 2 2
+>
+> A 1 3 4
+
+
+### 37. 下列代码输出什么？
+```go
+func Test37(t *testing.T) {
+	m := map[int]string{0: "zero", 1: "one"}
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+}
+```
+#### 答案
+> 0 zero
+>
+> 1 one
+>
+> 或者
+>
+> 1 one
+>
+> 0 zero
+>
+> map输出是无序的
+
+### 38. 下面代码是否可以编译通过？
+```go
+type People interface {
+    Speak(string) string
+}
+
+type Student struct{}
+
+func (stu *Student) Speak(think string) {
+    fmt.Println(think)
+}
+
+func main() {
+    var peo People = Student{}
+    think := "speak"
+    fmt.Println(peo.Speak(think))
+}
+```
+
+#### 答案
+> 不能编译通过，因为是 *Student 实现了Speak，并不是 值类型的Student，
+但是如果是 Student 类型实现了Speak方法，那么用 值类型的`Student{}` 或是指针类型的`&Student{}`都可以访问到该方法
+
+### 39. 下面代码输出什么？
+```go
+const (
+	a = iota
+	b = iota
+)
+const (
+	name = "name"
+	c    = iota
+	d    = iota
+)
+
+func Test39(t *testing.T) {
+	fmt.Println(a)
+	fmt.Println(b)
+	fmt.Println(c)
+	fmt.Println(d)
+}
+```
+#### 答案
+> 0 1 1 2
+>
+> iota 在 const 关键字出现时将被重置为0，const中每新增一行常量声明将使 iota 计数一次。
+
+### 39. 下面代码输出什么？
+```go
+type People interface {
+	Show()
+}
+
+type Student struct{}
+
+func (stu *Student) Show() {
+
+}
+
+func Test40(t *testing.T) {
+	var s *Student
+	if s == nil {
+		fmt.Println("s is nil")
+	} else {
+		fmt.Println("s is not nil")
+	}
+	var p People = s
+	if p == nil {
+		fmt.Println("p is nil")
+	} else {
+		fmt.Println("p is not nil")
+	}
+}
+```
+#### 答案
+> s is nil
+>
+> p is not nil
+>
+> 当且仅当动态值和动态类型都为 nil 时，接口类型值才为 nil。上面的代码，给变量 p 赋值之后，
+> p 的动态值是 nil，但是动态类型却是 *Student，是一个 nil 指针，所以相等条件不成立。
+
+### 41. 下列代码输出什么？
+```go
+type Direction int
+
+const (
+	North Direction = iota
+	East
+	South
+	West
+)
+
+func (d Direction) String() string {
+	return [...]string{"North", "East", "South", "West"}[d]
+}
+
+func Test41(t *testing.T) {
+	fmt.Println(South)
+}
+```
+#### 答案
+> South
+
+### 42. 下列代码是否可以编译通过？
+```go
+type Square struct {
+	x, y int
+}
+
+var m = map[string]Square{
+	"foo": Square{2, 3},
+}
+
+func Test42(t *testing.T) {
+	m["foo"].x = 1
+	fmt.Println(m["foo"].x)
+}
+```
+#### 答案
+> 编译失败， m["foo"].x = 4 报错
+>
+> 对于类似 X = Y的赋值操作，必须知道 X 的地址，才能够将 Y 的值赋给 X，
+> 但 go 中的 map 的 value 本身是不可寻址的
+#### 正确写法
+有两种解决方法：
+
+第一种：
+```go
+square := m["foo"]
+square.x = 1
+```
+第二种：
+```go
+var m = map[string]*Math{
+    "foo": &Math{2, 3},
+}
+m["foo"].x = 1
+```
+
