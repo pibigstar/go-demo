@@ -483,7 +483,7 @@ B. 65
 C. compilation error
 
 #### 答案
-> B
+> A
 > 
 > UTF-8 编码中，十进制数字 65 对应的符号是 A
 
@@ -853,3 +853,226 @@ var m = map[string]*Math{
 m["foo"].x = 1
 ```
 
+### 43. 下面代码输出什么？
+```go
+var p *int
+
+func foo() (*int, error) {
+	var i int = 5
+	return &i, nil
+}
+
+func bar() {
+	//use p
+	fmt.Println(*p)
+}
+
+func Test43(t *testing.T) {
+	p, err := foo()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	bar()
+	fmt.Println(*p)
+}
+```
+#### 答案
+> bar 函数会发生panic，空指针异常
+>
+> 因为 err 前面没有声明，所以 p, err := foo() 中的 p 是重新声明的局部变量，而不是我们在前面声明的全局变量 p
+
+### 44. 下面代码输出什么？
+```go
+func Test44(t *testing.T) {
+	v := []int{1, 2, 3}
+	for i := range v {
+		v = append(v, i)
+		fmt.Println(v)
+	}
+}
+```
+
+#### 答案
+> [1 2 3 0]
+>
+> [1 2 3 0 1]
+>
+> [1 2 3 0 1 2]
+
+### 45. 下面代码输出什么？
+```go
+func Test45(t *testing.T) {
+	var m = [...]int{1, 2, 3}
+
+	for i, v := range m {
+		go func() {
+			fmt.Println(i, v)
+		}()
+	}
+
+	time.Sleep(time.Second * 1)
+}
+```
+#### 答案
+> 2 3
+>
+> 2 3
+>
+> 2 3
+> 
+> for range 使用短变量声明(:=)的形式迭代变量，
+> 需要注意的是，变量 i、v 在每次循环体中都会被重用，而不是重新声明。
+
+#### 解决方案
+> 有两种解决方式
+
+第一种(推荐)
+```go
+for i, v := range m {
+    go func(i,v int) {
+        fmt.Println(i, v)
+    }(i,v)
+}
+```
+第二种
+```go
+for i, v := range m {
+    i := i           // 这里的 := 会重新声明变量，而不是重用
+    v := v
+    go func() {
+        fmt.Println(i, v)
+    }()
+}
+```
+
+### 46. 下面代码输出什么？
+```go
+func f46(n int) (r int) {
+	defer func() {
+		r += n
+		recover()
+	}()
+
+	var f func()
+
+	defer f()
+	f = func() {
+		r += 2
+	}
+	return n + 1
+}
+
+func Test46(t *testing.T) {
+	fmt.Println(f46(3))
+}
+```
+#### 答案
+> 7
+
+### 47. 下列代码输出什么？
+```go
+func Test47(t *testing.T) {
+	var a = [5]int{1, 2, 3, 4, 5}
+	var r [5]int
+
+	for i, v := range a {
+		if i == 0 {
+			a[1] = 12
+			a[2] = 13
+		}
+		r[i] = v
+	}
+	fmt.Println("r = ", r)
+	fmt.Println("a = ", a)
+}
+```
+#### 答案
+> r =  [1 2 3 4 5]
+>
+> a =  [1 12 13 4 5]
+
+### 48. 下面代码输出什么？
+```go
+func change(s ...int) {
+	s = append(s, 3)
+}
+
+func Test48(t *testing.T) {
+	slice := make([]int, 5, 5)
+	slice[0] = 1
+	slice[1] = 2
+	change(slice...)
+	fmt.Println(slice)
+	change(slice[0:2]...)
+	fmt.Println(slice)
+}
+```
+#### 答案
+> [1 2 0 0 0]
+>
+> [1 2 3 0 0]
+
+### 49. 下列代码输出什么？
+```go
+func Test49(t *testing.T) {
+	var m = map[string]int{
+		"A": 21,
+		"B": 22,
+		"C": 23,
+	}
+	counter := 0
+	for k, v := range m {
+		if counter == 0 {
+			delete(m, "A")
+		}
+		counter++
+		fmt.Println(k, v)
+	}
+	fmt.Println("counter is ", counter)
+}
+```
+
+#### 答案
+> counter is 2 或者 counter is 3
+>
+> for range map 是无序的
+
+### 50. 关于协程，下列说法正确的有？
+
+A. 协程和线程都可以实现程序的并发执行；
+
+B. 线程比协程更轻量级；
+
+C. 协程不存在死锁问题；
+
+D. 通过 channel 来进行协程间的通信；
+
+#### 答案
+> A D
+
+### 51.关于循环语句，下面说法正确的有？
+    
+A. 循环语句既支持 for 关键字，也支持 while 和 do-while；
+
+B. 关键字 for 的基本使用方法与 C/C++ 中没有任何差异；
+
+C. for 循环支持 continue 和 break 来控制循环，但是它提供了一个更高级的 break，可以选择中断哪一个循环；
+
+D. for 循环不支持以逗号为间隔的多个赋值语句，必须使用平行赋值的方式来初始化多个变量；
+
+#### 答案
+> C D
+
+### 52. 下列代码输出什么？
+```go
+func Test52(t *testing.T) {
+	i := 1
+	s := []string{"A", "B", "C"}
+	i, s[i-1] = 2, "Z"
+	fmt.Printf("s: %v \n", s)
+}
+```
+
+#### 答案
+> s: [Z B C] 

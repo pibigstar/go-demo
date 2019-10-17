@@ -3,6 +3,7 @@ package interview
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 func Test1(t *testing.T) {
@@ -317,4 +318,120 @@ func Test42(t *testing.T) {
 	square := m["foo"]
 	square.x = 1
 	fmt.Println(m["foo"].x)
+}
+
+var p *int
+
+func foo() (*int, error) {
+	var i int = 5
+	return &i, nil
+}
+
+func bar() {
+	//panic, p nil
+	//fmt.Println(*p)
+}
+
+func Test43(t *testing.T) {
+	p, err := foo()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	bar()
+	fmt.Println(*p)
+}
+
+func Test44(t *testing.T) {
+	v := []int{1, 2, 3}
+	for i := range v {
+		v = append(v, i)
+		fmt.Println(v)
+	}
+}
+
+func Test45(t *testing.T) {
+	var m = [...]int{1, 2, 3}
+
+	for i, v := range m {
+		go func() {
+			fmt.Println(i, v)
+		}()
+	}
+
+	time.Sleep(time.Second * 1)
+}
+
+func f46(n int) (r int) {
+	defer func() {
+		r += n
+		recover()
+	}()
+
+	var f func()
+
+	defer f()
+	f = func() {
+		r += 2
+	}
+	return n + 1
+}
+
+func Test46(t *testing.T) {
+	fmt.Println(f46(3))
+}
+
+func Test47(t *testing.T) {
+	var a = [5]int{1, 2, 3, 4, 5}
+	var r [5]int
+
+	for i, v := range a {
+		if i == 0 {
+			a[1] = 12
+			a[2] = 13
+		}
+		r[i] = v
+	}
+	fmt.Println("r = ", r)
+	fmt.Println("a = ", a)
+}
+
+func change(s ...int) {
+	s = append(s, 3)
+}
+
+func Test48(t *testing.T) {
+	slice := make([]int, 5, 5)
+	slice[0] = 1
+	slice[1] = 2
+	change(slice...)
+	fmt.Println(slice)
+	change(slice[0:2]...)
+	fmt.Println(slice)
+}
+
+func Benchmark49(t *testing.B) {
+	for i := 0; i < t.N; i++ {
+		var m = map[string]int{
+			"A": 21,
+			"B": 22,
+			"C": 23,
+		}
+		counter := 0
+		for k, v := range m {
+			if counter == 0 {
+				delete(m, "A")
+			}
+			counter++
+			fmt.Println(k, v)
+		}
+		fmt.Println("counter is ", counter)
+	}
+}
+
+func Test52(t *testing.T) {
+	i := 1
+	s := []string{"A", "B", "C"}
+	i, s[i-1] = 2, "Z"
+	fmt.Printf("s: %v \n", s)
 }
