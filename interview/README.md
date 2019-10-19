@@ -1076,3 +1076,305 @@ func Test52(t *testing.T) {
 
 #### 答案
 > s: [Z B C] 
+
+### 53. .关于switch语句，下面说法正确的有?
+        
+A. 条件表达式必须为常量或者整数；
+
+B. 单个case中，可以出现多个结果选项；
+
+C. 需要用break来明确退出一个case；
+
+D. 只有在case中明确添加fallthrough关键字，才会继续执行紧跟的下一个case；
+
+#### 答案
+> B D
+
+### 54. 下列Add函数定义正确的是？
+```go
+func Test54(t *testing.T) {
+	var a Integer = 1
+	var b Integer = 2
+	var i interface{} = &a
+	sum := i.(*Integer).Add(b)
+	fmt.Println(sum)
+}
+```
+
+```
+A.
+type Integer int
+func (a Integer) Add(b Integer) Integer {
+        return a + b
+}
+
+B.
+type Integer int
+func (a Integer) Add(b *Integer) Integer {
+        return a + *b
+}
+
+C.
+type Integer int
+func (a *Integer) Add(b Integer) Integer {
+        return *a + b
+}
+
+D.
+type Integer int
+func (a *Integer) Add(b *Integer) Integer {
+        return *a + *b
+}
+```
+#### 答案
+> A C
+
+### 55. 关于 bool 变量 b 的赋值，下面错误的用法是？
+        
+A. b = true
+
+B. b = 1
+
+C. b = bool(1)
+
+D. b = (1 == 2)
+
+#### 答案
+> B C
+
+### 56. 关于变量的自增和自减操作，下面语句正确的是？
+A.
+```go
+i := 1
+i++
+```
+B.
+```go
+i := 1
+j = i++
+```
+C.
+```go
+i := 1
+++i
+```
+D.
+```go
+i := 1
+i--
+```
+#### 答案
+> A D
+>
+> go 里面没有 ++i 和 --i
+
+### 56. 关于GetPodAction定义，下面赋值正确的是
+```go
+type Fragment interface {
+        Exec(transInfo *TransInfo) error
+}
+type GetPodAction struct {
+}
+func (g GetPodAction) Exec(transInfo *TransInfo) error {
+        ...
+        return nil
+}
+```
+A. var fragment Fragment = new(GetPodAction)
+
+B. var fragment Fragment = GetPodAction
+
+C. var fragment Fragment = &GetPodAction{}
+
+D. var fragment Fragment = GetPodAction{}
+
+#### 答案
+> A C D
+
+### 58. 关于整型切片的初始化，下面正确的是？
+        
+A. s := make([]int)
+
+B. s := make([]int, 0)
+
+C. s := make([]int, 5, 10)
+
+D. s := []int{1, 2, 3, 4, 5}
+
+#### 答案
+> B C D
+
+### 59. 下列代码是否会触发异常？
+```go
+func Test59(t *testing.T) {
+	runtime.GOMAXPROCS(1)
+	intChan := make(chan int, 1)
+	stringChan := make(chan string, 1)
+	intChan <- 1
+	stringChan <- "hello"
+	select {
+	case value := <-intChan:
+		fmt.Println(value)
+	case value := <-stringChan:
+		panic(value)
+	}
+}
+```
+#### 答案
+> 不一定，当两个chan同时有值时，select 会随机选择一个可用通道做收发操作
+
+### 60. 关于channel的特性，下面说法正确的是？
+        
+A. 给一个 nil channel 发送数据，造成永远阻塞
+
+B. 从一个 nil channel 接收数据，造成永远阻塞
+
+C. 给一个已经关闭的 channel 发送数据，引起 panic
+
+D. 从一个已经关闭的 channel 接收数据，如果缓冲区中为空，则返回一个零值
+
+#### 答案
+> A B C D
+
+### 61. 下列代码有什么问题？
+```go
+const i = 100
+var j = 123
+
+func main() {
+    fmt.Println(&j, j)
+    fmt.Println(&i, i)
+}
+```
+#### 答案
+> Go语言中，常量无法寻址, 是不能进行取指针操作的
+
+### 62. 下列代码输出什么？
+```go
+func Test62(t *testing.T) {
+	x := []string{"a", "b", "c"}
+	for v := range x {
+		fmt.Print(v)
+	}
+}
+```
+#### 答案
+> 012
+>
+> range 一个返回值时，这个值是下标，两个值时，第一个是下标，第二个是值，当 x 为 map时，第一个是key，第二个是value
+
+### 63. 关于无缓冲和有冲突的channel，下面说法正确的是？
+        
+A. 无缓冲的channel是默认的缓冲为1的channel；
+
+B. 无缓冲的channel和有缓冲的channel都是同步的；
+
+C. 无缓冲的channel和有缓冲的channel都是非同步的；
+
+D. 无缓冲的channel是同步的，而有缓冲的channel是非同步的；
+
+#### 答案
+> D
+
+### 64. 下列代码输出什么？
+```go
+func Foo(x interface{}) {
+	if x == nil {
+		fmt.Println("empty interface")
+		return
+	}
+	fmt.Println("non-empty interface")
+}
+func Test64(t *testing.T) {
+	var x *int = nil
+	Foo(x)
+}
+```
+#### 答案
+> non-empty interface
+>
+> 接口除了有静态类型，还有动态类型和动态值，
+> 当且仅当动态值和动态类型都为 nil 时，接口类型值才为 nil。
+> 这里的 x 的动态类型是 *int，所以 x 不为 nil
+
+### 65. 关于select机制，下面说法正确的是?
+        
+A. select机制用来处理异步IO问题；
+
+B. select机制最大的一条限制就是每个case语句里必须是一个IO操作；
+
+C. golang在语言级别支持select关键字；
+
+D. select关键字的用法与switch语句非常类似，后面要带判断条件；
+
+#### 答案
+> A B C 
+
+### 66. 下列代码有什么问题？
+```go
+func Stop(stop <-chan bool) {
+	    close(stop)
+}
+```
+#### 答案
+> 有方向的 channel 不可以被关闭
+
+### 67. 下列代码输出什么？
+```go
+func Test67(t *testing.T) {
+	var x = []int{2: 2, 3, 0: 1}
+	fmt.Println(x)
+}
+```
+#### 答案
+> [1 0 2 3]
+
+### 68. 下列代码输出什么？
+```go
+func incr(p *int) int {
+	*p++
+	return *p
+}
+func Test68(t *testing.T) {
+	v := 1
+	incr(&v)
+	fmt.Println(v)
+}
+```
+#### 答案
+> 2
+
+### 69. 下列代码输出什么？
+```go
+func Test69(t *testing.T) {
+	var a = []int{1, 2, 3, 4, 5}
+	var r = make([]int, 0)
+
+	for i, v := range a {
+		if i == 0 {
+			a = append(a, 6, 7)
+		}
+		r = append(r, v)
+	}
+	fmt.Println(r)
+}
+```
+#### 答案
+> [1 2 3 4 5]
+>
+> a 在 for range 过程中增加了两个元素
+> len 由 5 增加到 7，但 for range 时会使用 a 的副本 a' 参与循环，副本的 len 依旧是 5，
+> 因此 for range 只会循环 5 次，也就只获取 a 对应的底层数组的前 5 个元素。
+
+### 70. 下列代码有什么问题？
+```go
+func main() {
+    var s []int
+    s = append(s,1)
+
+    var m map[string]int
+    m["one"] = 1 
+}
+```
+#### 答案
+> 切片可以开箱即用，但 map 需要用 make函数 进行初始化之后才能赋值

@@ -2,6 +2,7 @@ package interview
 
 import (
 	"fmt"
+	"runtime"
 	"testing"
 	"time"
 )
@@ -434,4 +435,79 @@ func Test52(t *testing.T) {
 	s := []string{"A", "B", "C"}
 	i, s[i-1] = 2, "Z"
 	fmt.Printf("s: %v \n", s)
+}
+
+type Integer int
+
+func (a Integer) Add(b Integer) Integer {
+	return a + b
+}
+
+func Test54(t *testing.T) {
+	var a Integer = 1
+	var b Integer = 2
+	var i interface{} = &a
+	sum := i.(*Integer).Add(b)
+	fmt.Println(sum)
+}
+
+func Test59(t *testing.T) {
+	runtime.GOMAXPROCS(1)
+	intChan := make(chan int, 1)
+	stringChan := make(chan string, 1)
+	intChan <- 1
+	stringChan <- "hello"
+	select {
+	case value := <-intChan:
+		fmt.Println(value)
+	case value := <-stringChan:
+		panic(value)
+	}
+}
+
+func Test62(t *testing.T) {
+	x := []string{"a", "b", "c"}
+	for v := range x {
+		fmt.Print(v)
+	}
+}
+
+func Foo(x interface{}) {
+	if x == nil {
+		fmt.Println("empty interface")
+		return
+	}
+	fmt.Println("non-empty interface")
+}
+func Test64(t *testing.T) {
+	var x *int = nil
+	Foo(x)
+}
+
+func Test67(t *testing.T) {
+	var x = []int{2: 2, 3, 0: 1}
+	fmt.Println(x)
+}
+
+func incr(p *int) int {
+	*p++
+	return *p
+}
+func Test68(t *testing.T) {
+	v := 1
+	incr(&v)
+	fmt.Println(v)
+}
+
+func Test69(t *testing.T) {
+	var a = []int{1, 2, 3, 4, 5}
+	var r = make([]int, 0)
+
+	for i, v := range a {
+		if i == 0 {
+			a = append(a, 6, 7)
+		}
+		r = append(r, v)
+	}
+	fmt.Println(r)
 }
