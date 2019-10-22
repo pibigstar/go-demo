@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"time"
 
 	"github.com/olivere/elastic"
-	"github.com/pkg/errors"
 )
 
 var client *esClient
@@ -52,11 +52,10 @@ func init() {
 }
 
 // insert a document to the index
-func (client *esClient) Insert(index, typeName string, value interface{}) (*elastic.IndexResponse, error) {
+func (client *esClient) Insert(index string, value interface{}) (*elastic.IndexResponse, error) {
 	// access by the http://localhost:9700/pibigstar/employee/id
 	response, err := client.Index().
 		Index(index).
-		Type(typeName).
 		BodyJson(value).
 		Do(client.ctx)
 	if err != nil {
@@ -66,9 +65,9 @@ func (client *esClient) Insert(index, typeName string, value interface{}) (*elas
 }
 
 // get the document by id
-func (client *esClient) GetById(index, typeName, id string) ([]byte, error) {
+func (client *esClient) GetById(index string, id string) ([]byte, error) {
 	// id 必须存在，不然会报错，如果想查找请用search
-	result, err := client.Get().Index(index).Type(typeName).Id(id).Do(client.ctx)
+	result, err := client.Get().Index(index).Id(id).Do(client.ctx)
 	if err != nil && !result.Found {
 		return nil, err
 	}
@@ -80,26 +79,48 @@ func (client *esClient) GetById(index, typeName, id string) ([]byte, error) {
 }
 
 // search the result by query strings
-func (client *esClient) Query(index, typeName string, queryStrings ...string) (*elastic.SearchResult, error) {
-	var queryString string
-	if len(queryStrings) > 0 {
-		queryString = queryStrings[0]
-	}
+func (client *esClient) Query(index, keyword string) (*elastic.SearchResult, error) {
 	// 根据名字查询
-	query := elastic.NewQueryStringQuery(queryString)
-	result, err := client.Search().Index(index).Type(typeName).Query(query).Do(client.ctx)
-	if err != nil {
-		return nil, err
-	}
-	if result.Hits.TotalHits > 0 {
-		return result, nil
-	}
-	return nil, errors.New("query the result is null")
+	query := elastic.NewQueryStringQuery(keyword)
+	result, err := client.Search().Index(index).Query(query).Do(client.ctx)
+	return result, err
+}
+
+// Aggregate query
+func (client *esClient) AggQuery(index, keyword string) (*elastic.SearchResult, error) {
+	agg := elastic.NewDateHistogramAggregation().
+		Field("@timestamp").
+		TimeZone("Asia/Shanghai").
+		MinDocCount(1).
+		Interval("1m")
+
+	// 查询一分钟前是否出现关键字keyword
+	boolQuery := elastic.NewBoolQuery().
+		Filter(elastic.NewRangeQuery("@timestamp").
+			Format("strict_date_optional_time").
+			Gte(time.Now().Add(time.Minute * -1).Format(time.RFC3339)).
+			Lte(time.Now().Format(time.RFC3339))).
+		Filter(elastic.NewMultiMatchQuery(keyword).
+			Type("best_fields").
+			Lenient(true))
+
+	result, err := client.Search().
+		Index(index).
+		Query(boolQuery).
+		Timeout("30000ms").
+		IgnoreUnavailable(true).
+		Size(500).
+		Aggregation("aggs", agg).
+		Version(true).
+		StoredFields("*").
+		Do(client.ctx)
+
+	return result, err
 }
 
 // delete the document by id
-func (client *esClient) DeleteById(index, typeName, id string) (*elastic.DeleteResponse, error) {
-	response, err := client.Delete().Index(index).Type(typeName).Id(id).Do(client.ctx)
+func (client *esClient) DeleteById(index, id string) (*elastic.DeleteResponse, error) {
+	response, err := client.Delete().Index(index).Id(id).Do(client.ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -108,10 +129,9 @@ func (client *esClient) DeleteById(index, typeName, id string) (*elastic.DeleteR
 
 // update the document by id
 // values : map[string]interface{}{"age": 12}
-func (client *esClient) UpdateById(index, typeName, id string, values map[string]interface{}) (*elastic.UpdateResponse, error) {
+func (client *esClient) UpdateById(index, id string, values map[string]interface{}) (*elastic.UpdateResponse, error) {
 	response, err := client.Update().
 		Index(index).
-		Type(typeName).
 		Id(id).
 		Doc(values).Do(client.ctx)
 	if err != nil {

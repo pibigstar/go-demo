@@ -14,13 +14,13 @@ func TestElasticSearch(t *testing.T) {
 
 	user := &User{Name: "pibigstar", Age: 18}
 
-	response, err := client.Insert("test", "user", user)
+	response, err := client.Insert("test", user)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Logf("%+v", response)
 
-	bytes, err := client.GetById("test", "user", response.Id)
+	bytes, err := client.GetById("test", response.Id)
 	if err != nil {
 		t.Error(err)
 	}
