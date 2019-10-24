@@ -1,6 +1,6 @@
 // +
 
-package handpick
+package others
 
 import (
 	"fmt"
