@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/github/license/pibigstar/go-demo.svg?style=flat)](https://github.com/pibigstar/go-demo)
 [![go-demo](https://img.shields.io/badge/go-demo-green)](https://github.com/pibigstar/go-demo)
 
-- [bash](bash): Go语言基础（file、goroutine、http、net...)
+- [bash](base): Go语言基础（file、goroutine、http、net...)
 - [blockchain](blockchain): 用Go设计一个简单的区块链项目
 - [design](design): Go实现常用设计模式
 - [interview](interview): Go面试题及详解
