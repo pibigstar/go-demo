@@ -80,3 +80,36 @@ delete from person where id in
 where t1.email=t2.email and t1.id>t2.id) as temp);
 
 ```
+
+## 11. 上升的温度
+> 查找昨天的温度比今天高的Id
+```sql
+SELECT t1.id FROM weather t1 
+JOIN weather t2 ON DATEDIFF(t1.date, t2.date) = 1 AND t1.Temperature > t2.Temperature
+```
+
+## 12. 取消率
+> ROUND(x, d)  x: 要处理的数 d: 保留几位小数
+>
+> IF(表达式, x, y): 表达式为true时取 x, false时取 y, 类似于Java的三元表达式
+```sql
+SELECT t1.Request_at, ROUND(SUM(IF(t1.Status = 'cancelled',1,0))/ COUNT(t1.Status), 2) FROM Trips t1
+JOIN Users t2 ON (t1.Client_Id = t2.Users_Id AND t2.Banned = 'No')
+JOIN Users t3 ON (t1.Driver_Id = t3.Users_Id AND t3.Banned = 'No')
+Where t1.Request_at BETWEEN '2013-10-01' AND '2013-10-03' GROUP BY t1.Request_at
+```
+## 13. 游戏分析
+1. 玩家第一天登录游戏日期
+```sql
+SELECT player_id, MIN(event_date)  AS first_login FROM Activity GROUP BY player_id
+```
+2. 玩家第一天登录游戏设备名称
+```sql
+SELECT player_id, device_id FROM Activity WHERE (player_id, event_date ) 
+IN (SELECT player_id, MIN(event_date) FROM Activity GROUP BY player_id)
+```
+3. 统计各个日期前玩家的登录次数
+```sql
+SELECT t2.player_id, t2.event_date, sum(t1.games_played) AS games_played_so_far FROM Activity t1 JOIN Activity t2
+ON (t1.event_date <= t2.event_date AND t1.player_id = t2.player_id) GROUP BY t2.player_id,t2.event_date
+```
