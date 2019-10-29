@@ -83,6 +83,8 @@ where t1.email=t2.email and t1.id>t2.id) as temp);
 
 ## 11. 上升的温度
 > 查找昨天的温度比今天高的Id
+>
+> DATEDIFF(t1.date, t2.date) 两个日期相差天数
 ```sql
 SELECT t1.id FROM weather t1 
 JOIN weather t2 ON DATEDIFF(t1.date, t2.date) = 1 AND t1.Temperature > t2.Temperature
@@ -112,4 +114,21 @@ IN (SELECT player_id, MIN(event_date) FROM Activity GROUP BY player_id)
 ```sql
 SELECT t2.player_id, t2.event_date, sum(t1.games_played) AS games_played_so_far FROM Activity t1 JOIN Activity t2
 ON (t1.event_date <= t2.event_date AND t1.player_id = t2.player_id) GROUP BY t2.player_id,t2.event_date
+```
+4. 求首次登陆之后，第二天也登陆的玩家占总玩家的比率
+```sql
+SELECT ROUND(SUM(IF(DATEDIFF(t1.event_date,t2.first_date) = 1, 1, 0)) / (select count(distinct(t1.player_id))), 2) AS fraction
+FROM Activity t1,(select player_id,min(event_date) first_date from activity group by player_id) t2 where t1.player_id=t2.player_id
+```
+
+## 14. 求各个公司薪水中位数
+```sql
+SELECT e1.Id, e1.Company, e1.Salary
+FROM Employee AS e1, Employee AS e2
+WHERE e1.Company = e2.Company
+GROUP BY e1.Company, e1.Salary
+HAVING
+SUM(CASE WHEN e1.Salary >= e2.Salary THEN 1 ELSE 0 END) >= COUNT(*)/2
+AND SUM(CASE WHEN e1.Salary <= e2.Salary THEN 1 ELSE 0 END) >= COUNT(*)/2
+ORDER BY e1.Company;
 ```
