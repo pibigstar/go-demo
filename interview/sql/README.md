@@ -138,3 +138,26 @@ ORDER BY e1.Company;
 SELECT Name FROM Employee WHERE Id IN 
 (SELECT ManagerId FROM Employee GROUP BY ManagerId Having count(*) >= 5)
 ```
+
+## 16. 找出记录最多者
+> 使用 ORDER 排序，然后用Limit 1获取最多者
+```sql
+SELECT Name
+FROM Candidate
+WHERE id = (
+	SELECT CandidateId
+	FROM (
+		SELECT CandidateId
+		FROM Vote
+		GROUP BY CandidateId
+		ORDER BY COUNT(*) DESC
+		LIMIT 1
+	) t2
+)
+```
+## 17. 找出回答率最高的问题
+> 通过 action和question_id进行分组统计，使用limit 1获取最多的那个
+```sql
+SELECT question_id  AS survey_log  FROM survey_log 
+GROUP BY action,question_id Having action = 'answer' ORDER BY COUNT(*) DESC Limit 1
+```
