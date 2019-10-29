@@ -132,3 +132,9 @@ SUM(CASE WHEN e1.Salary >= e2.Salary THEN 1 ELSE 0 END) >= COUNT(*)/2
 AND SUM(CASE WHEN e1.Salary <= e2.Salary THEN 1 ELSE 0 END) >= COUNT(*)/2
 ORDER BY e1.Company;
 ```
+
+## 15. 找出至少有五名下属的经理
+```sql
+SELECT Name FROM Employee WHERE Id IN 
+(SELECT ManagerId FROM Employee GROUP BY ManagerId Having count(*) >= 5)
+```
