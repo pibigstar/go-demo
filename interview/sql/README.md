@@ -113,7 +113,14 @@ LIMIT 1
 SELECT name,population,area FROM World WHERE area >= 3000000 OR population >= 25000000;
 ```
 
+### 超过5名学生的课(596)
+```sql
+SELECT class FROM courses GROUP BY class Having COUNT(DISTINCT(student)) >= 5;
+```
+### 总体通过率(597)
+```sql
 
+```
 
 
 ## 中等
