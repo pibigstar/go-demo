@@ -119,7 +119,64 @@ SELECT class FROM courses GROUP BY class Having COUNT(DISTINCT(student)) >= 5;
 ```
 ### 总体通过率(597)
 ```sql
+SELECT ROUND( IFNULL((
+		SELECT COUNT(*)
+		FROM (
+			SELECT DISTINCT requester_id, accepter_id
+			FROM request_accepted
+		) A
+	) / (
+		SELECT COUNT(*)
+		FROM (
+			SELECT DISTINCT sender_id, send_to_id
+			FROM friend_request
+		) B
+	),0), 2) AS accept_rate;
+```
 
+### 连续空余座位(603)
+> 只要挨着我的是空余的，那么就是连续座位
+>
+> 利用 abs 相减 等于 1 即为相邻
+```sql
+SELECT DISTINCT t1.seat_id
+FROM cinema t1, cinema t2
+WHERE (abs(t1.seat_id - t2.seat_id) = 1
+	AND t1.free = 1
+	AND t2.free = 1)
+ORDER BY t1.seat_id
+```
+
+### 销售员(607)
+> 找出没有向 RED 公司销售过的员工
+```sql
+SELECT name FROM salesperson WHERE sales_id NOT IN (
+    SELECT distinct sales_id FROM orders t1 INNEr JOIN company t2 ON t1.com_id = t2.com_id  AND t2.name = 'RED'
+)
+```
+
+### 判断三角形(610)
+> 如果任意一个两边之和小于等于第三边的则不能构成
+```sql
+SELECT *,IF((x+y-z<=0 or x+z-y<=0 or y+z-x<=0), 'No','Yes') AS triangle FROM triangle;
+```
+
+### 直线上的最近距离(613)
+```sql
+SELECT MIN(abs(t1.x - t2.x)) AS shortest FROM point t1,point t2 WHERE t1.x <> t2.x;
+```
+
+### 只出现过一次的最大数字(619)
+> GROUP 找出出现过多次的，再使用 NOT IN 过滤掉这些
+```sql
+SELECT MAX(num) AS num
+FROM my_numbers
+WHERE num NOT IN (
+	SELECT num
+	FROM my_numbers
+	GROUP BY num
+	HAVING COUNT(*) > 1
+)
 ```
 
 
