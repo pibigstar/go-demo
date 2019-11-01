@@ -179,6 +179,38 @@ WHERE num NOT IN (
 )
 ```
 
+### 有趣的电影(620)
+> 找出id为奇数，且不无聊的电影
+```sql
+SELECT * FROM cinema WHERE description <> 'boring' AND id%2<>0 ORDER BY rating DESC;
+```
+
+### 交换工资(627)
+> 将 f 和 m 的值互换
+```sql
+UPDATE salary set sex = IF(sex='f', 'm', 'f');
+```
+### 合作过至少三次的演员和导演(1050)
+```sql
+SELECT actor_id,director_id FROM ActorDirector GROUP BY actor_id,director_id Having count(*) >=3;
+```
+### 产品销售分析I(1068)
+```sql
+SELECT t2.product_name,t1.year,t1.price FROM Sales t1 Left JOIN Product t2 ON t1.product_id = t2.product_id;
+```
+### 产品销售分析II(1069)
+```sql
+SELECT product_id,SUM(quantity) AS total_quantity FROM Sales GROUP BY product_id;
+```
+
+### 项目员工I(1075)
+> AVG求平均值，ROUND确定精度
+```sql
+SELECT t1.project_id, ROUND(AVG(t2.experience_years), 2) AS average_years
+FROM Project t1
+	LEFT JOIN Employee t2 ON t1.employee_id = t2.employee_id
+GROUP BY t1.project_id;
+```
 
 ## 中等
 
