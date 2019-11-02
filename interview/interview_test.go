@@ -461,7 +461,7 @@ func Test59(t *testing.T) {
 	case value := <-intChan:
 		fmt.Println(value)
 	case value := <-stringChan:
-		panic(value)
+		fmt.Printf("panic: %s", value)
 	}
 }
 
