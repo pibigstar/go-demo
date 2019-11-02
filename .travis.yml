@@ -1,35 +1,36 @@
-# 文档 http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
+# http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
 language: go
 
 go:
-- "1.13.x"
+  - "1.13.x"
 
 branches:
   only:
   - master
   - develop
 
+# https://docs.travis-ci.com/user/database-setup/
 services:
   - mysql
   - redis-server
   - elasticsearch
 
 env:
-- GO111MODULE=on
-- GOPROXY=https://goproxy.io
+  - GO111MODULE=on
+  - GOPROXY=https://goproxy.io
 
-install: true
-# go mod download
+install:
+  - go mod download
 
 
 before_script:
-- mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
-- find . -name "*.go" | xargs gofmt -w
-- git diff --name-only --exit-code || exit 1
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - find . -name "*.go" | xargs gofmt -w
+  - git diff --name-only --exit-code || exit 1
 
 script:
-- go test -v ./... || exit 0
-- go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
+  - go test -v ./... || exit 0
+  - go test -v ./... -race -coverprofile=coverage.txt -covermode=atomic
 
 after_success:
-- bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash)
