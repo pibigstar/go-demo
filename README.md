@@ -1,6 +1,7 @@
 # Go语言学习
 [![Build Status](https://travis-ci.org/pibigstar/go-demo.svg?branch=master)](https://travis-ci.org/pibigstar/go-demo)
 [![Code Coverage](https://codecov.io/gh/pibigstar/go-demo/branch/master/graph/badge.svg)](https://codecov.io/gh/pibigstar/go-demo/branch/master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pibigstar/go-demo)](https://goreportcard.com/report/github.com/pibigstar/go-demo)
 [![License](https://img.shields.io/github/license/pibigstar/go-demo.svg?style=flat)](https://github.com/pibigstar/go-demo)
 [![go-demo](https://img.shields.io/badge/go-demo-green)](https://github.com/pibigstar/go-demo)
 
