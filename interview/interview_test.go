@@ -360,7 +360,7 @@ func Test45(t *testing.T) {
 		}()
 	}
 
-	time.Sleep(time.Second * 1)
+	time.Sleep(time.Millisecond * 10)
 }
 
 func f46(n int) (r int) {
