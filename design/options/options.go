@@ -5,8 +5,8 @@ import (
 )
 
 type Connection struct {
-	addr string
-	cache bool
+	addr    string
+	cache   bool
 	timeout time.Duration
 }
 
@@ -56,11 +56,8 @@ func Connect(addr string, opts ...Option) (*Connection, error) {
 	}
 
 	return &Connection{
-		addr: addr,
-		cache: options.caching,
+		addr:    addr,
+		cache:   options.caching,
 		timeout: options.timeout,
 	}, nil
 }
-
-
-

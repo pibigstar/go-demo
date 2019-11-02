@@ -5,7 +5,6 @@ import (
 	"time"
 )
 
-
 func TestContextWithCancel(t *testing.T) {
 	contextWithCancel()
 }
@@ -18,9 +17,9 @@ func TestContextWithValue(t *testing.T) {
 }
 
 func TestContextWithDeadLine(t *testing.T) {
-	contextWithDeadLine(time.Now().Add(50*time.Millisecond))
+	contextWithDeadLine(time.Now().Add(50 * time.Millisecond))
 }
 
 func TestContextWithTimeout(t *testing.T) {
-	contextWithTimeout(50*time.Millisecond)
+	contextWithTimeout(50 * time.Millisecond)
 }

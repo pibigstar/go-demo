@@ -43,11 +43,11 @@ func contextWithCancel() {
 // 带Value的Context
 func contextWithValue(kv map[string]interface{}) {
 	ctx := context.Background()
-	for key,value := range kv{
+	for key, value := range kv {
 		ctx = context.WithValue(ctx, key, value)
 	}
 
-	for key := range kv{
+	for key := range kv {
 		printKey(ctx, key)
 	}
 }

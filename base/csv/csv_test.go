@@ -10,7 +10,7 @@ func TestWriteCsv(t *testing.T) {
 	writeCsv(file)
 }
 
-func TestReadCsv(t *testing.T)  {
+func TestReadCsv(t *testing.T) {
 	file, _ := os.Open("test.csv")
 	readCsv(file)
 }
