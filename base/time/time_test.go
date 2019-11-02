@@ -20,7 +20,7 @@ func TestTimeParse(t *testing.T) {
 	format := TimeFormat(now)
 	t.Log(format)
 	// 字符串转时间
-	parse, err := time.Parse(time.RFC3339, format)
+	parse, err := time.Parse(defaultTime, format)
 	if err != nil {
 		t.Error(err)
 	}
