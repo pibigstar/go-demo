@@ -1,22 +1,16 @@
-package main
+package csv
 
 import (
-	"encoding/csv"
 	"os"
 	"testing"
 )
 
-func TestCsv(t *testing.T) {
+func TestWriteCsv(t *testing.T) {
 	file, _ := os.OpenFile("test.csv", os.O_WRONLY|os.O_CREATE, os.ModePerm)
-	w := csv.NewWriter(file)
-	w.Write([]string{"123", "456", "789", "666"})
-	w.Flush()
-	file.Close()
+	writeCsv(file)
+}
 
-	rfile, _ := os.Open("test.csv")
-	r := csv.NewReader(rfile)
-	strs, _ := r.Read()
-	for _, str := range strs {
-		t.Log(str)
-	}
+func TestReadCsv(t *testing.T)  {
+	file, _ := os.Open("test.csv")
+	readCsv(file)
 }
