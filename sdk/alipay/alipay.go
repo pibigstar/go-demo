@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/smartwalle/alipay"
+	"github.com/smartwalle/alipay/v3"
 )
 
 var (
@@ -21,7 +21,7 @@ var (
 )
 
 func init() {
-	client, _ = alipay.New(appId, aliPublicKey, privateKey, false)
+	client, _ = alipay.New(appId, privateKey, false)
 	client.LoadAppPublicCertFromFile("appPublic.crt")
 	client.LoadAliPayPublicCertFromFile("aliPayPublic.crt")
 	client.LoadAliPayRootCertFromFile("aliPayRoot.crt")

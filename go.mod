@@ -39,14 +39,12 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/russross/blackfriday v2.0.0+incompatible
-	github.com/satori/go.uuid v1.2.0
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
-	github.com/smartwalle/alipay v1.0.2
+	github.com/smartwalle/alipay/v3 v3.0.9
 	github.com/sony/sonyflake v1.0.0
-	github.com/spf13/cast v1.3.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/unidoc/unioffice v1.2.0
 	github.com/xuri/excelize v1.4.0
