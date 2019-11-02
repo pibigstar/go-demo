@@ -11,7 +11,6 @@ import (
 
 func TestMqtt(t *testing.T) {
 	hostname, _ := os.Hostname()
-	fmt.Println(os.Hostname())
 	if hostname == "pibigstar" {
 		var (
 			clientId = hostname
