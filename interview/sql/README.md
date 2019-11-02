@@ -212,6 +212,79 @@ FROM Project t1
 GROUP BY t1.project_id;
 ```
 
+### 项目员工I(1076)
+> 查询项目中员工最多的项目，值得注意的是有可能有多个项目员工并列最多
+```sql
+SELECT project_id
+FROM Project
+GROUP BY project_id
+HAVING COUNT(*) = (
+	SELECT COUNT(*) AS num
+	FROM Project
+	GROUP BY project_id
+	ORDER BY COUNT(*) DESC
+	LIMIT 1
+)
+```
+### 产品分析I(1082)
+> 查询总销售额最高的销售者，可能有销售额相等者
+```sql
+SELECT seller_id
+FROM Sales
+GROUP BY seller_id
+HAVING SUM(price) = (
+	SELECT SUM(price) AS num
+	FROM Sales
+	GROUP BY seller_id
+	ORDER BY SUM(price) DESC
+	LIMIT 1
+)
+```
+
+### 产品分析II(1083)
+> 找出购买了 S8 但没有购买 Iphon的用户
+```sql
+SELECT t1.buyer_id
+FROM Sales t1
+	LEFT JOIN Product t2 ON t1.product_id = t2.product_id
+GROUP BY t1.buyer_id
+HAVING SUM(t2.product_name = 'S8') > 0
+AND SUM(t2.product_name = 'iPhone') = 0;
+```
+> 也可以使用 In 和 NOT In来求解
+```sql
+SELECT DISTINCT buyer_id
+FROM Sales
+WHERE buyer_id IN (
+		SELECT t1.buyer_id
+		FROM Sales t1
+			LEFT JOIN Product t2 ON t1.product_id = t2.product_id
+		WHERE t2.product_name = 'S8'
+	)
+	AND buyer_id NOT IN (
+		SELECT t3.buyer_id
+		FROM Sales t3
+			LEFT JOIN Product t4 ON t3.product_id = t4.product_id
+		WHERE t4.product_name = 'iPhone'
+	)
+```
+
+### 产品分析III(1084)
+> 找出仅在 '2019-01-01' 到 '2019-03-31' 之间销售的产品
+>
+> 使用`NOT BETWEEN ... AND ...`
+```sql
+SELECT DISTINCT t1.product_id, t2.product_name
+FROM Sales t1
+	LEFT JOIN Product t2 ON t1.product_id = t2.product_id
+WHERE t1.sale_date BETWEEN '2019-01-01' AND '2019-03-31'
+	AND t1.product_id NOT IN (
+		SELECT product_id
+		FROM Sales
+		WHERE sale_date NOT BETWEEN '2019-01-01' AND '2019-03-31'
+	)
+```
+
 ## 中等
 
 ### 分数排名(178)
