@@ -17,8 +17,8 @@ services:
 env:
 - GO111MODULE=on
 
-install:
-- go mod download
+#install:
+#- go mod download
 
 
 before_script:
