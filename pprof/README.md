@@ -2,8 +2,9 @@
 
 # 1. 准备工作
 ## 1.1 下载go-wrk
->  这个是用来进行http接口压测的
+>  这个是用来进行http接口压测的,
 >  官网地址：https://github.com/tsliwowicz/go-wrk
+>
 [七牛云下载](http://store.pibigstar.com/go-wrk.exe)
 
 **使用**
@@ -18,7 +19,9 @@ go get github.com/uber/go-torch
 ```
 ### 1.2.2 安装perl
 官网下载地址：https://www.activestate.com/products/perl/downloads/
+
 [七牛云下载](http://store.pibigstar.com/ActivePerl-5.28.1.0000-MSWin32-x64-92425271.msi)
+
 `注意`：安装时记得把添加到环境变量PATH选项勾上
 ### 1.2.3 下载FlameGraph
 ```bash
@@ -29,8 +32,11 @@ git clone https://github.com/brendangregg/FlameGraph.git
 ## 1.3 下载graphviz
 > 生成SVG 图，能够更好地看到函数调用 CPU 占用情况
 ### 1.3.1 Windows安装
+
 > 官网下载地址：https://graphviz.gitlab.io/_pages/Download/Download_windows.html
+
 [七牛云下载](http://store.pibigstar.com/graphviz-2.38.msi)
+
 安装好之后，添加其 bin文件到`PATH`环境变量中
 
 ### 1.3.2 Linux安装
@@ -65,6 +71,7 @@ go-wrk -d 500 http://localhost:8080/hello
 
 ## 2.3 web查看
 浏览器打开：[http://localhost:8080/debug/pprof/](http://localhost:8080/debug/pprof/)
+
 ![](https://img-blog.csdnimg.cn/20191104171603929.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70)
 - `allocs`: 内存分配情况
 - `block`: 导致阻塞同步的堆栈跟踪
@@ -101,11 +108,11 @@ go-torch --seconds 5 http://localhost:8080/debug/pprof/profile
 命令执行完会在该目录下生成一个`torch.svg`文件，可用浏览器打开查看火焰图
 ![](https://img-blog.csdnimg.cn/2019110417565173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70)
 # 3. Go压力测试分析
-1. 生成 `pprof.cpu`文件
+1.生成 `pprof.cpu`文件
 ```bash
 go test -bench . -benchmem -cpuprofile pprof.cpu
 ```
-2. 分析`pprof.cpu`文件
+2.分析`pprof.cpu`文件
 ```go
 go tool pprof pprof.cpu
 ```

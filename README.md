@@ -7,13 +7,13 @@
 
 - [bash](base): Go语言基础
 - [pprof](pprof): Go性能分析
-- [utils](utils): Go常用工具类
 - [design](design): Go实现常用设计模式
 - [interview](interview): Go面试题及详解
-- [leetcode](leetcode): Go实现LeetCode中的算法题
-- [blockchain](blockchain): 用Go设计一个简单的区块链项目
+- [sdk](sdk): Go对接第三方工具（mqtt、elastic、kafka...)
+- [utils](utils): GoWeb开发常用工具类
+- [blockchain](blockchain): Go实现一个简单的区块链
 - [spider](spider): Go实现爬虫(QQ协议登录，QQ自动领礼物)
-- [sdk](sdk): Go对接第三方工具（mqtt、elastic、nsq、kafka、oss...)
+- [leetcode](leetcode): Go实现LeetCode中的算法题
 
 ## 项目结构
 <details>
