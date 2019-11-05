@@ -5,14 +5,15 @@
 [![License](https://img.shields.io/github/license/pibigstar/go-demo.svg?style=flat)](https://github.com/pibigstar/go-demo)
 [![go-demo](https://img.shields.io/badge/go-demo-green)](https://github.com/pibigstar/go-demo)
 
-- [bash](base): Go语言基础（file、sync、goroutine、http、context...)
-- [blockchain](blockchain): 用Go设计一个简单的区块链项目
+- [bash](base): Go语言基础
+- [pprof](pprof): Go性能分析
+- [utils](utils): Go常用工具类
 - [design](design): Go实现常用设计模式
 - [interview](interview): Go面试题及详解
 - [leetcode](leetcode): Go实现LeetCode中的算法题
-- [sdk](sdk): Go对接第三方工具（mqtt、elastic、nsq、kafka、oss...)
+- [blockchain](blockchain): 用Go设计一个简单的区块链项目
 - [spider](spider): Go实现爬虫(QQ协议登录，QQ自动领礼物)
-- [utils](utils): Go常用工具类
+- [sdk](sdk): Go对接第三方工具（mqtt、elastic、nsq、kafka、oss...)
 
 ## 项目结构
 <details>

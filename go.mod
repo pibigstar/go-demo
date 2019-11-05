@@ -47,6 +47,7 @@ require (
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/unidoc/unioffice v1.2.0
+	github.com/varstr/uaparser v0.0.0-20170929040706-6aabb7c4e98c
 	github.com/xuri/excelize v1.4.0
 	github.com/youzan/go-nsq v1.3.1
 	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529 // indirect
