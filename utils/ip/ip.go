@@ -3,7 +3,6 @@ package ip
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net"
 	"net/http"
 	"os"
@@ -37,9 +36,4 @@ func GetLocalIp() string {
 		}
 	}
 	return ""
-}
-
-func main() {
-	log.Println("本地IP:", GetLocalIp())
-	log.Println("公网IP:", GetInternetIP())
 }

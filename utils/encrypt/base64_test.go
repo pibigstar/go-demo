@@ -12,3 +12,11 @@ func TestBase64(t *testing.T) {
 		t.Error("Failed to encrypt")
 	}
 }
+
+func TestBase64Decode(t *testing.T) {
+	code := Base64Encode("pibigstar")
+	t.Log(code)
+
+	decode := Base64Decode(code)
+	t.Log(decode)
+}

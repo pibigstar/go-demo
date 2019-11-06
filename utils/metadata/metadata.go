@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"go-demo/utils/token"
 	"google.golang.org/grpc/metadata"
@@ -15,14 +14,6 @@ const (
 	ContextMDTokenKey = "token"
 	ContextMDReqIDKey = "req-id"
 )
-
-func main() {
-
-	tokenContext := mockTokenContext(ContextMDTokenKey)
-
-	token := GetTokenFromContext(tokenContext)
-	fmt.Println("get token from context:", token)
-}
 
 // 将token放到上下文中
 func mockTokenContext(tokenKey string) context.Context {

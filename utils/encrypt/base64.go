@@ -16,6 +16,11 @@ func UnEncrypt(encrypt string) string {
 	return string(s)
 }
 
-func main() {
+func Base64Encode(str string) string {
+	return base64.URLEncoding.EncodeToString([]byte(str))
+}
 
+func Base64Decode(str string) string {
+	bytes, _ := base64.URLEncoding.DecodeString(str)
+	return string(bytes)
 }

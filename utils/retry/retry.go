@@ -1,7 +1,7 @@
 package retry
 
 import (
-	"github.com/smallnest/rpcx/log"
+	"fmt"
 	"time"
 )
 
@@ -18,7 +18,7 @@ func Retry(attempts int, sleep time.Duration, fn func() error) error {
 		}
 
 		if attempts--; attempts > 0 {
-			log.Warnf("retry func error: %s. attemps #%d after %s.", err.Error(), attempts, sleep)
+			fmt.Printf("retry func error: %s, attemps: %d, after: %s. \n", err.Error(), attempts, sleep)
 			time.Sleep(sleep)
 			return Retry(attempts, 2*sleep, fn)
 		}
