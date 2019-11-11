@@ -20,6 +20,7 @@ env:
   - GOPROXY=https://goproxy.io
 
 install:
+  - cd /usr/bin
   - go get -u github.com/mgechev/revive
 
 before_script:
