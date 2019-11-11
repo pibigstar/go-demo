@@ -17,6 +17,5 @@ func TestHttpGet(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	//t.Log(string(data))
-	_ = string(data)
+	t.Log(string(data))
 }

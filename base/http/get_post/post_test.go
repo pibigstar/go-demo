@@ -23,8 +23,7 @@ func TestPostForm(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	//t.Log(string(data))
-	_ = string(data)
+	t.Log(string(data))
 }
 
 func TestHttpPost(t *testing.T) {
@@ -39,6 +38,7 @@ func TestHttpPost(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+
 	t.Log(string(body))
 }
 

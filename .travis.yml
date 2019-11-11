@@ -25,7 +25,7 @@ install:
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - find . -name "*.go" | xargs gofmt -w
-  - git diff --name-only --exit-code || exit 1
+  - git diff --exit-code
   - revive -config=revive.toml -formatter friendly ./...
 
 script:
