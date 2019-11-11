@@ -1,6 +1,7 @@
 package getpost
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -17,5 +18,7 @@ func TestHttpGet(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+	loginUrl := "sss"
+	fmt.Println(loginUrl)
 	t.Log(string(data))
 }
