@@ -1,4 +1,4 @@
-package get_post
+package getpost
 
 import (
 	"io/ioutil"

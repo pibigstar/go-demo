@@ -13,7 +13,7 @@ func init() {
 	cityDB, cityDbError = NewCity("address/address.datx")
 }
 
-func GetAddressByIp(ip string) (*LocationAddress, error) {
+func GetAddressByIP(ip string) (*LocationAddress, error) {
 	if cityDbError != nil {
 		return nil, cityDbError
 	}

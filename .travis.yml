@@ -19,12 +19,14 @@ env:
   - GO111MODULE=on
   - GOPROXY=https://goproxy.io
 
-install: true
+install:
+  - go get -u github.com/mgechev/revive
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
   - find . -name "*.go" | xargs gofmt -w
   - git diff --name-only --exit-code || exit 1
+  - revive -config=revive.toml -formatter friendly ./...
 
 script:
   - go test ./... || exit 0

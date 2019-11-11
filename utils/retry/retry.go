@@ -13,7 +13,7 @@ import (
 */
 func Retry(attempts int, sleep time.Duration, fn func() error) error {
 	if err := fn(); err != nil {
-		if s, ok := err.(stop); ok {
+		if s, ok := err.(Stop); ok {
 			return s.error
 		}
 
@@ -27,10 +27,10 @@ func Retry(attempts int, sleep time.Duration, fn func() error) error {
 	return nil
 }
 
-type stop struct {
+type Stop struct {
 	error
 }
 
-func NoRetryError(err error) stop {
-	return stop{err}
+func NoRetryError(err error) Stop {
+	return Stop{err}
 }

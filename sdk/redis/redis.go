@@ -6,12 +6,12 @@ import (
 	"time"
 )
 
-var Redis *redisClient
+var Redis *RedisClient
 
 const expiration = 7 * 24 * time.Hour
 
-// redisClient extend client and have itself func
-type redisClient struct {
+// RedisClient extend client and have itself func
+type RedisClient struct {
 	*goRedis.Client
 }
 
@@ -34,7 +34,7 @@ func NewRedisClient() error {
 	if err != nil {
 		return err
 	}
-	Redis = &redisClient{client}
+	Redis = &RedisClient{client}
 	return nil
 }
 
@@ -47,23 +47,23 @@ func init() {
 }
 
 // set the string to redis，the expire default is seven days
-func (redis *redisClient) SSet(key string, value interface{}) *goRedis.StatusCmd {
+func (redis *RedisClient) SSet(key string, value interface{}) *goRedis.StatusCmd {
 	return redis.Set(key, value, expiration)
 }
 
 // get the string value by key
-func (redis *redisClient) SGet(key string) string {
+func (redis *RedisClient) SGet(key string) string {
 	return redis.Get(key).String()
 }
 
 // close the redis client
-func (redis *redisClient) Close() {
+func (redis *RedisClient) Close() {
 	redis.Close()
 }
 
 // get the redis client，if client not initialization
 // and create the redis client
-func GetRedisClient() (*redisClient, error) {
+func GetRedisClient() (*RedisClient, error) {
 	if Redis == nil {
 		err := NewRedisClient()
 		if err != nil {

@@ -1,4 +1,4 @@
-package sync_demo
+package sync
 
 import (
 	"errors"
@@ -8,16 +8,16 @@ import (
 )
 
 //存储type，可以实现安全存储不会引发panic
-type atomicValue struct {
+type AtomicValue struct {
 	v atomic.Value
 	t reflect.Type
 }
 
-func NewAtomicValue() *atomicValue {
-	return &atomicValue{}
+func NewAtomicValue() *AtomicValue {
+	return &AtomicValue{}
 }
 
-func (av *atomicValue) Store(v interface{}) error {
+func (av *AtomicValue) Store(v interface{}) error {
 	if v == nil {
 		return errors.New("atomic value cannot be nil")
 	}
@@ -35,10 +35,10 @@ func (av *atomicValue) Store(v interface{}) error {
 	return nil
 }
 
-func (av *atomicValue) Load() interface{} {
+func (av *AtomicValue) Load() interface{} {
 	return av.v.Load()
 }
 
-func (av *atomicValue) TypeOfValue() reflect.Type {
+func (av *AtomicValue) TypeOfValue() reflect.Type {
 	return av.t
 }

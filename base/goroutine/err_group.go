@@ -23,9 +23,8 @@ func Run(work []int) error {
 	}
 	if err := eg.Wait(); err != nil {
 		return err
-	} else {
-		fmt.Println("All success!")
 	}
+	fmt.Println("All success!")
 	return nil
 }
 

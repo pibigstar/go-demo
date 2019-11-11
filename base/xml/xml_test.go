@@ -37,13 +37,13 @@ func TestXml(t *testing.T) {
 		Comment: "我是注释",
 	}
 	// 对象转xml
-	personXml, err := xml.Marshal(p)
+	personXML, err := xml.Marshal(p)
 	if err != nil {
 		log.Println("Error when marshal", err.Error())
 	}
-	t.Log(string(personXml))
+	t.Log(string(personXML))
 	//xml 文本转 对象
 	obj := &Person{}
-	xml.Unmarshal(personXml, obj)
+	xml.Unmarshal(personXML, obj)
 	t.Logf("%+v", obj)
 }

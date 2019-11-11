@@ -14,13 +14,14 @@ func GetQQInfo(t QQType) (*User, error) {
 	user.Title = t.Title()
 	client := http.Client{}
 	// 1. 获取pt_local_token
-	req, _ := http.NewRequest("GET", "https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url="+t.TargetUrl()+"&style=20&appid=715021417&proxy_url=https%3A%2F%2Fhuifu.qq.com%2Fproxy.html", nil)
+	req, _ := http.NewRequest("GET", "https://xui.ptlogin2.qq.com/cgi-bin/xlogin?s_url="+t.TargetURL()+"&style=20&appid=715021417&proxy_url=https%3A%2F%2Fhuifu.qq.com%2Fproxy.html", nil)
 	response, err := client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("第一次请求失败, err: %s \n", err.Error())
+		return nil, fmt.Errorf("get pt_local_token, err: %s", err.Error())
 	}
 	ptLocalToken := processStr(response.Header["Set-Cookie"], "pt_local_token")
 	user.PtLocalToken = ptLocalToken
+
 	// 2.获取本机所登陆的QQ号码
 	flag := false
 	for i := 0; i < 8; i++ {
@@ -30,19 +31,19 @@ func GetQQInfo(t QQType) (*User, error) {
 		res, err := client.Do(req)
 		if err != nil || res == nil {
 			continue
-		} else {
-			bytes, _ := ioutil.ReadAll(res.Body)
-			body := string(bytes)
-			r := regexp.MustCompile("\\[.*?]")
-			temp := string(r.Find([]byte(body)))
-			temp = temp[1 : len(temp)-1]
-			json.Unmarshal([]byte(temp), &user)
-			flag = true
-			break
 		}
+
+		bytes, _ := ioutil.ReadAll(res.Body)
+		body := string(bytes)
+		r := regexp.MustCompile("\\[.*?]")
+		temp := string(r.Find([]byte(body)))
+		temp = temp[1 : len(temp)-1]
+		json.Unmarshal([]byte(temp), &user)
+		flag = true
+		break
 	}
 	if !flag {
-		return nil, fmt.Errorf("获取本机所登陆的QQ号码失败 \n")
+		return nil, fmt.Errorf("get localhost qq failed")
 	}
 
 	// 3. 获取clientkey
@@ -51,19 +52,19 @@ func GetQQInfo(t QQType) (*User, error) {
 	req.Header.Set("referer", t.Referer())
 	res, err := client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("获取clientkey失败, err: %s \n", err.Error())
+		return nil, fmt.Errorf("get client key, err: %s", err.Error())
 	}
 	clientKey := processStr(res.Header["Set-Cookie"], "clientkey")
 
 	// 4. 获取skey
-	url := "https://ptlogin2.qq.com/jump?clientuin=" + user.Account + "&keyindex=9&pt_aid=549000912&daid=5&u1=" + t.TargetUrl() + "%3Fpara%3Dizone&pt_local_tk=" + ptLocalToken + "&pt_3rd_aid=0&ptopt=1&style=40&has_onekey=1"
+	url := "https://ptlogin2.qq.com/jump?clientuin=" + user.Account + "&keyindex=9&pt_aid=549000912&daid=5&u1=" + t.TargetURL() + "%3Fpara%3Dizone&pt_local_tk=" + ptLocalToken + "&pt_3rd_aid=0&ptopt=1&style=40&has_onekey=1"
 	req, _ = http.NewRequest("GET", url, nil)
 	req.Header.Set("cookie", fmt.Sprintf("pt_local_token=%s;clientuin=%s;clientkey=%s", ptLocalToken, user.Account, clientKey))
 	req.Header.Set("referer", t.Referer())
 
 	res, err = client.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("获取skey失败, err: %s \n", err.Error())
+		return nil, fmt.Errorf("get skey, err: %s", err.Error())
 	}
 
 	// 获取uin和skey
@@ -85,7 +86,7 @@ func GetQQInfo(t QQType) (*User, error) {
 	req.Header.Set("referer", t.Referer())
 	res, err = client.Do(req)
 	if err != nil {
-		return user, fmt.Errorf("获取uin和skey失败, err: %s \n", err.Error())
+		return user, fmt.Errorf("get uin and p_skey, err: %s", err.Error())
 	}
 	pSkey := processStr(res.Request.Response.Header["Set-Cookie"], "p_skey")
 	user.PSkey = pSkey

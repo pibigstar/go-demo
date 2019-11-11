@@ -83,10 +83,10 @@ func WeixinPayCode(amount int32, openId string) (string, error) {
 		return "", err
 	}
 	// 当trade_type=NATIVE时才有返回
-	codeURl := response.CodeUrl
-	fmt.Println(codeURl)
+	codeURL := response.CodeURL
+	fmt.Println(codeURL)
 
-	return codeURl, nil
+	return codeURL, nil
 }
 
 // 统一下单
@@ -148,7 +148,7 @@ type UnifyOrderResponse struct {
 	ErrCodeDes string `xml:"err_code_des"`
 	ReturnMsg  string `xml:"return_msg"`
 	PrepayID   string `xml:"prepay_id"`
-	CodeUrl    string `xml:"code_url"`
+	CodeURL    string `xml:"code_url"`
 	NoneceStr  string `xml:"nonce_str"`
 }
 

@@ -21,7 +21,7 @@ func GetInternetIP() string {
 }
 
 // 获取本地IP地址
-func GetLocalIp() string {
+func GetLocalIP() string {
 	address, err := net.InterfaceAddrs()
 	if err != nil {
 		fmt.Println(err)

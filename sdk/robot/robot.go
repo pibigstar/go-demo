@@ -46,8 +46,8 @@ type atMobiles struct {
 type Link struct {
 	Title      string `json:"title"`
 	Text       string `json:"text"`
-	PicUrl     string `json:"PicUrl"`
-	MessageUrl string `json:"messageUrl"`
+	PicURL     string `json:"PicUrl"`
+	MessageURL string `json:"messageUrl"`
 }
 
 type RobotMsg struct {

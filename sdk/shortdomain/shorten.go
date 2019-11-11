@@ -5,32 +5,26 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"
+	"net/url"
 )
 
 const (
-	apiShortURL = "https://dwz.cn/admin/v2/create"
-	shortToken  = "fa44d0ecaabdf1a3629faad123f1a50e"
+	apiURL = "https://api.uomg.com/api/long2dwz?%s"
 )
 
 type ShortResponse struct {
-	Code     int    `json:"Code"`
-	ShortUrl string `json:"ShortUrl"`
-	LongUrl  string `json:"LongUrl"`
-	ErrMsg   string `json:"ErrMsg"`
+	Code     int    `json:"code"`
+	ShortURL string `json:"ae_url"`
 }
 
+// https://www.free-api.com/doc/300
 func GetShortURL(longURL string) (string, error) {
 
-	client := &http.Client{}
-	req, err := http.NewRequest("POST", apiShortURL, strings.NewReader("url="+longURL))
-	if err != nil {
-		return "", err
-	}
-	req.Header.Set("Content-Type", "application/json; charset=UTF-8")
-	req.Header.Set("Token", shortToken)
+	params := url.Values{}
+	params.Add("url", longURL)
+	params.Add("dwzapi", "urlcn")
 
-	resp, err := client.Do(req)
+	resp, err := http.Get(fmt.Sprintf(apiURL, params.Encode()))
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
@@ -38,8 +32,7 @@ func GetShortURL(longURL string) (string, error) {
 		return "", err
 	}
 	shortResponse := new(ShortResponse)
-	json.Unmarshal(body, shortResponse)
-	fmt.Printf("%+v", shortResponse)
+	err = json.Unmarshal(body, shortResponse)
 
-	return shortResponse.ShortUrl, nil
+	return shortResponse.ShortURL, err
 }

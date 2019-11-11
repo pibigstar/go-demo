@@ -67,8 +67,8 @@ func TestSendLink(t *testing.T) {
 	link := Link{
 		Title:      "发生特殊",
 		Text:       buildMsg(),
-		PicUrl:     "",
-		MessageUrl: fmt.Sprintf(elkDev, "623b64ad171c248363e491d46d65b7ca"),
+		PicURL:     "",
+		MessageURL: fmt.Sprintf(elkDev, "623b64ad171c248363e491d46d65b7ca"),
 	}
 	msg := &RobotMsg{
 		Msgtype: "link",
