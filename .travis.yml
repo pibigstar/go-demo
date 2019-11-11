@@ -22,6 +22,7 @@ env:
 install:
   - cd /usr/bin
   - go get -u github.com/mgechev/revive
+  - cd -
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
