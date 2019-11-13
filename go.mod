@@ -18,6 +18,7 @@ require (
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-redis/redis v6.15.3+incompatible
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
+	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
 	github.com/golang/mock v1.2.0
 	github.com/google/go-cmp v0.3.1
 	github.com/google/uuid v1.0.0
