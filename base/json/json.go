@@ -5,21 +5,21 @@ import (
 	"github.com/goinggo/mapstructure"
 )
 
-func StructToJson(obj interface{}) string {
+func StructToJSON(obj interface{}) string {
 	bs, _ := json.Marshal(obj)
 	return string(bs)
 }
 
-func JsonToStruct(str string, result interface{}) error {
+func JSONToStruct(str string, result interface{}) error {
 	return json.Unmarshal([]byte(str), result)
 }
 
-func MapToJson(params map[string]interface{}) string {
+func MapToJSON(params map[string]interface{}) string {
 	bs, _ := json.Marshal(params)
 	return string(bs)
 }
 
-func JsonToMap(str string, result map[string]interface{}) error {
+func JSONToMap(str string, result map[string]interface{}) error {
 	return json.Unmarshal([]byte(str), &result)
 }
 

@@ -10,7 +10,7 @@ type User struct {
 }
 
 var (
-	strJson string
+	strJSON string
 	user    *User
 	m       map[string]interface{}
 )
@@ -21,17 +21,17 @@ func init() {
 		Name: "pibigstar",
 	}
 	m = make(map[string]interface{})
-	strJson = `{"id":"1","name":"pibigstar"}`
+	strJSON = `{"id":"1","name":"pibigstar"}`
 }
 
 func TestStructToJson(t *testing.T) {
-	strJson = StructToJson(user)
-	t.Log(strJson)
+	strJSON = StructToJSON(user)
+	t.Log(strJSON)
 }
 
 func TestJsonToStruct(t *testing.T) {
 	var user User
-	err := JsonToStruct(strJson, &user)
+	err := JSONToStruct(strJSON, &user)
 	if err != nil {
 		t.Error(err)
 	}
@@ -42,13 +42,13 @@ func TestMapToJson(t *testing.T) {
 	m := make(map[string]interface{})
 	m["name"] = "pibigstar"
 	m["id"] = "1"
-	strJson = MapToJson(m)
-	t.Log(strJson)
+	strJSON = MapToJSON(m)
+	t.Log(strJSON)
 }
 
 func TestJsonToMap(t *testing.T) {
 	m := make(map[string]interface{})
-	err := JsonToMap(strJson, m)
+	err := JSONToMap(strJSON, m)
 	if err != nil {
 		t.Error(err)
 	}
