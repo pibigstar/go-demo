@@ -83,7 +83,7 @@ func funcMui(x,y int)(sum int,error){
 >这里的第一个返回值有命名 sum，第二个没有命名，所以错误。
 
 ### 5. new() 与 make() 的区别
-> new仅仅只初始化并返回指针，而maker不仅仅要做初始化，他需要设置一些数组的长度、容量等
+> new只初始化并返回指针，而make不仅仅要做初始化，还需要设置一些数组的长度、容量等
 
 
 ### 6. 下面几段代码能否通过编译，如果能，输出什么?
@@ -91,8 +91,8 @@ func funcMui(x,y int)(sum int,error){
 func main() {
 	list := new([]int)
     // 编译错误
-    // new([]int) 之后的 list 是一个 *[]int 类型的指针
-    // 不能对指针执行 append 操作。
+    // new([]int) 之后的 list 是一个未设置长度的 *[]int 类型的指针
+    // 不能对未设置长度的指针执行 append 操作。
 	list = append(list, 1)
 	fmt.Println(list)
 
@@ -128,7 +128,7 @@ func Test7(t *testing.T) {
 		age int
 		m   map[string]string
 	}{age: 11, m: map[string]string{"a": "1"}}
-    // 编译错误，map不能进行比较
+    // 编译错误，含有map、slice类型的struct不能进行比较
 	if sm1 == sm2 {
 		fmt.Println("sm1 == sm2")
 	}
@@ -158,6 +158,8 @@ D. fmt.Sprintf("abc%d", 123)
 
 ### 答案
 > BD
+>
+> golang单引号''中的内容表示单个字符（rune）,反引号``中的内容表示不可转义的字符串
 
 ### 10. 关于iota，下面代码输出什么?
 ```go
@@ -223,7 +225,7 @@ C.Compilation error
 #### 答案
 > A
 >
-> 可变函数是指针传递
+> 可变参数是指针传递
 
 ### 14. 下面选择哪个？
 ```go
@@ -261,7 +263,11 @@ C.compilation error
 #### 答案
 > B
 >
-> a[3:4] = 4  a[4:4] = 4
+> a[3:4][0] = 4 切片的长度是1，容量是2
+>
+> a[4:4][0] 报越界错误
+>
+> a[3:4:4][0] = 4 切片的长度是1，容量是1，最后一个4表示切片容量的最大坐标(不含)
 
 ### 16. 下面代码输出什么？
 ```go
@@ -336,7 +342,9 @@ C. compilation error
 > B
 >
 > 删除 map 不存在的键值对时，不会报错，相当于没有任何作用；
-> 获取不存在的减值对时，返回值类型对应的零值，所以返回 0
+> 获取不存在的键值对时，返回值类型对应的零值，所以返回 0
+>
+> 可以使用if v, ok := s["h"]; ok {}的方式判断键值对是否存在
 
 ### 20. 下面代码输出什么？
 ```go
@@ -446,7 +454,7 @@ D. add([]int{1, 3, 7}…)
 #### 答案
 > A B D
 
-### 26. 下列代码中下划线处可填入哪些变量？
+### 26. 下列代码中下划线处可填入哪个变量会打印"yes nil"？
 ```go
 func Test26(t *testing.T) {
 	var s1 []int
@@ -573,7 +581,7 @@ func Test31(t *testing.T) {
 	person := &Person{28}
 	// 1
 	defer fmt.Println(person.age)
-        // 2
+	// 2
 	defer func(p *Person) {
 		fmt.Println(p.age)
 	}(person)
@@ -628,7 +636,7 @@ func Test33(t *testing.T) {
 > B D 会编译错误
 >
 > 函数参数为 interface{} 时可以接收任何类型的参数，包括用户自定义类型等，
-> 即使是接收指针类型也用 interface{}，而不是使用 *interface{}
+> 即使是接收指针类型也用 interface{}，而不是使用 *interface{}。
 > 永远不要使用一个指针指向一个接口类型，因为它已经是一个指针。
 
 ### 34. 下面代码输出什么？
@@ -844,6 +852,7 @@ func Test42(t *testing.T) {
 ```go
 square := m["foo"]
 square.x = 1
+m["foo"] = square
 ```
 第二种：
 ```go
@@ -1002,8 +1011,10 @@ func Test48(t *testing.T) {
 	slice := make([]int, 5, 5)
 	slice[0] = 1
 	slice[1] = 2
+	// 1
 	change(slice...)
 	fmt.Println(slice)
+	// 2
 	change(slice[0:2]...)
 	fmt.Println(slice)
 }
@@ -1012,6 +1023,12 @@ func Test48(t *testing.T) {
 > [1 2 0 0 0]
 >
 > [1 2 3 0 0]
+>
+> 1.change函数内部append时超出了s的容量，生成了新的底层数组的切片，
+> 未对change函数外的切片产生影响。
+>
+> 2.change函数收到的切片长度小于容量，append没有重新生成底层数组，
+> 直接修改了底层数组对应位置的值，影响到了change函数外的切片。
 
 ### 49. 下列代码输出什么？
 ```go
@@ -1036,7 +1053,7 @@ func Test49(t *testing.T) {
 #### 答案
 > counter is 2 或者 counter is 3
 >
-> for range map 是无序的
+> for range map 是无序的，若先遍历到A则counter是3，否则是2
 
 ### 50. 关于协程，下列说法正确的有？
 
@@ -1317,7 +1334,7 @@ func Stop(stop <-chan bool) {
 }
 ```
 #### 答案
-> 有方向的 channel 不可以被关闭
+> 只可以接收数据的 channel 不可以被关闭
 
 ### 67. 下列代码输出什么？
 ```go
