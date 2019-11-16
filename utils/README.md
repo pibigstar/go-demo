@@ -2,7 +2,7 @@
 
 - cron: 定时任务
 - disk: 获取系统和U盘盘符
-- encrypt: 使用md5加密，base64加密解密
+- crypto: 签名与加密工具类
 - error: 异常工具类,打印异常栈
 - image: 图片常用操作
 - ip: 获取本地IP与公网IP并得到地址
