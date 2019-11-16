@@ -1,45 +1,81 @@
 package json
 
 import (
-	"encoding/json"
-	"fmt"
 	"testing"
 )
 
-type ColorGroup struct {
-	ID     int
-	Name   string
-	Colors []string
+type User struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
-// 对象转Json字符串 json.Marshal
-func TestObjectToJson(t *testing.T) {
-	group := ColorGroup{
-		ID:     1,
-		Name:   "Reds",
-		Colors: []string{"Crimson", "Red", "Ruby", "Maroon"},
+var (
+	strJSON string
+	user    *User
+	m       map[string]interface{}
+)
+
+func init() {
+	user = &User{
+		ID:   "1",
+		Name: "pibigstar",
 	}
-	b, err := json.Marshal(group)
+	m = make(map[string]interface{})
+	strJSON = `{"id":"1","name":"pibigstar"}`
+}
+
+func TestStructToJson(t *testing.T) {
+	strJSON = StructToJSON(user)
+	t.Log(strJSON)
+}
+
+func TestJsonToStruct(t *testing.T) {
+	var user User
+	err := JSONToStruct(strJSON, &user)
 	if err != nil {
 		t.Error(err)
 	}
-	t.Log(string(b))
+	t.Logf("%+v", user)
 }
 
-// Json字符串转对象 json.Unmarshal
-func TestJsonToObject(t *testing.T) {
-	var jsonBlob = []byte(`[
-        {"Name": "Platypus", "Order": "Monotremata"},
-        {"Name": "Quoll",    "Order": "Dasyuromorphia"}
-    ]`)
-	type Animal struct {
-		Name  string
-		Order string
-	}
-	var animals []Animal
-	err := json.Unmarshal(jsonBlob, &animals)
+func TestMapToJson(t *testing.T) {
+	m := make(map[string]interface{})
+	m["name"] = "pibigstar"
+	m["id"] = "1"
+	strJSON = MapToJSON(m)
+	t.Log(strJSON)
+}
+
+func TestJsonToMap(t *testing.T) {
+	m := make(map[string]interface{})
+	err := JSONToMap(strJSON, m)
 	if err != nil {
-		fmt.Println("error:", err)
+		t.Error(err)
 	}
-	t.Logf("%+v", animals) // 添加一个 + 号可以输出key值
+	t.Logf("%+v", m)
+}
+
+func TestMapToStruct(t *testing.T) {
+	m := make(map[string]interface{})
+	m["name"] = "pibigstar"
+	m["id"] = "1"
+	var user User
+	err := MapToStruct(m, &user)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Logf("%+v", user)
+}
+
+func TestStructToMap(t *testing.T) {
+	user := &User{
+		ID:   "1",
+		Name: "pibigstar",
+	}
+	m := make(map[string]interface{})
+	err := StructToMap(user, m)
+	if err != nil {
+		t.Error(err)
+	}
+	t.Logf("%+v", m)
 }

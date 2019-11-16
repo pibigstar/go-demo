@@ -1,6 +1,7 @@
 package reflect
 
 import (
+	"encoding/json"
 	"reflect"
 	"testing"
 )
@@ -8,6 +9,26 @@ import (
 type ReflectTest struct {
 	A int
 	B string
+}
+
+func TestInterface(t *testing.T) {
+	var value interface{}
+	value = "pibigstar"
+	switch value.(type) {
+	case string:
+		v, ok := value.(string)
+		if ok {
+			t.Logf("String ==> %s \n", v)
+		}
+	case map[string]string:
+		v, ok := value.(map[string]string)
+		if ok {
+			t.Logf("Map ==> %v \n", v)
+		}
+	default:
+		bs, _ := json.Marshal(value)
+		t.Logf("Others ==> %s \n", string(bs))
+	}
 }
 
 func TestReflect(t *testing.T) {
@@ -41,7 +62,7 @@ func TestReflect(t *testing.T) {
 	typeOfT := s.Type()
 	for i := 0; i < s.NumField(); i++ {
 		f := s.Field(i)
-		t.Logf("%s %s = %v\n", typeOfT.Field(i).Name, f.Type(), f.Interface())
+		t.Logf("%s: Type ==>%s Value==> %v \n", typeOfT.Field(i).Name, f.Type(), f.Interface())
 	}
 	s.Field(0).SetInt(77)
 	s.Field(1).SetString("new world")
