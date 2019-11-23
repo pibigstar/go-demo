@@ -382,7 +382,14 @@ HAVING action = 'answer'
 ORDER BY COUNT(*) DESC
 LIMIT 1
 ```
-
+### 统计各专业学生人数(580)
+```sql
+SELECT t1.dept_name, COUNT(t2.student_id) AS student_number
+FROM department t1
+	LEFT JOIN student t2 ON t1.dept_id = t2.dept_id
+GROUP BY t1.dept_id
+ORDER BY student_number DESC, t1.dept_name
+```
 
 ## 困难
 
