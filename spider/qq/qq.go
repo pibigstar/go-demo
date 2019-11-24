@@ -8,7 +8,7 @@ type User struct {
 	Uin          string `json:"uin"`
 	Skey         string `json:"skey"`
 	PSkey        string `json:"p_skey"`
-	GTK          int    `json:"g_tk"`
+	GTK          string `json:"g_tk"`
 }
 
 const (
@@ -17,7 +17,7 @@ const (
 	qzoneTargetURL = "https://qzs.qzone.qq.com/qzone/v5/loginsucc.html"
 
 	// qq好友
-	friendReferer   = "https://xui.ptlogin2.qq.com/cgi-bin/xlogin?appid=715030901&daid=73&hide_close_icon=1&pt_no_auth=1&s_url=https%3A%2F%2Fqun.qq.com%2Fmember.html%23gid%3D11186560"
+	friendReferer   = "https://xui.ptlogin2.qq.com/cgi-bin/xlogin?pt_disable_pwd=1&appid=715030901&daid=73&pt_no_auth=1&s_url=https%3A%2F%2Fqun.qq.com%2Fmanage.html"
 	friendTargetURL = "https://qun.qq.com/member.html"
 )
 

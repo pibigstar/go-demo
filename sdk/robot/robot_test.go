@@ -96,7 +96,7 @@ func buildMsg() string {
 	}
 
 	str := strings.Builder{}
-	str.WriteString(fmt.Sprintf("#### 环境【%s】%s \n\n", "dev", time.Now().Format("2006-01-02 15:04:05")))
+	str.WriteString(fmt.Sprintf("#### 环境【<font color=#FF0000>%s</font>】%s \n\n", "dev", time.Now().Format("2006-01-02 15:04:05")))
 	for _, content := range contents {
 		str.WriteString("------------------- \n\n")
 		str.WriteString(fmt.Sprintf("##### Svc: %s \n", content.Svc))
