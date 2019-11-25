@@ -413,6 +413,22 @@ SELECT id, COUNT(*) as num FROM (
 ) as t1 GROUP BY id ) as t2 ORDER BY num DESC limit 1
 ```
 
+### 树节点(608)
+```sql
+select id,
+case when t.p_id is null then 'Root' 
+     when t.id in (select p_id from tree ) then 'Inner'
+     else 'Leaf' 
+     end as Type
+from tree t 
+```
+
+### 平面上的最近距离(612)
+```sql
+SELECT MIN(ROUND(POW(POW(p1.x-p2.x,2)+POW(p1.y-p2.y,2),1/2),2)) as shortest 
+FROM point_2d p1 LEFT JOIN point_2d p2 ON p1.x!=p2.x OR p1.y!=p2.y
+```
+
 ## 困难
 
 ### 游戏玩法分析
