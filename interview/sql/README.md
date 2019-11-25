@@ -391,6 +391,28 @@ GROUP BY t1.dept_id
 ORDER BY student_number DESC, t1.dept_name
 ```
 
+### 2016年的投资(585)
+```sql
+SELECT
+    SUM(insurance.TIV_2016) AS TIV_2016
+FROM
+    insurance
+WHERE
+    insurance.TIV_2015 IN
+(SELECT TIV_2015 FROM insurance GROUP BY TIV_2015 HAVING COUNT(*) > 1)
+AND CONCAT(LAT, LON) IN
+(SELECT CONCAT(LAT, LON) FROM insurance  GROUP BY LAT , LON HAVING COUNT(*) = 1)
+```
+
+### 好友申请 II ：谁有最多的好友(602)
+```sql
+SELECT id,num FROM (
+SELECT id, COUNT(*) as num FROM (
+    SELECT requester_id as id FROM request_accepted UNION ALL 
+    SELECT accepter_id FROM request_accepted
+) as t1 GROUP BY id ) as t2 ORDER BY num DESC limit 1
+```
+
 ## 困难
 
 ### 游戏玩法分析
