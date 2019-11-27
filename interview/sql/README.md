@@ -308,6 +308,16 @@ SUM(IF(month = 'Dec', revenue, null)) AS Dec_Revenue
 FROM Department GROUP BY id
 ```
 
+### 每个帖子的评论数(1241)
+```sql
+SELECT
+	post_id,
+	COUNT( DISTINCT S2.sub_id ) AS number_of_comments 
+FROM
+	( SELECT DISTINCT sub_id AS post_id FROM Submissions WHERE parent_id IS NULL ) S1
+	LEFT JOIN Submissions S2 ON S1.post_id = S2.parent_id 
+GROUP BY S1.post_id
+```
 
 ## 中等
 
@@ -429,6 +439,133 @@ SELECT MIN(ROUND(POW(POW(p1.x-p2.x,2)+POW(p1.y-p2.y,2),1/2),2)) as shortest
 FROM point_2d p1 LEFT JOIN point_2d p2 ON p1.x!=p2.x OR p1.y!=p2.y
 ```
 
+### 二级关注者(614)
+```sql
+select f1.follower, count(distinct f2.follower) as num
+from (select distinct follower from follow) f1 join follow f2 on f1.follower = f2.followee
+group by f1.follower
+```
+
+### 换座位(626)
+```sql
+select (case
+when id%2=0 then id-1
+when id=(select max(id) from seat) then id
+else id+1 end) as id ,student
+from seat order by id;
+```
+
+### 买下所有产品的客户(1045)
+```sql
+select customer_id
+from 
+(select customer_id,count(distinct product_key) as num 
+ from Customer
+ group by customer_id
+) t
+join (
+    select count(product_key) as num
+    from Product
+) m 
+on t.num = m.num;
+```
+
+### 产品销售分析 III(1070)
+```sql
+select  
+    product_id,
+    year first_year,
+    quantity,
+    price
+from Sales
+where (product_id,year)
+in (select product_id,min(year) from Sales group by product_id)
+```
+
+### 项目员工 III(1077)
+```sql
+select p.project_id, p.employee_id
+from Project p
+join Employee e
+on p.employee_id = e.employee_id
+where (p.project_id, e.experience_years) in (
+select p.project_id,max(e.experience_years)
+from project p join employee e on p.employee_id = e.employee_id
+group by p.project_id )
+```
+
+### 小众书籍(1098)
+```sql
+select book_id,name
+from Books
+where book_id not in (select book_id from Orders
+where dispatch_date between '2019-06-23'-interval 1 year and '2019-06-23'
+group by book_id having sum(quantity)>=10) and available_from<'2019-06-23'-interval 1 month;
+```
+
+### 每日新用户统计(1107)
+```sql
+SELECT login_date, COUNT(user_id) AS user_count
+FROM (SELECT user_id, MIN(activity_date) AS login_date
+      FROM Traffic
+      WHERE activity = 'login'
+      GROUP BY user_id) tmp
+WHERE DATEDIFF('2019-06-30', login_date) <= 90
+GROUP BY login_date
+ORDER BY login_date
+```
+
+### 每位学生的最高成绩(1112)
+```sql
+select 
+    t.student_id,
+    if(count(e.grade) > 1 ,min(e.course_id),course_id) as course_id,
+    t.max1 as grade
+from Enrollments e 
+right join (select student_id,max(grade) as max1  from Enrollments group by student_id )t
+    on t.student_id=e.student_id and t.max1 = e.grade
+group by e.student_id 
+order by t.student_id;
+```
+
+### 每月交易 I(1193)
+```sql
+select
+date_format(trans_date,'%Y-%m') as month,
+country,
+count(*) as trans_count,
+sum(if(state='approved',1,0)) as approved_count,
+sum(amount) as trans_total_amount,
+sum(if(state='approved',amount,0)) as approved_total_amount
+from Transactions t
+group by
+date_format(trans_date,'%Y-%m'),country
+```
+
+### 每月交易II(1205)
+
+```sql
+select
+month,
+country,
+sum(case when state = 'approved' then 1 else 0 end) as approved_count,
+sum(case when state = 'approved' then amount else 0 end) as approved_amount,
+sum(case when state = 'charged' then 1 else 0 end) as chargeback_count,
+sum(case when state = 'charged' then amount else 0 end) as chargeback_amount
+from
+(
+select c.trans_id as id, t.country,'charged' as state,amount,c.trans_date,date_format(c.trans_date,'%Y-%m') as month
+from chargebacks c
+left join transactions t on c.trans_id = t.id
+union all
+select *,date_format(trans_date,'%Y-%m') as month
+from transactions
+where state = 'approved' #去零
+) as temp
+group by month,country
+order by month
+```
+
 ## 困难
 
 ### 游戏玩法分析
@@ -502,6 +639,120 @@ WHERE t1.Request_at BETWEEN '2013-10-01' AND '2013-10-03'
 GROUP BY t1.Request_at
 ```
 
+### 给定数字的频率查询中位数(571)
 
+```sql
+select
+avg(t.number) as median
+from
+(
+select
+n1.number,
+n1.frequency,
+(select sum(frequency) from numbers n2 where n2.number<=n1.number) as asc_frequency,
+(select sum(frequency) from numbers n3 where n3.number>=n1.number) as desc_frequency
+from numbers n1
+) t
+where t.asc_frequency>= (select sum(frequency) from numbers)/2
+and t.desc_frequency>= (select sum(frequency) from numbers)/2
+```
 
+### 查询员工的累计薪水(579)
+```sql
+SELECT
+    E1.id,
+    E1.month,
+    (IFNULL(E1.salary, 0) + IFNULL(E2.salary, 0) + IFNULL(E3.salary, 0)) AS Salary
+FROM
+    (SELECT
+        id, MAX(month) AS month
+    FROM
+        Employee
+    GROUP BY id
+    HAVING COUNT(*) > 1) AS maxmonth
+        LEFT JOIN
+    Employee E1 ON (maxmonth.id = E1.id
+        AND maxmonth.month > E1.month)
+        LEFT JOIN
+    Employee E2 ON (E2.id = E1.id
+        AND E2.month = E1.month - 1)
+        LEFT JOIN
+    Employee E3 ON (E3.id = E1.id
+        AND E3.month = E1.month - 2)
+ORDER BY id ASC , month DESC
+```
+
+### 体育馆的人流量(601) 
+```sql
+SELECT distinct a.*
+FROM stadium as a,stadium as b,stadium as c
+where ((a.id = b.id-1 and b.id+1 = c.id) or
+       (a.id-1 = b.id and a.id+1 = c.id) or
+       (a.id-1 = c.id and c.id-1 = b.id))
+  and (a.people>=100 and b.people>=100 and c.people>=100)
+order by a.id;
+```
+
+### 平均工资：部门与公司比较(615)
+```sql
+select department_salary.pay_month, department_id,
+case
+  when department_avg>company_avg then 'higher'
+  when department_avg<company_avg then 'lower'
+  else 'same'
+end as comparison
+from
+(
+  select department_id, avg(amount) as department_avg, date_format(pay_date, '%Y-%m') as pay_month
+  from salary join employee on salary.employee_id = employee.employee_id
+  group by department_id, pay_month
+) as department_salary
+join
+(
+  select avg(amount) as company_avg,  date_format(pay_date, '%Y-%m') as pay_month from salary group by date_format(pay_date, '%Y-%m')
+) as company_salary
+on department_salary.pay_month = company_salary.pay_month
+```
+### 游戏玩法分析 V(1097)
+```sql
+SELECT t0.install_dt, installs, ROUND(IFNULL(retention, 0)/installs, 2) Day1_retention FROM
+(SELECT install_dt, COUNT(*) installs FROM 
+(SELECT player_id, MIN(event_date) install_dt FROM Activity GROUP BY player_id) t1
+GROUP BY install_dt) t0
+LEFT JOIN
+(SELECT install_dt, COUNT(*) retention FROM
+(SELECT player_id, DATE_SUB(event_date, INTERVAL 1 DAY) install_dt FROM Activity WHERE (player_id, DATE_SUB(event_date, INTERVAL 1 DAY)) IN 
+(SELECT player_id, MIN(event_date) install_dt FROM Activity GROUP BY player_id)
+ ) t3 GROUP BY install_dt) t4 ON t0.install_dt = t4.install_dt 
+```
+
+### 锦标赛优胜者(1194)
+```sql
+select group_id,player_id from 
+(select group_id,player_id,sum((
+    case when player_id = first_player then first_score
+         when player_id = second_player then second_score
+         end
+)) as totalScores
+from Players p,Matches m
+where p.player_id = m.first_player
+or p.player_id = m.second_player
+group by group_id,player_id
+order by group_id,totalScores desc,player_id) as temp
+group by group_id
+order by group_id,totalScores desc,player_id
+```
+
+### 报告系统状态的连续日期(1225)
+```sql
+select status as period_state, min(date) as start_date, max(date) as end_date
+from
+(select * from (select fail_date as date, 'failed' as status, if(datediff(@pre, @pre := fail_date) = -1, @a, @a := @a + 1) as groupmark from Failed, (select @a := 0, @pre := "2018-07-07") as temp
+union
+select success_date as date, 'succeeded' as status, if(datediff(@cur, @cur := success_date) = -1, @b, @b := @b + 1) as groupmark from Succeeded, (select @b := 100, @cur := "2018-07-07") as temp
+) as temp where date between "2019-01-01" and "2019-12-31"
+order by date) as s
+group by groupmark
+order by min(date);
+```
 
