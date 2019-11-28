@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -57,7 +58,7 @@ func GetQQInfo(t QQType) (*User, error) {
 	clientKey := processStr(res.Header["Set-Cookie"], "clientkey")
 
 	// 4. 获取skey
-	url := "https://ptlogin2.qq.com/jump?clientuin=" + user.Account + "&keyindex=9&pt_aid=549000912&daid=5&u1=" + t.TargetURL() + "%3Fpara%3Dizone&pt_local_tk=" + ptLocalToken + "&pt_3rd_aid=0&ptopt=1&style=40&has_onekey=1"
+	url := "https://ptlogin2.qq.com/jump?clientuin=" + user.Account + "&keyindex=9&pt_aid=549000912&daid=5&u1=" + t.TargetURL() + "&pt_local_tk=" + ptLocalToken + "&pt_3rd_aid=0&ptopt=1&style=40&has_onekey=1"
 	req, _ = http.NewRequest("GET", url, nil)
 	req.Header.Set("cookie", fmt.Sprintf("pt_local_token=%s;clientuin=%s;clientkey=%s", ptLocalToken, user.Account, clientKey))
 	req.Header.Set("referer", t.Referer())
@@ -110,26 +111,12 @@ func processStr(maps []string, key string) string {
 	return ""
 }
 
-// 根据skey计算出g_tk
-func genderGTK(skey string) int {
+// 根据skey计算出g_tk/bkn
+func genderGTK(skey string) string {
 	hash := 5381
-	len := len(skey)
-	for i := 0; i < len; i++ {
-		hash += (hash << 5) + int(skey[i])
+	for _, s := range skey {
+		us, _ := strconv.Atoi(fmt.Sprintf("%d", s))
+		hash += (hash << 5) + us
 	}
-	return hash & 0x7fffffff
-}
-
-func GetAllFriends(user *User) {
-	client := &http.Client{}
-
-	request, _ := http.NewRequest("POST", "https://qun.qq.com/cgi-bin/qun_mgr/get_friend_list", strings.NewReader("bkn="+string(user.GTK)))
-	request.Header.Set("cookie", fmt.Sprintf("uin=%s; skey=%s;p_skey=%s", user.Uin, user.Skey, user.PSkey))
-
-	response, err := client.Do(request)
-	if err != nil {
-		fmt.Println(err)
-	}
-	bytes, _ := ioutil.ReadAll(response.Body)
-	fmt.Println(string(bytes))
+	return fmt.Sprintf("%d", hash&0x7fffffff)
 }

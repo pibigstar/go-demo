@@ -16,7 +16,7 @@ var (
 	rateMax     = 5 // 池子最大的令牌数
 )
 
-func GetIpLimiter(ip string) *rate.Limiter {
+func GetIPLimiter(ip string) *rate.Limiter {
 	mu.Lock()
 	defer mu.Unlock()
 
@@ -31,7 +31,7 @@ func GetIpLimiter(ip string) *rate.Limiter {
 
 func LimitIPRate(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		limiter := GetIpLimiter(r.RemoteAddr)
+		limiter := GetIPLimiter(r.RemoteAddr)
 		// 如果想不丢掉此次请求，请使用Wait方法
 		if !limiter.Allow() {
 			http.Error(w, http.StatusText(http.StatusTooManyRequests), http.StatusTooManyRequests)
