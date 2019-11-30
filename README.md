@@ -12,6 +12,7 @@
 - [sdk](sdk): Go对接第三方工具（mqtt、elastic、kafka...)
 - [utils](utils): GoWeb开发常用工具类
 - [blockchain](blockchain): Go实现一个简单的区块链
+- [proxy](https://github.com/pibigstar/go-proxy): Go实现内网穿透工具
 - [spider](spider): Go实现爬虫(QQ协议登录，QQ自动领礼物)
 - [leetcode](leetcode): Go实现LeetCode中的算法题
 
