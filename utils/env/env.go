@@ -1,11 +1,14 @@
 package env
 
-import "os"
+import (
+	"os"
+	"runtime"
+)
 
 func IsCI() bool {
 	name, _ := os.Hostname()
-	if name == "pibigstar" {
-		return false
+	if name != "pibigstar" && runtime.GOOS == "linux" {
+		return true
 	}
-	return true
+	return false
 }

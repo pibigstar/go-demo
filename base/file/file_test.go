@@ -1,8 +1,16 @@
 package file
 
 import (
+	"go-demo/utils/env"
 	"testing"
 )
+
+func TestMain(m *testing.M) {
+	if env.IsCI() {
+		return
+	}
+	m.Run()
+}
 
 const fileName = "demo.text"
 
@@ -33,4 +41,8 @@ func TestReadAllDir(t *testing.T) {
 
 func TestDeleteFile(t *testing.T) {
 	DeleteFile(fileName)
+}
+
+func TestFileAbs(t *testing.T) {
+	t.Log(FileAbs("file"))
 }

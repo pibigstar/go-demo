@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -87,4 +88,12 @@ func IsExist(filePath string) bool {
 		return false
 	}
 	return true
+}
+
+// 返回该文件的绝对路径
+func FileAbs(path string) string {
+	if absPath, err := filepath.Abs(path); err == nil {
+		return absPath
+	}
+	return ""
 }
