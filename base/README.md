@@ -2,6 +2,7 @@
 
 - context: 上下文使用详解
 - csv: csv文件操作
+- defer: 巧用defer
 - file：操作文件
 - flag：读取运行时参数
 - goroutine：Go中goroutine各种骚操作
