@@ -1,4 +1,4 @@
-package _defer
+package deferTest
 
 import (
 	"fmt"
