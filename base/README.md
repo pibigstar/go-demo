@@ -1,22 +1,22 @@
 # Go语言内部库使用
 
-- context: 上下文使用详解
-- csv: csv文件操作
-- defer: 巧用defer
-- file：操作文件
-- flag：读取运行时参数
-- goroutine：Go中goroutine各种骚操作
-- http：http相关操作
-- json：json相关操作
-- mail: Go发送邮件
-- mysql：Go操作MySQL数据库
-- net：网络相关操作（写一个简单的聊天室）
-- reflect: Go反射相关操作
-- regexp: Go正则表达式操作
-- shell: Go执行shell命令
-- sort: Go切片排序
-- string: Go字符串操作
-- sync: Go并发相关包使用
-- time: 时间操作
-- xml: xml操作
-- zip: 压缩解压文件
+- [context](context): 上下文使用详解
+- [csv](csv): csv文件操作
+- [defer](defer): 巧用defer
+- [file](file)：Go操作文件
+- [flag](flag)：读取运行时参数
+- [goroutine](goroutine)：Go中goroutine各种骚操作
+- [http](http)：http相关操作
+- [json](json)：json相关操作
+- [mail](mail): Go发送邮件
+- [net](net)：网络相关操作（写一个简单的聊天室）
+- [reflect](reflect): Go反射相关操作
+- [regexp](regexp): Go正则表达式操作
+- [runtime](runtime): Go runtime包使用
+- [shell](shell): Go执行shell命令
+- [sort](sort): Go切片排序
+- [string](string): Go字符串操作
+- [sync](sync): Go并发相关包使用
+- [time](time): 时间操作
+- [xml](xml): xml操作
+- [zip](zip): 压缩解压文件

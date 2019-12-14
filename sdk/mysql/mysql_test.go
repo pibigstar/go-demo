@@ -1,35 +1,29 @@
 package mysql
 
 import (
-	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
-	"go-demo/utils/env"
 	"testing"
 )
 
-func TestMysql(t *testing.T) {
-	if env.IsCI() {
-		return
-	}
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/oa?charset=utf8")
+func TestConnectMysql(t *testing.T) {
+	db, err := GetGormDB()
+	defer db.Close()
 	if err != nil {
 		t.Error(err)
 	}
-
-	rows, err := db.Query("select id,username from user where id = ?", "1")
+	err = db.Exec("SELECT CURRENT_TIMESTAMP();").Error
 	if err != nil {
-		t.Error(err.Error())
-		return
+		t.Error(err)
 	}
-	defer rows.Close()
+}
 
-	for rows.Next() {
-		var id int
-		var username string
-		err := rows.Scan(&id, &username)
-		if err != nil {
-			t.Error(err)
-		}
-		t.Log(id, username)
+func TestMySQLDB(t *testing.T) {
+	db, err := GetMySQLDB()
+	if err != nil {
+		t.Error(err)
+	}
+	defer db.Close()
+	_, err = db.Exec("SELECT CURRENT_TIMESTAMP();")
+	if err != nil {
+		t.Error(err)
 	}
 }
