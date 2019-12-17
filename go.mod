@@ -6,6 +6,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.0 // indirect
 	github.com/Shopify/sarama v1.20.0
 	github.com/TruthHun/html2md v0.0.0-20190507142218-8352cc68f88e
+	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5
 	github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190827030439-84d9962c10d3
 	github.com/aliyun/aliyun-oss-go-sdk v2.0.1+incompatible
 	github.com/astaxie/beego v1.12.0 // indirect

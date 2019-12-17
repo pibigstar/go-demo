@@ -19,6 +19,8 @@ github.com/Shopify/toxiproxy v2.1.4+incompatible h1:TKdv8HiTLgE5wdJuEML90aBgNWso
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
 github.com/TruthHun/html2md v0.0.0-20190507142218-8352cc68f88e h1:yZjizb3ZBrJIJh92fzD3Edtum+n+6NtFfgZ8dFxMEdk=
 github.com/TruthHun/html2md v0.0.0-20190507142218-8352cc68f88e/go.mod h1:lk/px549MkTEty8sh17Rktxc+fDUR/HiwH3Nb9BhRlk=
+github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5 h1:rFw4nCn9iMW+Vajsk51NtYIcwSTkXr+JGrMd36kTDJw=
+github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5/go.mod h1:SkGFH1ia65gfNATL8TAiHDNxPzPdmEL5uirI2Uyuz6c=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190827030439-84d9962c10d3 h1:/kaGCOy/Tnd3TE00TA7/Ag9+U/zSR3zWVCQBK815Ckg=
