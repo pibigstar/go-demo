@@ -13,6 +13,7 @@
 - [pool](pool): 批量操作线程池
 - [qrcode](qrcode): 二维码生成工具
 - [retry](retry):  方法重试
+- [robot](robot): 监听键盘模拟事件
 - [seq](seq): id和uuid生成器
 - [token](token): jwt加密生成token
 - [word](word): Go操作docx文件

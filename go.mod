@@ -22,6 +22,7 @@ require (
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-redis/redis v6.15.3+incompatible
+	github.com/go-vgo/robotgo v0.0.0-20191216133555-c86926da97a5
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
 	github.com/golang/groupcache v0.0.0-20191027212112-611e8accdfc9 // indirect
