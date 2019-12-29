@@ -3,6 +3,8 @@ package interview
 import (
 	"fmt"
 	"runtime"
+	"strings"
+	"sync"
 	"testing"
 	"time"
 )
@@ -510,4 +512,123 @@ func Test69(t *testing.T) {
 		r = append(r, v)
 	}
 	fmt.Println(r)
+}
+
+func Test75(t *testing.T) {
+	s := make([]int, 3, 9)
+	fmt.Println(len(s))
+	s2 := s[4:8]
+	fmt.Println(len(s2))
+}
+
+func Test76(t *testing.T) {
+	var x interface{}
+	var y interface{} = []int{3, 5}
+	_ = x == x
+	_ = x == y
+	// _ = y == y panic
+}
+
+func Test77(t *testing.T) {
+	x := make([]int, 2, 10)
+	_ = x[6:10]
+	// _ = x[6:] panic
+	_ = x[2:]
+}
+
+type data struct {
+	sync.Mutex
+}
+
+func (d data) test(s string) {
+	d.Lock()
+	defer d.Unlock()
+
+	for i := 0; i < 5; i++ {
+		fmt.Println(s, i)
+		time.Sleep(time.Second)
+	}
+}
+
+func Test78(t *testing.T) {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	var d data
+
+	go func() {
+		defer wg.Done()
+		d.test("read")
+	}()
+
+	go func() {
+		defer wg.Done()
+		d.test("write")
+	}()
+
+	wg.Wait()
+}
+
+func Test79(t *testing.T) {
+	var k = 1
+	var s = []int{1, 2}
+	k, s[k] = 0, 3
+	fmt.Println(s[0] + s[1])
+}
+
+func Test80(t *testing.T) {
+	//nil := 123
+	//fmt.Println(nil)
+	//var _ map[string]int = nil
+}
+
+func Test81(t *testing.T) {
+	var x int8 = -128
+	var y = x / -1
+	fmt.Println(y)
+}
+
+func Test82(t *testing.T) {
+	defer func() {
+		fmt.Println(recover())
+	}()
+	defer func() {
+		defer fmt.Println(recover())
+		panic(1)
+	}()
+	defer recover()
+	panic(2)
+}
+
+func printI(num ...int) {
+	num[0] = 18
+}
+
+func Test87(t *testing.T) {
+	i := []int{5, 6, 7}
+	printI(i...)
+	fmt.Println(i[0])
+}
+
+func alwaysFalse() bool {
+	return false
+}
+
+func Test88(t *testing.T) {
+	switch alwaysFalse(); {
+	case true:
+		println(true)
+	case false:
+		println(false)
+	}
+}
+
+func Test92(t *testing.T) {
+	fmt.Println(strings.TrimRight("ABBA", "BA"))
+}
+
+func Test93(t *testing.T) {
+	var src, dst []int
+	src = []int{1, 2, 3}
+	copy(dst, src)
+	fmt.Println(dst)
 }

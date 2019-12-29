@@ -302,7 +302,10 @@ C. map
 
 D. channel
 #### 答案
-> A B D
+> A B D 
+> array 返回数组的元素个数；
+> slice 返回 slice 的最大容量；
+> channel 返回 channel 的容量；
 
 ### 18. 下面代码输出什么？
 ```go
@@ -1395,3 +1398,500 @@ func main() {
 ```
 #### 答案
 > 切片可以开箱即用，但 map 需要用 make函数 进行初始化之后才能赋值
+
+### 71. 下列函数能否正确输出?
+```go
+func main() {
+    var fn1 = func() {}
+    var fn2 = func() {}
+
+    if fn1 != fn2 {
+        println("fn1 not equal fn2")
+    }
+}
+```
+#### 答案
+> 编译错误，func 只能与 nil 做比较
+
+### 72. 下列代码是否正确?
+```go
+type T struct {
+    n int
+}
+
+func main() {
+    m := make(map[int]T)
+    m[0].n = 1
+    fmt.Println(m[0].n)
+}
+```
+#### 答案
+> 编译错误, map[key]struct 中 struct 是不可寻址的，所以无法直接赋值。
+
+#### 修复
+```go
+func main() {
+	m := make(map[int]T)
+	t := T{1}
+	m[0] = t
+	fmt.Println(m[0].n)
+}
+```
+
+### 73. 下列代码有什么问题?
+```go
+type X struct {}
+func (x *X) test()  {
+	println(x)
+}
+
+func main() {
+   var a *X
+   a.test()
+   X{}.test()
+}
+```
+#### 答案
+> X{} 是不可寻址的，不能直接调用方法
+
+#### 修复
+```go
+func main() {
+   var a *X
+   a.test()
+   // 为其定义一个变量，让其可寻址
+   var x = X{}
+   x.test()
+}
+```
+
+### 74. 关于 channel 下面描述正确的是？
+A. 向已关闭的通道发送数据会引发 panic；
+
+B. 从已关闭的缓冲通道接收数据，返回已缓冲数据或者零值；
+
+C. 无论接收还是接收，nil 通道都会阻塞；
+
+D. close() 可以用于只接收通道；
+
+E. 单向通道可以转换为双向通道；
+
+F. 不能在单向通道上做逆向操作（例如：只发送通道用于接收）；
+#### 答案
+> A B C F
+
+### 75. 下列代码输出什么?
+```go
+func Test75(t *testing.T) {
+	s := make([]int, 3, 9)
+	fmt.Println(len(s))
+	s2 := s[4:8]
+	fmt.Println(len(s2))
+}
+```
+
+#### 答案
+> 3 4
+
+### 76. 下列哪一行会panic?
+```go
+func Test76(t *testing.T) {
+	var x interface{}
+	var y interface{} = []int{3, 5}
+	_ = x == x
+	_ = x == y
+	_ = y == y
+}
+```
+#### 答案
+> _ = y == y 会发生panic, 因为两个比较值的动态类型为同一个不可比较类型
+
+### 77. 下列哪行代码会panic?
+```go
+func Test77(t *testing.T) {
+	x := make([]int, 2, 10)
+	_ = x[6:10]
+	_ = x[6:]
+	_ = x[2:]
+}
+```
+#### 答案
+> _ = x[6:] 这一行会发生panic, 截取符号 [i:j]，
+>如果 j 省略，默认是原切片或者数组的长度，x 的长度是 2，小于起始下标 6 ，所以 panic
+
+### 78. 下列代码有什么问题?
+```go
+type data struct {
+	sync.Mutex
+}
+
+func (d data) test(s string) {
+	d.Lock()
+	defer d.Unlock()
+
+	for i := 0; i < 5; i++ {
+		fmt.Println(s, i)
+		time.Sleep(time.Second)
+	}
+}
+
+func Test78(t *testing.T) {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	var d data
+
+	go func() {
+		defer wg.Done()
+		d.test("read")
+	}()
+
+	go func() {
+		defer wg.Done()
+		d.test("write")
+	}()
+
+	wg.Wait()
+}
+```
+#### 答案
+> 锁失效。将 Mutex 作为匿名字段时，相关的方法必须使用指针接收者，否则会导致锁机制失效。
+
+#### 修复
+```go
+// 指针接收者
+func (d *data) test(s string)  {     
+   d.Lock()
+   defer d.Unlock()
+
+   for i:=0;i<5 ;i++  {
+      fmt.Println(s,i)
+      time.Sleep(time.Second)
+   }
+}
+```
+### 79. 下列代码输出什么?
+```go
+func Test79(t *testing.T) {
+	var k = 1
+	var s = []int{1, 2}
+	k, s[k] = 0, 3
+	fmt.Println(s[0] + s[1])
+}
+```
+#### 答案
+> 4
+
+### 80. 下列那行代码会panic?
+```go
+func Test80(t *testing.T) {
+	nil := 123
+	fmt.Println(nil)
+	var _ map[string]int = nil
+}
+```
+#### 答案
+> var _ map[string]int = nil 会编译错误， 当前作用域中，
+> 预定义的 nil 被覆盖，此时 nil 是 int 类型值，不能赋值给 map 类型。
+
+### 81. 下列代码输出什么?
+```go
+func Test81(t *testing.T) {
+	var x int8 = -128
+	var y = x / -1
+	fmt.Println(y)
+}
+```
+#### 答案
+> -128, 因为溢出 int8为 -128 ~ 127 之间
+
+### 82. 下列代码输出什么?
+```go
+func Test82(t *testing.T) {
+	defer func() {
+		fmt.Println(recover())
+	}()
+	defer func() {
+		defer fmt.Println(recover())
+		panic(1)
+	}()
+	defer recover()
+	panic(2)
+}
+```
+### 答案
+> 2 1, recover() 必须在 defer函数体内使用才有效，所以 defer recover() 是无效的
+
+### 83. 关于字符串拼接,下列正确的是?
+A. str := 'abc' + '123'
+
+B. str := "abc" + "123"
+
+C. str ：= '123' + "abc"
+
+D. fmt.Sprintf("abc%d", 123)
+
+#### 答案
+> B D 双引号用来表示字符串 string，其实质是一个 byte 类型的数组，单引号表示 rune 类型。
+
+### 84. 下列代码有什么问题?
+```go
+func main() {
+     runtime.GOMAXPROCS(1)
+     go func() {
+         for i:=0;i<10 ;i++  {
+             fmt.Println(i)
+         }
+     }()
+ 
+    for {}
+}
+```
+#### 答案
+> for{} 独占 CPU 资源导致其他 Goroutine 饿死
+
+#### 修复
+```go
+func main() {
+     runtime.GOMAXPROCS(1)
+     go func() {
+         for i:=0;i<10 ;i++  {
+             fmt.Println(i)
+         }
+     }()
+ 
+    select {}
+}
+```
+
+### 85. 下列代码有什么问题?
+```go
+func main() {
+    f, err := os.Open("file")
+    defer f.Close()
+    if err != nil {
+        return
+    }
+
+    b, err := ioutil.ReadAll(f)
+    println(string(b))
+}
+```
+#### 答案
+> 应该先判断 err, 再用defer 关闭文件句柄
+
+### 86. 下列代码有什么问题?
+```go
+func main() {
+    var wg sync.WaitGroup
+    wg.Add(1)
+    go func() {
+        fmt.Println("1")
+        wg.Done()
+        wg.Add(1)
+    }()
+    wg.Wait()
+}
+```
+#### 答案
+> 协程里面，使用 wg.Add(1) 但是没有 wg.Done()，导致 panic()。
+
+### 87. 下列代码输出什么?
+```go
+func printI(num ...int) {
+	num[0] = 18
+}
+
+func Test87(t *testing.T) {
+	i := []int{5, 6, 7}
+	printI(i...)
+	fmt.Println(i[0])
+}
+```
+#### 答案
+> 18, 可变参数是指针传递
+
+### 88. 下列代码输出什么?
+```go
+func alwaysFalse() bool {
+	return false
+}
+
+func Test88(t *testing.T) {
+	switch alwaysFalse(); {
+	case true:
+		println(true)
+	case false:
+		println(false)
+	}
+}
+```
+#### 答案
+> true, Go代码断行规则
+
+### 89. 下列代码有什么问题?
+```go
+type ConfigOne struct {
+	Daemon string
+}
+
+ func (c *ConfigOne) String() string {
+    return fmt.Sprintf("print: %v", c)
+ }
+ 
+ func main() {
+    c := &ConfigOne{}
+    c.String()
+}
+```
+#### 答案
+> 无限循环，栈溢出, 如果结构体类型定义了 String() 方法，
+> 使用 Printf()、Print() 、 Println() 、 Sprintf() 等格式化输出时会自动使用 String() 方法。
+
+### 90. 下列代码有什么问题?
+```go
+func main() {
+
+    wg := sync.WaitGroup{}
+
+    for i := 0; i < 5; i++ {
+        go func(wg sync.WaitGroup, i int) {
+            wg.Add(1)
+            fmt.Printf("i:%d\n", i)
+            wg.Done()
+        }(wg, i)
+    }
+
+    wg.Wait()
+
+    fmt.Println("exit")
+}
+```
+#### 答案
+> 1. 在协程中使用了 `wg.Add(1)`
+>
+> 2. 使用了 sync.WaitGroup 副本
+
+#### 修复
+```go
+func main() {
+
+    wg := sync.WaitGroup{}
+
+    for i := 0; i < 5; i++ {
+        wg.Add(1)
+        go func(i int) {
+            fmt.Printf("i:%d\n", i)
+            wg.Done()
+        }(i)
+    }
+
+    wg.Wait()
+
+    fmt.Println("exit")
+}
+```
+
+### 91. 下列代码输出什么?
+```go
+func main() {
+     a := [3]int{0, 1, 2}
+     s := a[1:2]
+ 
+     s[0] = 11
+     s = append(s, 12)
+     s = append(s, 13)
+     s[0] = 21
+ 
+    fmt.Println(a)
+    fmt.Println(s)
+}
+```
+#### 答案
+> [0 11 12]
+>
+> [21 12 13]
+
+### 92. 下列代码输出什么?
+```go
+func Test92(t *testing.T) {
+	fmt.Println(strings.TrimRight("ABBA", "BA"))
+}
+```
+#### 答案
+> 输出空字符串, TrimRight() 会将第二个参数字符串里面所有的字符拿出来处理，
+> 只要与其中任何一个字符相等，便会将其删除。想正确地截取字符串，可以参考 TrimSuffix() 函数。
+
+### 93. 下列代码输出什么?
+```go
+func Test93(t *testing.T) {
+	var src, dst []int
+	src = []int{1, 2, 3}
+	copy(dst, src)
+	fmt.Println(dst)
+}
+```
+#### 答案
+> 输出 [], 如果想要将 src 完全拷贝至 dst，必须给 dst 分配足够的内存空间。
+
+#### 修复
+```go
+func Test93(t *testing.T) {
+	var src, dst []int
+	src = []int{1, 2, 3}
+    dst = make([]int, len(src))
+	copy(dst, src)
+	fmt.Println(dst)
+}
+```
+或者直接使用`append`
+```go
+func Test93(t *testing.T) {
+	var src, dst []int
+	src = []int{1, 2, 3}
+	dst = append(dst, src...)
+	fmt.Println(dst)
+}
+```
+### 94. 下列代码是否可以编译通过?
+```go
+type User struct {
+   Name string
+}
+ 
+func (u *User) SetName(name string) {
+    u.Name = name
+    fmt.Println(u.Name)
+}
+
+type Employee User
+
+func main() {
+    employee := new(Employee)
+    employee.SetName("Jack")
+}
+```
+#### 答案
+> 编译不通过, 当使用 type 声明一个新类型，它不会继承原有类型的方法集。
+
+### 95. 关于map，下面说法正确的是？ 
+A. map 反序列化时 json.unmarshal() 的入参必须为 map 的地址；
+
+B. 在函数调用中传递 map，则子函数中对 map 元素的增加不会导致父函数中 map 的修改；
+
+C. 在函数调用中传递 map，则子函数中对 map 元素的修改不会导致父函数中 map 的修改；
+
+D. 不能使用内置函数 delete() 删除 map 的元素
+#### 答案
+> A
+
+### 96. 关于同步锁，下面说法正确的是？
+
+A. 当一个 goroutine 获得了 Mutex 后，其他 goroutine 就只能乖乖的等待，除非该 goroutine 释放这个 Mutex；
+
+B. RWMutex 在读锁占用的情况下，会阻止写，但不阻止读；
+
+C. RWMutex 在写锁占用情况下，会阻止任何其他 goroutine（无论读和写）进来，整个锁相当于由该 goroutine 独占；
+
+D. Lock() 操作需要保证有 Unlock() 或 RUnlock() 调用与之对应；
+#### 答案
+> A B C , 106
