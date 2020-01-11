@@ -12,6 +12,7 @@
 - [net](net)：网络相关操作（写一个简单的聊天室）
 - [reflect](reflect): Go反射相关操作
 - [regexp](regexp): Go正则表达式操作
+- [rpc](rpc): Go使用rpc进行远程服务调用
 - [runtime](runtime): Go runtime包使用
 - [shell](shell): Go执行shell命令
 - [sort](sort): Go切片排序
