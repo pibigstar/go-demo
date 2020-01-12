@@ -11,7 +11,7 @@ func main() {
 		panic(err)
 	}
 	var result string
-	err = client.Call("HelloService.Hello", "pibigstar", &result)
+	err = client.Call("HelloService.Hello", "demo1", &result)
 	if err != nil {
 		panic(err)
 	}
