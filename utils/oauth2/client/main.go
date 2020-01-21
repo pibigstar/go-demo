@@ -123,7 +123,7 @@ func refreshTokenHandler(w http.ResponseWriter, r *http.Request) {
 
 func tryHandler(w http.ResponseWriter, r *http.Request) {
 	if globalToken == nil {
-		http.Redirect(w, r, "/", http.StatusFound)
+		http.Redirect(w, r, "/pi", http.StatusFound)
 		return
 	}
 

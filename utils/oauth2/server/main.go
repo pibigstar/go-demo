@@ -3,14 +3,17 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"gopkg.in/oauth2.v3"
 	"log"
 	"net/http"
 	"net/url"
 	"os"
 	"time"
 
+	"github.com/dgrijalva/jwt-go"
+	"github.com/go-redis/redis"
 	"github.com/go-session/session"
+	oredis "gopkg.in/go-oauth2/redis.v3"
+	"gopkg.in/oauth2.v3"
 	"gopkg.in/oauth2.v3/errors"
 	"gopkg.in/oauth2.v3/generates"
 	"gopkg.in/oauth2.v3/manage"
@@ -31,17 +34,23 @@ var (
 func main() {
 	mgr := manage.NewDefaultManager()
 	cfg := &manage.Config{
-		AccessTokenExp:    time.Hour * 24,
+		AccessTokenExp:    time.Hour * 1,
 		RefreshTokenExp:   time.Hour * 24 * 3,
 		IsGenerateRefresh: false,
 	}
+	// 设置授权码模式令牌的配置参数
 	mgr.SetAuthorizeCodeTokenCfg(cfg)
 
-	// 强制映射访问令牌存储接口
-	mgr.MustTokenStorage(store.NewMemoryTokenStore())
-	// 映射访问令牌生成接口
-	mgr.MapAccessGenerate(generates.NewAccessGenerate())
+	// 设置令牌存储方式
+	redisStore := oredis.NewRedisStore(&redis.Options{
+		Addr: "127.0.0.1:6379",
+		DB:   0,
+	})
+	mgr.MapTokenStorage(redisStore)
+	// 设置令牌的生成方式
+	mgr.MapAccessGenerate(generates.NewJWTAccessGenerate([]byte("pibigstar"), jwt.SigningMethodHS512))
 
+	// 设置 Client端
 	clientStore := store.NewClientStore()
 	clientStore.Set("123456", &models.Client{
 		// 分配给第三方的ID
