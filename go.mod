@@ -20,8 +20,8 @@ require (
 	github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 // indirect
 	github.com/fatih/camelcase v1.0.0 // indirect
 	github.com/fatih/color v1.7.0 // indirect
-	github.com/fatih/structs v1.1.0 // indirect
 	github.com/go-redis/redis v6.15.3+incompatible
+	github.com/go-session/session v3.1.2+incompatible
 	github.com/go-vgo/robotgo v0.0.0-20191216133555-c86926da97a5
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
@@ -30,7 +30,6 @@ require (
 	github.com/google/go-cmp v0.3.1
 	github.com/google/uuid v1.0.0
 	github.com/gorilla/mux v1.6.2
-	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.12.1 // indirect
@@ -40,7 +39,6 @@ require (
 	github.com/jonboulle/clockwork v0.1.0 // indirect
 	github.com/koding/multiconfig v0.0.0-20171124222453-69c27309b2d7
 	github.com/lib/pq v1.1.1 // indirect
-	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.2
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
@@ -60,7 +58,6 @@ require (
 	github.com/soheilhy/cmux v0.1.4 // indirect
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
-	github.com/tidwall/pretty v1.0.0 // indirect
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5 // indirect
 	github.com/unidoc/unioffice v1.2.0
 	github.com/varstr/uaparser v0.0.0-20170929040706-6aabb7c4e98c
@@ -73,13 +70,14 @@ require (
 	go.mongodb.org/mongo-driver v1.2.0
 	go.uber.org/zap v1.13.0 // indirect
 	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529
+	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58
 	golang.org/x/sys v0.0.0-20191110163157-d32e6e3b99c4 // indirect
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
-	golang.org/x/tools v0.0.0-20191029190741-b9c20aec41a5
 	google.golang.org/grpc v1.24.0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/pool.v3 v3.1.1
+	gopkg.in/oauth2.v3 v3.12.0
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 

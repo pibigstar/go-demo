@@ -10,6 +10,7 @@
 - [mock](mock): mock工具使用
 - [multiconfig](multiconfig): 读取配置文件操作
 - [name](name): 自动生成姓名
+- [oauth2](oauth2): oauth2授权中心
 - [pool](pool): 批量操作线程池
 - [qrcode](qrcode): 二维码生成工具
 - [retry](retry):  方法重试
