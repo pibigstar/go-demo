@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/pibigstar/go-demo.svg?style=flat)](https://github.com/pibigstar/go-demo)
 [![go-demo](https://img.shields.io/badge/go-demo-green)](https://github.com/pibigstar/go-demo)
 
-- [bash](base): Go语言基础
+- [base](base): Go语言基础
 - [pprof](pprof): Go性能分析
 - [design](design): Go实现常用设计模式
 - [interview](interview): Go面试题及详解
