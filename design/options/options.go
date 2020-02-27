@@ -4,6 +4,13 @@ import (
 	"time"
 )
 
+/**
+1. 需要Option选项得对象，里面是每一个配置
+2. 需要一个Option得接口，拥有一个设置option得函数
+3. 需要一个自定义类型得func，实现了Option接口
+4. func要返回一个Option类型得接口，并且参数为要设置得内容
+*/
+
 type Connection struct {
 	addr    string
 	cache   bool
