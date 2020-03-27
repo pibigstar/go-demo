@@ -25,10 +25,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	conn, err := listener.Accept()
-	if err != nil {
-		panic(err)
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			panic(err)
+		}
+		// 调用 rpc server
+		go rpc.ServeConn(conn)
 	}
-	// 启动 rpc server
-	rpc.ServeConn(conn)
 }

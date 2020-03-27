@@ -2,12 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io"
+	pb "go-demo/base/rpc/lv4"
 	"net/http"
-	"net/rpc"
-	"net/rpc/jsonrpc"
-
-	pb "go-demo/base/rpc/lv2"
 )
 
 type HelloService struct {
@@ -27,17 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		var conn io.ReadWriteCloser = struct {
-			io.Writer
-			io.ReadCloser
-		}{
-			ReadCloser: r.Body,
-			Writer:     w,
-		}
-
-		rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
-	})
+	http.HandleFunc("/hello", pb.HandleRpcHttp)
 
 	http.ListenAndServe(":8000", nil)
 }

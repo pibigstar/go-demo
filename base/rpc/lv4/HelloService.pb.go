@@ -1,11 +1,14 @@
 package pb
 
 import (
+	"io"
+	"net/http"
 	"net/rpc"
+	"net/rpc/jsonrpc"
 )
 
 // 定义 rpc server
-const HelloServiceName = "rpc/demo/HelloService"
+const HelloServiceName = "HelloService"
 
 type HelloServiceInterface = interface {
 	Hello(req string, resp *string) error
@@ -26,10 +29,14 @@ func (h *HelloServiceClient) Hello(req string, resp *string) error {
 	return h.Call(HelloServiceName+".Hello", req, resp)
 }
 
-func DialHelloServiceClient(address string) (*HelloServiceClient, error) {
-	client, err := rpc.Dial("tcp", address)
-	if err != nil {
-		return nil, err
+func HandleRpcHttp(w http.ResponseWriter, r *http.Request) {
+	var conn io.ReadWriteCloser = struct {
+		io.Writer
+		io.ReadCloser
+	}{
+		ReadCloser: r.Body,
+		Writer:     w,
 	}
-	return &HelloServiceClient{Client: client}, nil
+
+	rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
 }
