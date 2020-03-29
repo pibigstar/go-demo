@@ -13,6 +13,7 @@
 - [oauth2](oauth2): oauth2授权中心
 - [pool](pool): 批量操作线程池
 - [qrcode](qrcode): 二维码生成工具
+- [ratelimit](ratelimit):  限流使用
 - [retry](retry):  方法重试
 - [robot](robot): 监听键盘模拟事件
 - [seq](seq): id和uuid生成器

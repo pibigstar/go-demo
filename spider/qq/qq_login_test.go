@@ -16,9 +16,9 @@ func TestQQLogin(t *testing.T) {
 	}
 	t.Logf("%+v \n", user)
 
-	user, err = GetQQInfo(QQFriend)
-	if err != nil {
-		t.Error(err)
-	}
-	t.Logf("%+v \n", user)
+	//user, err = GetQQInfo(QQFriend)
+	//if err != nil {
+	//	t.Error(err)
+	//}
+	//t.Logf("%+v \n", user)
 }
