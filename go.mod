@@ -68,6 +68,7 @@ require (
 	github.com/xdg/stringprep v1.0.0 // indirect
 	github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2 // indirect
 	github.com/xuri/excelize v1.4.0
+	github.com/yanyiwu/gojieba v1.1.2
 	github.com/youzan/go-nsq v1.3.1
 	go.etcd.io/bbolt v1.3.3 // indirect
 	go.mongodb.org/mongo-driver v1.2.0
