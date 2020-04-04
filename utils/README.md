@@ -19,6 +19,7 @@
 - [robot](robot): 监听键盘模拟事件
 - [seq](seq): id和uuid生成器
 - [token](token): jwt加密生成token
+- [walk](walk): Go使用walk写GUI
 - [word](word): Go操作docx文件
 - [xlsx](xlsx): Go操作xlsx文件
 

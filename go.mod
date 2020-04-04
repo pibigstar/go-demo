@@ -41,6 +41,8 @@ require (
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/koding/multiconfig v0.0.0-20171124222453-69c27309b2d7
 	github.com/lib/pq v1.1.1 // indirect
+	github.com/lxn/walk v0.0.0-20191128110447-55ccb3a9f5c1
+	github.com/lxn/win v0.0.0-20191128105842-2da648fda5b4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.2
 	github.com/modern-go/reflect2 v1.0.1 // indirect
@@ -68,7 +70,6 @@ require (
 	github.com/xdg/stringprep v1.0.0 // indirect
 	github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2 // indirect
 	github.com/xuri/excelize v1.4.0
-	github.com/yanyiwu/gojieba v1.1.2
 	github.com/youzan/go-nsq v1.3.1
 	go.etcd.io/bbolt v1.3.3 // indirect
 	go.mongodb.org/mongo-driver v1.2.0
@@ -77,9 +78,10 @@ require (
 	golang.org/x/crypto v0.0.0-20190510104115-cbcb75029529
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58
-	golang.org/x/sys v0.0.0-20191110163157-d32e6e3b99c4 // indirect
+	golang.org/x/sys v0.0.0-20200331124033-c3d80250170d // indirect
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
 	google.golang.org/grpc v1.24.0
+	gopkg.in/Knetic/govaluate.v3 v3.0.0 // indirect
 	gopkg.in/go-oauth2/redis.v3 v3.2.1
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/pool.v3 v3.1.1
