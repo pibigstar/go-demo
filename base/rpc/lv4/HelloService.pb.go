@@ -29,7 +29,7 @@ func (h *HelloServiceClient) Hello(req string, resp *string) error {
 	return h.Call(HelloServiceName+".Hello", req, resp)
 }
 
-func HandleRpcHttp(w http.ResponseWriter, r *http.Request) {
+func HandleRPCHTTP(w http.ResponseWriter, r *http.Request) {
 	var conn io.ReadWriteCloser = struct {
 		io.Writer
 		io.ReadCloser

@@ -17,7 +17,7 @@ func (*HelloService) Hello(req string, resp *string) error {
 
 func main() {
 	pb.RegisterHelloService(&HelloService{})
-	pb.HandleHttp()
+	pb.HandleHTTP()
 	fmt.Println("server staring....")
 
 	cert, err := tls.LoadX509KeyPair("base/rpc/lv5/ssl/server.crt", "base/rpc/lv5/ssl/server.key")

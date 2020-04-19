@@ -1,9 +1,7 @@
 package pb
 
 import (
-	"net"
 	"net/rpc"
-	"net/rpc/jsonrpc"
 )
 
 // 定义 rpc server
@@ -29,10 +27,9 @@ func (h *HelloServiceClient) Hello(req string, resp *string) error {
 }
 
 func DialHelloServiceClient(address string) (*HelloServiceClient, error) {
-	conn, err := net.Dial("tcp", address)
+	client, err := rpc.Dial("tcp", address)
 	if err != nil {
 		return nil, err
 	}
-	client := rpc.NewClientWithCodec(jsonrpc.NewClientCodec(conn))
 	return &HelloServiceClient{Client: client}, nil
 }

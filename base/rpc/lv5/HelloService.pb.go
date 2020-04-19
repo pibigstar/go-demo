@@ -20,7 +20,7 @@ func RegisterHelloService(svc HelloServiceInterface) error {
 	return rpc.RegisterName(HelloServiceName, svc)
 }
 
-func HandleHttp() {
+func HandleHTTP() {
 	rpc.HandleHTTP()
 }
 

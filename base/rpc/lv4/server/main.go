@@ -23,7 +23,7 @@ func main() {
 		panic(err)
 	}
 
-	http.HandleFunc("/hello", pb.HandleRpcHttp)
+	http.HandleFunc("/hello", pb.HandleRPCHTTP)
 
 	http.ListenAndServe(":8000", nil)
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	pb "go-demo/base/rpc/lv2"
+	pb "go-demo/base/rpc/lv3"
 )
 
 func main() {
