@@ -13,7 +13,7 @@ warningCode = -1
 # [rule.exported]
 [rule.if-return]
 [rule.increment-decrement]
-[rule.var-naming]
+# [rule.var-naming]
   arguments = [["ID"]]
 # [rule.var-declaration]
 [rule.package-comments]

@@ -32,7 +32,6 @@ func (i *IPRateLimit) AddIp(ip string) *rate.Limiter {
 func (i *IPRateLimit) GetLimiter(ip string) *rate.Limiter {
 	if limiter, ok := i.limiter[ip]; ok {
 		return limiter
-	} else {
-		return i.AddIp(ip)
 	}
+	return i.AddIp(ip)
 }
