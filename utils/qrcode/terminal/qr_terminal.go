@@ -8,15 +8,15 @@ import (
 )
 
 // 将二维码输出到控制台
-func GenQrToTerminal(content string)  {
+func GenQrToTerminal(content string) {
 	qrterminal.Generate(content, qrterminal.L, os.Stdout)
 }
 
 // 使用简单配置
-func GenQrToTerminalWithConfig(content string)  {
+func GenQrToTerminalWithConfig(content string) {
 	config := qrterminal.Config{
-		Level: qrterminal.M,
-		Writer: os.Stdout,
+		Level:     qrterminal.M,
+		Writer:    os.Stdout,
 		BlackChar: qrterminal.WHITE,
 		WhiteChar: qrterminal.BLACK,
 		QuietZone: 1,

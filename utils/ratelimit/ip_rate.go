@@ -6,18 +6,18 @@ import (
 )
 
 type IPRateLimit struct {
-	mu *sync.RWMutex
+	mu      *sync.RWMutex
 	limiter map[string]*rate.Limiter
-	r rate.Limit
-	b int
+	r       rate.Limit
+	b       int
 }
 
 func NewIPRateLimiter(r rate.Limit, b int) *IPRateLimit {
 	return &IPRateLimit{
 		limiter: make(map[string]*rate.Limiter),
-		mu: &sync.RWMutex{},
-		r: r,
-		b: b,
+		mu:      &sync.RWMutex{},
+		r:       r,
+		b:       b,
 	}
 }
 

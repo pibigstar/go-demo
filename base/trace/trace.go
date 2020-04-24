@@ -11,11 +11,10 @@ import (
 	"time"
 )
 
-
 var wg sync.WaitGroup
 var httpClient = &http.Client{Timeout: 30 * time.Second}
 
-func SleepSomeTime() time.Duration{
+func SleepSomeTime() time.Duration {
 	return time.Microsecond * time.Duration(rand.Int()%10)
 }
 
