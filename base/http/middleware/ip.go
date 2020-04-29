@@ -29,7 +29,9 @@ func GetIPLimiter(ip string) *rate.Limiter {
 	return limiter
 }
 
-func LimitIPRate(handler http.Handler) http.Handler {
+// 限制IP访问频率
+// 作用在Server, 对所有访问进行限制
+func IPRateLimit(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		limiter := GetIPLimiter(r.RemoteAddr)
 		// 如果想不丢掉此次请求，请使用Wait方法
