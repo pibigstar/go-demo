@@ -122,3 +122,9 @@
 如果有任何错误或不懂的地方欢迎给我提 [issue](https://github.com/pibigstar/go-demo/issues)
 
 如果对你有所帮助，请给个Star，你的支持，是我最大的动力。
+
+## JetBrains OS licenses
+`go-demo` had been being developed with GoLand under the free JetBrains Open Source license(s) granted by JetBrains s.r.o., hence I would like to express my thanks here.
+![](https://raw.githubusercontent.com/panjf2000/illustrations/master/jetbrains/jetbrains-variant-4.png)
+
+
