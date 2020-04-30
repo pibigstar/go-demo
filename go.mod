@@ -52,6 +52,7 @@ require (
 	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/olivere/elastic v6.2.18+incompatible
+	github.com/panjf2000/ants/v2 v2.3.1
 	github.com/pibigstar/go-sdk v0.0.0-20190727082016-c4f5d238d8f5
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
 	github.com/pkg/errors v0.8.1
