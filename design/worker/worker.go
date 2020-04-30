@@ -5,7 +5,7 @@ import "fmt"
 // 工人模式
 // 自定义工人数量，高效处理任务
 
-var JobQueue chan Job
+var JobQueue = make(chan Job, 1000)
 
 type Job struct {
 	Content string
@@ -22,15 +22,16 @@ type Worker struct {
 
 func NewWorker(workerPool chan chan Job) Worker {
 	return Worker{
-		// WorkerPool: workerPool,
-		JobChan:  make(chan Job),
-		QuitChan: make(chan bool),
+		WorkerPool: workerPool,
+		JobChan:    make(chan Job),
+		QuitChan:   make(chan bool),
 	}
 }
 
 func (w Worker) Start() {
 	go func() {
 		for {
+			// 将当前 worker 注册到 worker 队列中。
 			w.WorkerPool <- w.JobChan
 			select {
 			case job := <-w.JobChan:

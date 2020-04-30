@@ -132,3 +132,6 @@ lv.setAdapter(adapter);
 2. 定义一个optFunc实现Option接口
 3. 构造结构体时，接收可变类型的Option
 4. 遍历options，调用option中的设置参数方法
+
+## 12. 工人列队模式（worker）
+> 自定义工人数量，高性能处理任务
