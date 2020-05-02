@@ -13,6 +13,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	defer conn.Close()
 
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("Please write your msg....")
