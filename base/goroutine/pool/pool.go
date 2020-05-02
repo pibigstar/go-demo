@@ -1,4 +1,4 @@
-package goroutinue
+package pool
 
 import (
 	"errors"
