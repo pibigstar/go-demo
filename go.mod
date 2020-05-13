@@ -10,6 +10,7 @@ require (
 	github.com/aliyun/alibaba-cloud-sdk-go v0.0.0-20190827030439-84d9962c10d3
 	github.com/aliyun/aliyun-oss-go-sdk v2.0.1+incompatible
 	github.com/astaxie/beego v1.12.0 // indirect
+	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
 	github.com/coreos/bbolt v1.3.3 // indirect
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/coreos/go-semver v0.3.0 // indirect
@@ -52,6 +53,7 @@ require (
 	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/olivere/elastic v6.2.18+incompatible
+	github.com/opentracing/opentracing-go v1.1.0
 	github.com/panjf2000/ants/v2 v2.3.1
 	github.com/pibigstar/go-sdk v0.0.0-20190727082016-c4f5d238d8f5
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
@@ -67,6 +69,8 @@ require (
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5 // indirect
+	github.com/uber/jaeger-client-go v2.23.1+incompatible
+	github.com/uber/jaeger-lib v2.2.0+incompatible
 	github.com/unidoc/unioffice v1.2.0
 	github.com/varstr/uaparser v0.0.0-20170929040706-6aabb7c4e98c
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect

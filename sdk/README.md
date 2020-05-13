@@ -25,3 +25,4 @@
 - [x] [钉钉机器人](robot)
 - [x] [SMS短信发送](sms)
 - [x] [短域名生成](shortdomain)
+- [x] [链路跟踪](trace)
