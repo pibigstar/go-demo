@@ -6,7 +6,7 @@ import (
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	"github.com/opentracing/opentracing-go/log"
-	"go-demo/sdk/trace"
+	"go-demo/sdk/trace/demo"
 	"io/ioutil"
 	"net/http"
 )
@@ -14,7 +14,7 @@ import (
 const URL = "http://localhost:8081/hello"
 
 func main() {
-	tracer, closer := trace.NewTracer("hello-client", "const", 1)
+	tracer, closer := demo.NewTracer("hello-client")
 	defer closer.Close()
 	opentracing.SetGlobalTracer(tracer)
 

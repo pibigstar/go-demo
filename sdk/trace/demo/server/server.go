@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-demo/sdk/trace"
+	"go-demo/sdk/trace/demo"
 	"io"
 	"net/http"
 
@@ -15,7 +15,7 @@ var (
 )
 
 func init() {
-	tracer, closer = trace.NewTracer("hello-server", "const", 1)
+	tracer, closer = demo.NewTracer("hello-server")
 }
 
 func hello(w http.ResponseWriter, req *http.Request) {

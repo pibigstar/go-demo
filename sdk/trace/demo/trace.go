@@ -1,4 +1,4 @@
-package trace
+package demo
 
 import (
 	"fmt"
@@ -8,16 +8,22 @@ import (
 	"io"
 )
 
-func NewTracer(serviceName string, samplerType string, samplerParam float64) (opentracing.Tracer, io.Closer) {
+func NewTracer(serviceName string) (opentracing.Tracer, io.Closer) {
 	cfg := &config.Configuration{
 		ServiceName: serviceName,
 		Sampler: &config.SamplerConfig{
-			Type:  samplerType,
-			Param: samplerParam,
+			Type:  "const",
+			Param: 1,
 		},
 		Reporter: &config.ReporterConfig{
 			LocalAgentHostPort: "127.0.0.1:6831",
 			LogSpans:           true,
+		},
+		Headers: &jaeger.HeadersConfig{
+			JaegerDebugHeader:        "x-debug-id",
+			JaegerBaggageHeader:      "x-baggage",
+			TraceContextHeaderName:   "x-trace-id",
+			TraceBaggageHeaderPrefix: "x-ctx",
 		},
 	}
 

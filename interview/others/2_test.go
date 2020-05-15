@@ -7,7 +7,7 @@ import (
 
 /*
 因为for遍历时，变量stu指针不变，每次遍历仅进行struct值拷贝，
-故m[stu.Name]=&stu实际上是将所有值指向同一个指针
+故m[stu.UserName]=&stu实际上是将所有值指向同一个指针
 最终该指针的值为遍历的最后一个struct的值拷贝
 */
 type student struct {
