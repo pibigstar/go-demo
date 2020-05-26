@@ -41,6 +41,9 @@ git clone https://github.com/brendangregg/FlameGraph.git
 
 ### 1.3.2 Linux安装
 ```bash
+# MacOS
+brew install graphviz
+
 # Ubuntu
 sudo apt-get install graphviz
 
@@ -91,6 +94,7 @@ go tool pprof --seconds 5 http://localhost:8080/debug/pprof/profile
 **常用命令**
 - `top`  默认显示 10 个占用 CPU 时间最多的函数
 - `tree` 树形结构查看goroutine情况。
+- `list 方法名` 查看方法名里面具体调用耗时时长。
 - `web` 生成SVG函数调用图（需安装`graphviz`）
 - `exit` 退出分析
 

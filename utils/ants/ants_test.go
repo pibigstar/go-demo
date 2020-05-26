@@ -5,6 +5,7 @@ import (
 	"github.com/panjf2000/ants/v2"
 	"sync"
 	"testing"
+	"time"
 )
 
 var runTimes = 1000
@@ -58,4 +59,22 @@ func TestPoolWithFunc(t *testing.T) {
 
 	fmt.Printf("running goroutines: %d\n", p.Running())
 	fmt.Printf("finish all tasks, result is %d\n", sum)
+}
+
+func TestWithOptions(t *testing.T) {
+
+	p, _ := ants.NewPool(3, ants.WithExpiryDuration(time.Second*1))
+	defer p.Release()
+
+	for i := 0; i < 10; i++ {
+		err := p.Submit(func() {
+			fmt.Printf("执行方法....... %d \n ", i)
+			time.Sleep(1 * time.Second) // 模拟耗时操作
+			fmt.Println("Hello With Options")
+		})
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+	}
+	time.Sleep(5 * time.Second)
 }
