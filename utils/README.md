@@ -2,6 +2,7 @@
 
 - [ants](ants): 高性能协程池
 - [cron](cron): 定时任务
+- [code](code): 验证码生成
 - [disk](disk): 获取系统和U盘盘符
 - [crypto](crypto): 签名与加密工具类
 - [image](images): 图片常用操作
