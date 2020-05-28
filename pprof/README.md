@@ -92,7 +92,8 @@ go-wrk -d 500 http://localhost:8080/hello
 go tool pprof --seconds 5 http://localhost:8080/debug/pprof/profile
 ```
 **常用命令**
-- `top`  默认显示 10 个占用 CPU 时间最多的函数
+- `top n`  n不写默认显示10个占用CPU时间最多的函数
+- `top -cum` 将数据累计查看各个函数CPU占用
 - `tree` 树形结构查看goroutine情况。
 - `list 方法名` 查看方法名里面具体调用耗时时长。
 - `web` 生成SVG函数调用图（需安装`graphviz`）
@@ -103,6 +104,16 @@ go tool pprof --seconds 5 http://localhost:8080/debug/pprof/profile
 go tool pprof -http=:8080 http://localhost:8080/debug/pprof/profile?seconds=60
 ```
 ![](https://img-blog.csdnimg.cn/20191104181816875.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70)
+
+**其他参数**
+- `-inuse_space`： 分析程序常驻内存的占用情况
+- `-alloc_objects`：分析内存的临时分配情况
+
+```bash
+go tool pprof -inuse_space http://localhost:8080/debug/pprof/heap
+
+go tool pprof -alloc_space http://localhost:8080/debug/pprof/heap
+```
 
 ## 2.5 生成火焰图
 > 进行 5 秒钟的 CPU 性能采样并生成火焰图
