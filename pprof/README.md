@@ -131,3 +131,10 @@ go test -bench . -benchmem -cpuprofile pprof.cpu
 ```go
 go tool pprof pprof.cpu
 ```
+
+3.使用`ab`压测
+```bash
+ab -n 200 -c 20 -p data.txt http://localhost:8082/hello 
+```
+- `-n` 一共请求多少次
+- `-c` 每次请求多少个
