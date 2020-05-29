@@ -122,6 +122,50 @@ go-torch --seconds 5 http://localhost:8080/debug/pprof/profile
 ```
 命令执行完会在该目录下生成一个`torch.svg`文件，可用浏览器打开查看火焰图
 ![](https://img-blog.csdnimg.cn/2019110417565173.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bm1veGk=,size_16,color_FFFFFF,t_70)
+
+
+## 2.6 链路追踪分析
+```bash
+curl http://localhost:8080/debug/pprof/trace?seconds=30 > trace.out
+
+go tool trace trace.out
+```
+上面会打开一个Web页面，我们点击`View trace`可以看到整个链路追踪页面。
+按`W`可以将时间线放大，`S` 将时间线缩小
+
+- `Goroutine analysis` 查看每个方法的Goroutine数量
+- `Network blocking profile` 查看IO阻塞情况
+- `Synchronization blocking profile` 查看系统同步阻塞情况
+- `Syscall blocking profile` 查看系统调用阻塞情况
+- `Scheduler latency profile` 查看系统调度阻塞情况
+
+
+如果只想针对某个方法进行分析可以在方法内第一行加上下面代码
+```go
+f, err := os.Create("trace.out")
+if err != nil {
+    panic(err)
+}
+defer f.Close()
+
+err = trace.Start(f)
+if err != nil {
+    panic(err)
+}
+defer trace.Stop()
+```
+
+**常用解释**
+|名称|含义|
+|----|---|
+|Execution Time       |执行时间    |
+|Network Wait Time    |网络等待时间 |
+|Sync Block Time      |同步阻塞时间 |
+|Blocking Syscall Time|调用阻塞时间 |
+|Scheduler Wait Time  |调度等待时间 |
+|GC Sweeping          |GC 清扫     |
+|GC Pause             |GC 暂停     |
+
 # 3. Go压力测试分析
 1.生成 `pprof.cpu`文件
 ```bash
