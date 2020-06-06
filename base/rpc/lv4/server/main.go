@@ -25,5 +25,7 @@ func main() {
 
 	http.HandleFunc("/hello", pb.HandleRPCHTTP)
 
-	http.ListenAndServe(":8000", nil)
+	if err := http.ListenAndServe(":8000", nil); err != nil {
+		panic(err)
+	}
 }

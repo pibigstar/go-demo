@@ -16,7 +16,11 @@ func (*HelloService) Hello(req string, resp *string) error {
 }
 
 func main() {
-	pb.RegisterHelloService(&HelloService{})
+	err := pb.RegisterHelloService(&HelloService{})
+	if err != nil {
+		panic(err)
+	}
+
 	pb.HandleHTTP()
 	fmt.Println("server staring....")
 

@@ -38,5 +38,8 @@ func HandleRPCHTTP(w http.ResponseWriter, r *http.Request) {
 		Writer:     w,
 	}
 
-	rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
+	err := rpc.ServeRequest(jsonrpc.NewServerCodec(conn))
+	if err != nil {
+		panic(err)
+	}
 }

@@ -6,7 +6,7 @@ import (
 	"net/rpc"
 	"net/rpc/jsonrpc"
 
-	pb "go-demo/base/rpc/lv2"
+	pb "go-demo/base/rpc/lv3"
 )
 
 type HelloService struct {
