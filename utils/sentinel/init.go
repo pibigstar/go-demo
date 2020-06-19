@@ -41,6 +41,7 @@ type BreakerRule struct {
 	MaxAllowedRt        uint64  `yaml:"maxAllowedRt"`        // 响应时间超过该值，将被标记为慢请求
 	MaxSlowRequestRatio float64 `yaml:"maxSlowRequestRatio"` // 最大响应时间，只在Strategy为0时有效
 	MaxErrorRatio       float64 `yaml:"maxErrorRatio"`       // 最大错误占比，只在Strategy为1时有效
+	MaxErrorCount       uint64  `yaml:"maxErrorCount"`       // 最大错误数，只在Strategy为2时有效
 }
 
 // 系统自适应流控
@@ -86,6 +87,8 @@ func init() {
 			breakerRules = append(breakerRules, circuitbreaker.NewSlowRtRule(BreakerPrefix+r.Resource, r.StatIntervalMs, r.RetryTimeoutMs, r.MaxAllowedRt, r.MinRequestAmount, r.MaxSlowRequestRatio))
 		case circuitbreaker.ErrorRatio:
 			breakerRules = append(breakerRules, circuitbreaker.NewErrorRatioRule(BreakerPrefix+r.Resource, r.StatIntervalMs, r.RetryTimeoutMs, r.MinRequestAmount, r.MaxErrorRatio))
+		case circuitbreaker.ErrorCount:
+			breakerRules = append(breakerRules, circuitbreaker.NewErrorCountRule(BreakerPrefix+r.Resource, r.StatIntervalMs, r.RetryTimeoutMs, r.MinRequestAmount, r.MaxErrorCount))
 		}
 	}
 	_, err = circuitbreaker.LoadRules(breakerRules)
