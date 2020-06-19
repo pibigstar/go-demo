@@ -21,7 +21,7 @@ func SentinelMiddleware(opts ...Option) gin.HandlerFunc {
 		breakerResource := BreakerPrefix + resource
 
 		// 流量控制
-		entry, err := api.Entry(
+		flowEntry, err := api.Entry(
 			flowResource,
 			api.WithResourceType(base.ResTypeWeb),
 			api.WithTrafficType(base.Inbound),
@@ -36,10 +36,10 @@ func SentinelMiddleware(opts ...Option) gin.HandlerFunc {
 
 			return
 		}
-		entry.Exit()
+		defer flowEntry.Exit()
 
 		// 熔断检查
-		entry, err = api.Entry(breakerResource)
+		breakerEntry, err := api.Entry(breakerResource)
 		if err != nil {
 			if fn, ok := options.breakerFallbackMap[resource]; ok {
 				fn(ctx)
@@ -49,7 +49,7 @@ func SentinelMiddleware(opts ...Option) gin.HandlerFunc {
 			}
 			return
 		}
-		entry.Exit()
+		defer breakerEntry.Exit()
 
 		ctx.Next()
 	}
