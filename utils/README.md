@@ -3,8 +3,11 @@
 - [ants](ants): 高性能协程池
 - [cron](cron): 定时任务
 - [code](code): 验证码生成
-- [disk](disk): 获取系统和U盘盘符
 - [crypto](crypto): 签名与加密工具类
+- [disk](disk): 获取系统和U盘盘符
+- [env](env): 当前环境判断
+- [hystrix](hystrix): 熔断
+- [i18n](i18n): i18n使用
 - [image](images): 图片常用操作
 - [ip](ip): 获取本地IP与公网IP并得到地址
 - [jieba](jieba): 中文分词

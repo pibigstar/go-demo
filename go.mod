@@ -53,6 +53,7 @@ require (
 	github.com/microcosm-cc/bluemonday v1.0.2
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
+	github.com/nicksnyder/go-i18n/v2 v2.0.3
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/olivere/elastic v6.2.18+incompatible
 	github.com/opentracing/opentracing-go v1.1.0
@@ -88,6 +89,7 @@ require (
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	golang.org/x/sys v0.0.0-20200331124033-c3d80250170d // indirect
+	golang.org/x/text v0.3.2
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/grpc v1.27.0
@@ -96,6 +98,7 @@ require (
 	gopkg.in/go-oauth2/redis.v3 v3.2.1
 	gopkg.in/go-playground/pool.v3 v3.1.1
 	gopkg.in/oauth2.v3 v3.12.0
+	gopkg.in/yaml.v2 v2.2.8
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
 
