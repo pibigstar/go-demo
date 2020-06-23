@@ -16,8 +16,8 @@ func NewIPRateLimiter(r rate.Limit, b int) *IPRateLimit {
 	return &IPRateLimit{
 		limiter: make(map[string]*rate.Limiter),
 		mu:      &sync.RWMutex{},
-		r:       r,
-		b:       b,
+		r:       r, // 1s创建多少个令牌
+		b:       b, // 最大存储多少个令牌
 	}
 }
 
