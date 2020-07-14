@@ -79,3 +79,11 @@ func TestStructToMap(t *testing.T) {
 	}
 	t.Logf("%+v", m)
 }
+
+func TestMarshInterface(t *testing.T) {
+	jsonStream := `{"name":"pibigstar", "num": 123456789}`
+	err := MarshInterface(jsonStream)
+	if err != nil {
+		t.Error(err)
+	}
+}
