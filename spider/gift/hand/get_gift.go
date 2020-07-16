@@ -5,13 +5,14 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
 
 type Gift struct {
-	Name   string `json:"name"`
-	LuckId int    `json:"luckid"`
+	Name    string `json:"name"`
+	LuckyId int    `json:"luckyid"`
 }
 
 const (
@@ -27,7 +28,8 @@ func main() {
 	date := now.Format("2006-01-02")
 	for i := 0; i < TryTime; i++ {
 		client := &http.Client{}
-		req, err := http.NewRequest("POST", URL, strings.NewReader("bkn=1858570791&from=0&gc=594174090&client=1&version=0"))
+
+		req, err := http.NewRequest("POST", URL, strings.NewReader("bkn=373350492"))
 		if err != nil {
 			return
 		}
@@ -56,7 +58,8 @@ func main() {
 			fmt.Printf("%s JSON解析失败,第%d次尝试 \n", date, i+1)
 			continue
 		}
-		if gift.Name == "" || gift.LuckId == 0 {
+
+		if gift.Name == "" || gift.LuckyId == 0 {
 			fmt.Println(date + " 未获得礼物")
 			break
 		}
@@ -71,4 +74,14 @@ func getCookie() string {
 		fmt.Println("读取Cookie失败:", err.Error())
 	}
 	return string(bytes)
+}
+
+// 根据skey计算出g_tk/bkn
+func genderGTK(skey string) string {
+	hash := 5381
+	for _, s := range skey {
+		us, _ := strconv.Atoi(fmt.Sprintf("%d", s))
+		hash += (hash << 5) + us
+	}
+	return fmt.Sprintf("%d", hash&0x7fffffff)
 }
