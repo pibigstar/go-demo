@@ -29,7 +29,8 @@ func main() {
 	for i := 0; i < TryTime; i++ {
 		client := &http.Client{}
 
-		req, err := http.NewRequest("POST", URL, strings.NewReader("bkn=373350492"))
+		bkn := genderGTK("@l8QyyiX37") // todo: 回头优化下这个，自动获取
+		req, err := http.NewRequest("POST", URL, strings.NewReader(fmt.Sprintf("bkn=%s", bkn)))
 		if err != nil {
 			return
 		}
