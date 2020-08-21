@@ -1,6 +1,7 @@
 ### 常用工具包
 
 - [ants](ants): 高性能协程池
+- [bar](bar): 进度条使用
 - [cron](cron): 定时任务
 - [code](code): 验证码生成
 - [crypto](crypto): 签名与加密工具类

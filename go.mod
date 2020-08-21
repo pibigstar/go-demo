@@ -62,6 +62,8 @@ require (
 	github.com/pibigstar/go-sdk v0.0.0-20190727082016-c4f5d238d8f5
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
 	github.com/pkg/errors v0.8.1
+	github.com/qianlnk/pgbar v0.0.0-20190929032005-46c23acad4ed
+	github.com/qianlnk/to v0.0.0-20191230085244-91e712717368 // indirect
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/russross/blackfriday v2.0.0+incompatible
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
