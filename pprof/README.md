@@ -166,6 +166,33 @@ defer trace.Stop()
 |GC Sweeping          |GC 清扫     |
 |GC Pause             |GC 暂停     |
 
+
+## 2.7 打点对比分析
+> 下文以 `goroutine`为列，想比较 内存的话，可把url后缀改成 `heap`
+
+打第一个时间点
+```go
+go tool pprof http://localhost:8080/debug/pprof/goroutine
+```
+
+等待一会，再打第二个时间点
+```go
+go tool pprof http://localhost:8080/debug/pprof/goroutine
+```
+会生成两个采样文件 `pprof.goroutine.001.pb.gz` `pprof.goroutine.002.pb.gz`
+
+对比分析
+```go
+go tool pprof -base pprof.goroutine.001.pb.gz pprof.goroutine.002.pb.gz
+```
+>会和之前一样出现一个命令行交互界面，不同的是这个里面的信息是两者的差异比较。我们通过 `top` 
+查看两者差异goroutine最大之处是在哪里，然后通过 `traces` 查看栈调用信息，
+也可以通过 `list 方法名` 查看某个方法具体哪一行出了问题
+
+
+
+
+
 # 3. Go压力测试分析
 1.生成 `pprof.cpu`文件
 ```bash
