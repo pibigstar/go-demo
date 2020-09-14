@@ -58,3 +58,9 @@ func MarshInterface(jsonStr string) error {
 	fmt.Printf("%+v \n", v)
 	return nil
 }
+
+// 格式化输出json
+func FormatMarshal(value interface{}) string {
+	bs, _ := json.MarshalIndent(value, "", "    ")
+	return string(bs)
+}
