@@ -139,3 +139,46 @@ func (client *esClient) UpdateById(index, id string, values map[string]interface
 	}
 	return response, nil
 }
+
+// 批量执行操作
+func (client *esClient) MUpdate(index, id string, values map[string]interface{}) (*elastic.BulkResponse, error) {
+	response, err := client.Bulk().
+		Add(elastic.NewBulkUpdateRequest().Index(index).Id(id).Doc(values)).
+		Add(elastic.NewBulkDeleteRequest().Index(index).Id(id)).
+		Do(client.ctx)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
+}
+
+// 批量获取
+func (client *esClient) MGet(index string, ids []string) (*elastic.MgetResponse, error) {
+	var getItems []*elastic.MultiGetItem
+	for _, id := range ids {
+		getItems = append(getItems, elastic.NewMultiGetItem().Index(index).Id(id))
+	}
+
+	response, err := client.Mget().Add(getItems...).
+		Do(client.ctx)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
+}
+
+// 批量搜索
+func (client *esClient) MSearch(index string, ids []string) (*elastic.MultiSearchResult, error) {
+	var searchRequests []*elastic.SearchRequest
+	for _, id := range ids {
+		searchRequests = append(searchRequests,
+			elastic.NewSearchRequest().Index(index).Query(
+				elastic.NewBoolQuery().Must(elastic.NewTermQuery("id", id))))
+	}
+	response, err := client.MultiSearch().Add(searchRequests...).
+		Do(client.ctx)
+	if err != nil {
+		return nil, err
+	}
+	return response, nil
+}
