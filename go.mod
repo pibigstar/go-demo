@@ -15,6 +15,7 @@ require (
 	github.com/antchfx/xmlquery v1.2.4 // indirect
 	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/astaxie/beego v1.12.0 // indirect
+	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
@@ -52,6 +53,7 @@ require (
 	github.com/mattn/go-colorable v0.1.6
 	github.com/mdp/qrterminal/v3 v3.0.0
 	github.com/microcosm-cc/bluemonday v1.0.2
+	github.com/mozillazg/go-pinyin v0.18.0
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
 	github.com/nicksnyder/go-i18n/v2 v2.0.3
@@ -68,6 +70,7 @@ require (
 	github.com/russross/blackfriday v2.0.0+incompatible
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
+	github.com/shirou/gopsutil v2.19.12+incompatible
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
