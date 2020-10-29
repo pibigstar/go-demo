@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"time"
 
@@ -23,7 +24,17 @@ const host = "http://127.0.0.1:9200"
 func NewElasticSearchClient() error {
 	errLog := log.New(os.Stdout, "Elastic", log.LstdFlags)
 
-	esCli, err := elastic.NewClient(elastic.SetErrorLog(errLog), elastic.SetURL(host))
+	tr := NewTransport(WithDebug(false))
+	httpCli := &http.Client{
+		Transport: tr,
+	}
+	esCli, err := elastic.NewClient(
+		elastic.SetErrorLog(errLog),
+		elastic.SetURL(host),
+		elastic.SetBasicAuth("elastic", "123456"),
+		elastic.SetHttpClient(httpCli),
+		elastic.SetHealthcheck(false),
+	)
 	if err != nil {
 		return err
 	}
