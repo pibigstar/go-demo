@@ -26,3 +26,4 @@
 - [x] [SMS短信发送](sms)
 - [x] [短域名生成](shortdomain)
 - [x] [链路跟踪](trace)
+- [x] [consul使用](consul)
