@@ -3,6 +3,7 @@
 - [ants](ants): 高性能协程池
 - [bar](bar): 进度条使用
 - [cron](cron): 定时任务
+- [cmux](cmux): 一个端口注册多个服务
 - [code](code): 验证码生成
 - [copy](copy): 对象深拷贝
 - [crypto](crypto): 签名与加密工具类
