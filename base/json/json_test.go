@@ -96,3 +96,14 @@ func TestFormatMarshal(t *testing.T) {
 	s := FormatMarshal(u)
 	t.Log(s)
 }
+
+func TestMarshalUnEscapeHTML(t *testing.T) {
+	u := User{
+		ID:   "123",
+		Name: "&&&&",
+	}
+	s := FormatMarshal(u)
+	t.Log(s)
+	s = MarshalUnEscapeHTML(u)
+	t.Log(s)
+}
