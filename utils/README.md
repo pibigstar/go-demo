@@ -29,6 +29,7 @@
 - [retry](retry):  方法重试
 - [robot](robot): 监听键盘模拟事件
 - [seq](seq): id和uuid生成器
+- [timex](timex): 时间相关操作
 - [token](token): jwt加密生成token
 - [walk](walk): Go使用walk写GUI
 - [word](word): Go操作docx文件
