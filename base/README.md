@@ -3,6 +3,7 @@
 - [context](context): 上下文使用详解
 - [csv](csv): csv文件操作
 - [defer](defer): 巧用defer
+- [embed](embed): 内嵌资源使用
 - [file](file)：Go操作文件
 - [flag](flag)：读取运行时参数
 - [goroutine](goroutine)：Go中goroutine各种骚操作

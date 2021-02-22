@@ -1,5 +1,7 @@
 module go-demo
 
+go 1.16
+
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
@@ -110,5 +112,3 @@ require (
 	gopkg.in/yaml.v2 v2.2.8
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
-
-go 1.13
