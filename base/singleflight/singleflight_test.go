@@ -1,4 +1,4 @@
-package single_flight
+package singleflight
 
 import (
 	"fmt"

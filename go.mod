@@ -54,6 +54,7 @@ require (
 	github.com/lib/pq v1.1.1 // indirect
 	github.com/lxn/walk v0.0.0-20191128110447-55ccb3a9f5c1
 	github.com/lxn/win v0.0.0-20191128105842-2da648fda5b4 // indirect
+	github.com/marusama/cyclicbarrier v1.1.0
 	github.com/mattn/go-colorable v0.1.6
 	github.com/mdp/qrterminal/v3 v3.0.0
 	github.com/microcosm-cc/bluemonday v1.0.2
@@ -79,6 +80,7 @@ require (
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
 	github.com/smartwalle/alipay/v3 v3.0.9
+	github.com/soheilhy/cmux v0.1.4
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/temoto/robotstxt v1.1.1 // indirect
@@ -95,13 +97,12 @@ require (
 	go.uber.org/ratelimit v0.1.0
 	go.uber.org/zap v1.13.0 // indirect
 	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
+	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	golang.org/x/sys v0.0.0-20200515095857-1151b9dac4a9 // indirect
 	golang.org/x/text v0.3.2
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
-	golang.org/x/tools v0.0.0-20200426102838-f3a5411a4c3b
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/grpc v1.27.0
 	google.golang.org/protobuf v1.24.0 // indirect
