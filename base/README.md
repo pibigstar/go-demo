@@ -18,6 +18,7 @@
 - [regexp](regexp): Go正则表达式操作
 - [rpc](rpc): Go使用rpc进行远程服务调用
 - [runtime](runtime): Go runtime包使用
+- [semaphore](semaphore): 信号量
 - [shell](shell): Go执行shell命令
 - [singleflight](singleflight): 合并并发请求
 - [sort](sort): Go切片排序
