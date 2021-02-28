@@ -18,6 +18,7 @@
 - [rpc](rpc): Go使用rpc进行远程服务调用
 - [runtime](runtime): Go runtime包使用
 - [shell](shell): Go执行shell命令
+- [single_flight](single_flight): 合并并发请求
 - [sort](sort): Go切片排序
 - [string](string): Go字符串操作
 - [sync](sync): Go并发相关包使用
