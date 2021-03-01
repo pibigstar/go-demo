@@ -14,7 +14,8 @@ var (
 )
 
 // 使用SingleFlight合并并发请求
-// 当缓存被击穿时，让一个请求去请求DB即可
+// 例如当缓存被击穿时，可以通过singleFlight让一个请求去请求DB即可
+// 其他goroutine共享请求DB的结果
 func TestSingleFlight(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		go func(i int) {
