@@ -10,7 +10,7 @@ import (
 
 // 通过信号量控制goroutine并发执行的数量
 func TestSemaphorePool(t *testing.T) {
-	s := semaphore.NewWeighted(1)
+	s := semaphore.NewWeighted(3)
 
 	ctx := context.Background()
 	for i := 0; i < 20; i++ {
@@ -23,7 +23,8 @@ func TestSemaphorePool(t *testing.T) {
 		}(i)
 	}
 
-	err := s.Acquire(ctx, 2)
+	// 请求3个资源保证前面的任务都已经执行完毕
+	err := s.Acquire(ctx, 3)
 	if err != nil {
 		t.Error(err)
 	}
