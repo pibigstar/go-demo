@@ -71,6 +71,7 @@ require (
 	github.com/pkg/errors v0.8.1
 	github.com/qianlnk/pgbar v0.0.0-20190929032005-46c23acad4ed
 	github.com/qianlnk/to v0.0.0-20191230085244-91e712717368 // indirect
+	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/russross/blackfriday v2.0.0+incompatible
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
@@ -110,6 +111,7 @@ require (
 	gopkg.in/go-oauth2/redis.v3 v3.2.1
 	gopkg.in/go-playground/pool.v3 v3.1.1
 	gopkg.in/oauth2.v3 v3.12.0
+	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
