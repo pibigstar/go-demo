@@ -86,6 +86,15 @@ go-wrk -d 500 http://localhost:8080/hello
 - `threadcreate`:  操作系统线程跟踪
 - `trace`: 当前程序执行情况
 - `full goroutine stack dump`: 所有goroutine栈输出
+
+**粗略查看，以goroutine为例，参数有debug=1 与 debug = 2**
+
+- http://localhost:8080/debug/pprof/goroutine?dubug=1
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210422102707387.png)
+
+- http://localhost:8080/debug/pprof/goroutine?dubug=2
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210422103048167.png)
+
 ## 2.4 采样分析
 下面命令会打开一个交互页面
 ```bash
