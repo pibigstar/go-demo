@@ -5,25 +5,29 @@ import (
 	"fmt"
 	"reflect"
 	"testing"
-	"unsafe"
 )
 
 type TestStruct struct {
 	A int    `json:"a"`
 	B string `json:"b"`
-	c string `json:"c"`
+	C string `json:"c"`
 }
 
 // 通过反射修改非导出字段
 func TestChangeNotExportFiled(t *testing.T) {
 	var r TestStruct
-	// 获取字段对象
-	v := reflect.ValueOf(&r).Elem().FieldByName("c")
-	// 构建指向该字段的可寻址（addressable）反射对象
-	rv := reflect.NewAt(v.Type(), unsafe.Pointer(v.UnsafeAddr())).Elem()
-	// 设置值
-	fv := reflect.ValueOf("pibigstar")
-	rv.Set(fv)
+	r.A = 100
+	r.B = "B"
+	r.C = "c"
+	getValue := reflect.ValueOf(r)
+	if getValue.Kind() != reflect.Struct {
+		panic("need struct kind")
+	}
+	getType := reflect.TypeOf(r)
+	// 或者 getType := getValue.Type()
+	for i := 0; i < getValue.NumField(); i++ {
+		t.Logf("name: %s, type: %s, value: %v\n", getType.Field(i).Name, getValue.Field(i).Type(), getValue.Field(i).Interface())
+	}
 
 	t.Logf("%+v", r)
 }

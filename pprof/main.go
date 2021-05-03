@@ -2,58 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
-	"net/http"
+	"github.com/charmbracelet/lipgloss"
 	_ "net/http/pprof"
-	"os"
-	"path/filepath"
-	"time"
-
-	"github.com/varstr/uaparser"
 )
 
-const hostPort = ":8080"
+var style = lipgloss.NewStyle().Bold(false).Foreground(lipgloss.Color("#FAFAFA")).Background(lipgloss.Color("#7D56F4")).PaddingTop(2).PaddingLeft(4).Width(22)
 
 func main() {
-	http.HandleFunc("/hello", Hello)
-	fmt.Println("Starting server on", hostPort)
-	if err := http.ListenAndServe(hostPort, nil); err != nil {
-		log.Fatalf("HTTP server failed: %v", err)
-	}
-}
-
-func Hello(w http.ResponseWriter, r *http.Request) {
-	start := time.Now()
-	tags := getStatsTags(r)
-	duration := time.Since(start)
-	fmt.Println(tags, duration)
-}
-
-func getStatsTags(r *http.Request) map[string]string {
-	userBrowser, userOS := parseUserAgent(r.UserAgent())
-	stats := map[string]string{
-		"browser":  userBrowser,
-		"os":       userOS,
-		"endpoint": filepath.Base(r.URL.Path),
-	}
-
-	hostName, _ := os.Hostname()
-
-	if hostName != "" {
-		stats["host"] = hostName
-	}
-	return stats
-}
-
-func parseUserAgent(uaString string) (browser, os string) {
-	ua := uaparser.Parse(uaString)
-
-	if ua.Browser != nil {
-		browser = ua.Browser.Name
-	}
-	if ua.OS != nil {
-		os = ua.OS.Name
-	}
-
-	return browser, os
+	fmt.Println(style.Render("Hello, kitty."))
 }
