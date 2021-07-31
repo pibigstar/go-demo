@@ -118,8 +118,8 @@ func Hiring() {
 							}(l.GeekCard.SecurityID)
 						}
 						jWg.Wait()
-						return
 					}
+					return
 				case <-t.C:
 					geeks := searchGeekByJobId(jobId)
 					geeksQueue = append(geeksQueue, geeks...)
@@ -150,8 +150,7 @@ func searchGeekByJobId(jobId string) []*Geek {
 	return geeks
 }
 
-// 筛选
-// 985,211,大厂优先选择
+// 筛选并打分
 func selectGeek(geek *Geek) bool {
 	// 已经打过招呼了
 	if geek.HaveChatted == 1 {
