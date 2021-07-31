@@ -1,5 +1,7 @@
 module go-demo
 
+go 1.16
+
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
@@ -15,6 +17,7 @@ require (
 	github.com/antchfx/xmlquery v1.2.4 // indirect
 	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/astaxie/beego v1.12.0 // indirect
+	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
@@ -42,6 +45,8 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway v1.12.1 // indirect
+	github.com/hashicorp/consul/api v1.1.0
+	github.com/jinzhu/copier v0.0.0-20190625015134-976e0346caa8
 	github.com/jinzhu/gorm v1.9.2
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
 	github.com/jinzhu/now v1.0.0 // indirect
@@ -50,9 +55,11 @@ require (
 	github.com/lib/pq v1.1.1 // indirect
 	github.com/lxn/walk v0.0.0-20191128110447-55ccb3a9f5c1
 	github.com/lxn/win v0.0.0-20191128105842-2da648fda5b4 // indirect
+	github.com/marusama/cyclicbarrier v1.1.0
 	github.com/mattn/go-colorable v0.1.6
 	github.com/mdp/qrterminal/v3 v3.0.0
 	github.com/microcosm-cc/bluemonday v1.0.2
+	github.com/mozillazg/go-pinyin v0.18.0
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/nguyenthenguyen/docx v0.0.0-20181031033525-8cb697a41e43
 	github.com/nicksnyder/go-i18n/v2 v2.0.3
@@ -63,14 +70,19 @@ require (
 	github.com/pibigstar/go-sdk v0.0.0-20190727082016-c4f5d238d8f5
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
 	github.com/pkg/errors v0.8.1
+	github.com/qianlnk/pgbar v0.0.0-20190929032005-46c23acad4ed
+	github.com/qianlnk/to v0.0.0-20191230085244-91e712717368 // indirect
+	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac
 	github.com/robfig/cron v0.0.0-20180505203441-b41be1df6967
 	github.com/russross/blackfriday v2.0.0+incompatible
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
+	github.com/shirou/gopsutil v2.19.12+incompatible
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
 	github.com/smartwalle/alipay/v3 v3.0.9
+	github.com/soheilhy/cmux v0.1.4
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/temoto/robotstxt v1.1.1 // indirect
@@ -87,7 +99,7 @@ require (
 	go.uber.org/ratelimit v0.1.0
 	go.uber.org/zap v1.13.0 // indirect
 	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9 // indirect
+	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	golang.org/x/sys v0.0.0-20200515095857-1151b9dac4a9 // indirect
@@ -100,8 +112,7 @@ require (
 	gopkg.in/go-oauth2/redis.v3 v3.2.1
 	gopkg.in/go-playground/pool.v3 v3.1.1
 	gopkg.in/oauth2.v3 v3.12.0
+	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
-
-go 1.13

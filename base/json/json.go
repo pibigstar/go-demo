@@ -1,6 +1,7 @@
 package json
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/goinggo/mapstructure"
@@ -57,4 +58,22 @@ func MarshInterface(jsonStr string) error {
 	}
 	fmt.Printf("%+v \n", v)
 	return nil
+}
+
+// 格式化输出json
+func FormatMarshal(value interface{}) string {
+	bs, _ := json.MarshalIndent(value, "", "    ")
+	return string(bs)
+}
+
+// 不让特殊字符编码为Unicode
+func MarshalUnEscapeHTML(value interface{}) string {
+	var s = &bytes.Buffer{}
+	e := json.NewEncoder(s)
+	e.SetEscapeHTML(false)
+	err := e.Encode(value)
+	if err != nil {
+		return err.Error()
+	}
+	return s.String()
 }

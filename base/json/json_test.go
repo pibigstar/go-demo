@@ -87,3 +87,23 @@ func TestMarshInterface(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestFormatMarshal(t *testing.T) {
+	u := User{
+		ID:   "123",
+		Name: "派大星",
+	}
+	s := FormatMarshal(u)
+	t.Log(s)
+}
+
+func TestMarshalUnEscapeHTML(t *testing.T) {
+	u := User{
+		ID:   "123",
+		Name: "&&&&",
+	}
+	s := FormatMarshal(u)
+	t.Log(s)
+	s = MarshalUnEscapeHTML(u)
+	t.Log(s)
+}

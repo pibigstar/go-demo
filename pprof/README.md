@@ -86,6 +86,15 @@ go-wrk -d 500 http://localhost:8080/hello
 - `threadcreate`:  操作系统线程跟踪
 - `trace`: 当前程序执行情况
 - `full goroutine stack dump`: 所有goroutine栈输出
+
+**粗略查看，以goroutine为例，参数有debug=1 与 debug = 2**
+
+- http://localhost:8080/debug/pprof/goroutine?dubug=1
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210422102707387.png)
+
+- http://localhost:8080/debug/pprof/goroutine?dubug=2
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20210422103048167.png)
+
 ## 2.4 采样分析
 下面命令会打开一个交互页面
 ```bash
@@ -165,6 +174,33 @@ defer trace.Stop()
 |Scheduler Wait Time  |调度等待时间 |
 |GC Sweeping          |GC 清扫     |
 |GC Pause             |GC 暂停     |
+
+
+## 2.7 打点对比分析
+> 下文以 `goroutine`为列，想比较 内存的话，可把url后缀改成 `heap`
+
+打第一个时间点
+```go
+go tool pprof http://localhost:8080/debug/pprof/goroutine
+```
+
+等待一会，再打第二个时间点
+```go
+go tool pprof http://localhost:8080/debug/pprof/goroutine
+```
+会生成两个采样文件 `pprof.goroutine.001.pb.gz` `pprof.goroutine.002.pb.gz`
+
+对比分析
+```go
+go tool pprof -base pprof.goroutine.001.pb.gz pprof.goroutine.002.pb.gz
+```
+>会和之前一样出现一个命令行交互界面，不同的是这个里面的信息是两者的差异比较。我们通过 `top` 
+查看两者差异goroutine最大之处是在哪里，然后通过 `traces` 查看栈调用信息，
+也可以通过 `list 方法名` 查看某个方法具体哪一行出了问题
+
+
+
+
 
 # 3. Go压力测试分析
 1.生成 `pprof.cpu`文件

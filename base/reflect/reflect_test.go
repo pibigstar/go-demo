@@ -2,15 +2,16 @@ package reflect
 
 import (
 	"encoding/json"
+	"fmt"
 	"reflect"
 	"testing"
 	"unsafe"
 )
 
 type TestStruct struct {
-	A int
-	B string
-	c string
+	A int    `json:"a"`
+	B string `json:"b"`
+	c string `json:"c"`
 }
 
 // 通过反射修改非导出字段
@@ -85,4 +86,14 @@ func TestReflect(t *testing.T) {
 	s.Field(0).SetInt(77)
 	s.Field(1).SetString("new world")
 	t.Logf("%+v", test)
+}
+
+// 获取tag
+func TestGetTag(t *testing.T) {
+	s := TestStruct{}
+	rt := reflect.TypeOf(s)
+	for i := 0; i < rt.NumField(); i++ {
+		f := rt.Field(i)
+		fmt.Println(f.Tag.Get("json"))
+	}
 }

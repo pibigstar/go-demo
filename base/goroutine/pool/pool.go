@@ -7,7 +7,6 @@ import (
 )
 
 // 简单写一个协程池
-
 var (
 	ErrorCapacity   = errors.New("illegal capacity")
 	ErrorPoolClosed = errors.New("pool already closed")

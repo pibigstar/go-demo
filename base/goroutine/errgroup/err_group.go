@@ -8,11 +8,9 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
-// 错误组(Errgroup)
-// 有时候你想创建多个goroutine，
-// 让它们并行地工作，当遇到某种错误或者你不想再输出了，
-// 你可能想取消整个goroutine。
-
+// 错误组是用来将一个通用的父任务拆成几个小任务并发执行
+// 一旦有一个子任务返回错误，或者是Wait调用返回
+// 那么整个context将会被取消，所有任务终止执行
 func Run(work []int) error {
 	eg, ctx := errgroup.WithContext(context.Background())
 	for _, w := range work {

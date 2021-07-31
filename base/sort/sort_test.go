@@ -37,6 +37,36 @@ func TestSortObj(t *testing.T) {
 		return p.Name < q.Name //按姓名递增
 	}})
 	t.Log(persons)
+
+	// 先按年龄再按姓名
+	sort.Sort(PersonSwapper{persons, func(p, q *Person) bool {
+		if p.Age < q.Age {
+			return true
+		}
+		if p.Age == q.Age {
+			if p.Name < q.Name {
+				return true
+			}
+		}
+		return false
+	}})
+	t.Log(persons)
+}
+
+// 数组排序更简易的方式
+func TestSortSlice(t *testing.T) {
+	persons := []Person{
+		{18, "li", time.Now()},
+		{11, "hua", time.Now()},
+		{25, "tt", time.Now()},
+	}
+	sort.Slice(persons, func(i, j int) bool {
+		if persons[i].Age < persons[j].Age {
+			return true
+		}
+		return false
+	})
+	t.Log(persons)
 }
 
 type Person struct {
