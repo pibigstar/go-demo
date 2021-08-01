@@ -38,3 +38,18 @@ func TestListRecommend(t *testing.T) {
 		}
 	}
 }
+
+func TestSetHelloMsg(t *testing.T) {
+	setHelloMsg()
+}
+
+func TestReadCompany(t *testing.T) {
+	readCompany()
+	for _, c := range goodCompany {
+		t.Log(c)
+	}
+}
+
+func TestSendEmail(t *testing.T) {
+	sendEmail()
+}

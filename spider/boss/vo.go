@@ -184,7 +184,6 @@ func (s SortGeek) Len() int {
 	return len(s)
 }
 
-// 好公司 > 985 > 211 > 考虑换工作 > 本科
 func (s SortGeek) Less(i, j int) bool {
 	if s[i].Weight > s[j].Weight {
 		return true
@@ -194,4 +193,39 @@ func (s SortGeek) Less(i, j int) bool {
 
 func (s SortGeek) Swap(i, j int) {
 	s[i], s[j] = s[j], s[i]
+}
+
+type JobHelloMsg struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+	ZpData  struct {
+		Jobs []struct {
+			JobID           int    `json:"jobId"`
+			EncJobID        string `json:"encJobId"`
+			JobName         string `json:"jobName"`
+			JobCity         string `json:"jobCity"`
+			JobSalary       string `json:"jobSalary"`
+			Degree          string `json:"degree"`
+			Experience      string `json:"experience"`
+			Set             bool   `json:"set"`
+			EncGreetingID   string `json:"encGreetingId"`
+			JobGreeting     string `json:"jobGreeting"`
+			JobAddTime      int64  `json:"jobAddTime"`
+			GreetingAddTime int64  `json:"greetingAddTime"`
+		} `json:"jobs"`
+		Greetings []struct {
+			JobID           int    `json:"jobId"`
+			EncJobID        string `json:"encJobId"`
+			JobName         string `json:"jobName"`
+			JobCity         string `json:"jobCity"`
+			JobSalary       string `json:"jobSalary"`
+			Degree          string `json:"degree"`
+			Experience      string `json:"experience"`
+			Set             bool   `json:"set"`
+			EncGreetingID   string `json:"encGreetingId"`
+			JobGreeting     string `json:"jobGreeting"`
+			JobAddTime      int64  `json:"jobAddTime"`
+			GreetingAddTime int64  `json:"greetingAddTime"`
+		} `json:"greetings"`
+	} `json:"zpData"`
 }

@@ -19,7 +19,12 @@ func SendEmail() {
 
 	user := "741047261@qq.com"
 	to := []string{"123456789@qq.com"}
-	msg := []byte("this is a message")
+	msg := []byte(`From: 741047261@qq.com
+To: 123456789@qq.com
+Subject: 测试邮件
+
+这是邮件内容
+	`)
 
 	err := smtp.SendMail(addr, auth, user, to, msg)
 	if err != nil {
