@@ -41,3 +41,9 @@ func TestRefactorWrite(t *testing.T) {
 		t.Error(err)
 	}
 }
+
+func TestRefactorReadXlsx(t *testing.T) {
+	var r []Record
+	ReadToStruct("test_write.xlsx", "Sheet1", &r)
+	t.Log(r)
+}

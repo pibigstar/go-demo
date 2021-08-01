@@ -27,6 +27,7 @@ require (
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5 // indirect
 	github.com/fatih/camelcase v1.0.0 // indirect
+	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-redis/redis v6.15.6+incompatible
 	github.com/go-session/session v3.1.2+incompatible
@@ -49,6 +50,7 @@ require (
 	github.com/jinzhu/gorm v1.9.2
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
 	github.com/jinzhu/now v1.0.0 // indirect
+	github.com/json-iterator/go v1.1.9
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/koding/multiconfig v0.0.0-20171124222453-69c27309b2d7
 	github.com/lib/pq v1.1.1 // indirect

@@ -2,6 +2,8 @@ package xlsxkit
 
 import (
 	"fmt"
+	jsoniter "github.com/json-iterator/go"
+	"github.com/json-iterator/go/extra"
 	"reflect"
 	"strings"
 
@@ -79,4 +81,73 @@ func ReadXlsx(xlsxfile string) ([][]string, error) {
 
 	rows := xlsx.GetRows("Sheet1")
 	return rows, nil
+}
+
+func ReadToStruct(fileName, sheetName string, result interface{}) error {
+	xlsx, err := excelize.OpenFile(fileName)
+	if err != nil {
+		return err
+	}
+
+	rows := xlsx.GetRows(sheetName)
+
+	var records []map[string]interface{}
+	if len(rows) == 0 {
+		return nil
+	}
+
+	columns := rows[0]
+	columnJson := getColumnJson(result)
+	for i, row := range rows {
+		if i == 0 {
+			continue
+		}
+		record := make(map[string]interface{})
+		for f, c := range row {
+			column := columns[f]
+			if j, ok := columnJson[column]; ok {
+				record[j] = c
+			}
+		}
+		records = append(records, record)
+	}
+
+	err = CopyStruct(records, &result)
+	fmt.Println(records)
+	return err
+}
+
+var json2 = func() jsoniter.API {
+	// 开启模糊模式
+	extra.RegisterFuzzyDecoders()
+	return jsoniter.ConfigCompatibleWithStandardLibrary
+}()
+
+func CopyStruct(src interface{}, dst interface{}) error {
+	r := reflect.ValueOf(src)
+	if r.Kind() == reflect.Ptr {
+		if !r.IsNil() {
+			bs, _ := json2.Marshal(src)
+			return json2.Unmarshal(bs, &dst)
+		}
+		return nil
+	}
+	bs, _ := json2.Marshal(src)
+	return json2.Unmarshal(bs, &dst)
+}
+
+func getColumnJson(model interface{}) map[string]string {
+	columnJson := make(map[string]string)
+	d := reflect.TypeOf(model).Elem().Elem()
+	for j := 0; j < d.NumField(); j++ {
+		var (
+			columnName string
+		)
+		columns := strings.Split(d.Field(j).Tag.Get("xlsx"), "-")
+		if len(columns) == 2 {
+			columnName = columns[1]
+		}
+		columnJson[columnName] = d.Field(j).Name
+	}
+	return columnJson
 }
