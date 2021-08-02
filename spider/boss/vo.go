@@ -229,3 +229,107 @@ type JobHelloMsg struct {
 		} `json:"greetings"`
 	} `json:"zpData"`
 }
+
+type QRMsg struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+	ZpData  struct {
+		QrID    string `json:"qrId"`
+		RandKey string `json:"randKey"`
+	} `json:"zpData"`
+}
+
+type JobListResp struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+	ZpData  struct {
+		Page      int  `json:"page"`
+		PageSize  int  `json:"pageSize"`
+		HasMore   bool `json:"hasMore"`
+		StartRow  int  `json:"startRow"`
+		TotalSize int  `json:"totalSize"`
+		Data      []struct {
+			JobID                    int         `json:"jobId"`
+			EncryptID                string      `json:"encryptId"`
+			JobAuditStatus           int         `json:"jobAuditStatus"`
+			JobStatus                int         `json:"jobStatus"`
+			JobName                  string      `json:"jobName"`
+			ShowType                 int         `json:"showType"`
+			LocationName             string      `json:"locationName"`
+			ExperienceName           string      `json:"experienceName"`
+			DegreeName               string      `json:"degreeName"`
+			JobTypeName              string      `json:"jobTypeName"`
+			LowSalary                int         `json:"lowSalary"`
+			HighSalary               int         `json:"highSalary"`
+			ViewCount                int         `json:"viewCount"`
+			ConcatCount              int         `json:"concatCount"`
+			AddTime                  int64       `json:"addTime"`
+			UpdateTime               int64       `json:"updateTime"`
+			LastModifyTime           int64       `json:"lastModifyTime"`
+			Deleted                  int         `json:"deleted"`
+			SalaryMonth              int         `json:"salaryMonth"`
+			AddTimeDesc              string      `json:"addTimeDesc"`
+			SalaryDesc               string      `json:"salaryDesc"`
+			FreeExperience           bool        `json:"freeExperience"`
+			Hot                      bool        `json:"hot"`
+			RemainDays               int         `json:"remainDays"`
+			UnpaidVip                int         `json:"unpaidVip"`
+			HotPayStatus             int         `json:"hotPayStatus"`
+			CanDelay                 bool        `json:"canDelay"`
+			ViewChatCount            int         `json:"viewChatCount"`
+			ShowQuickTop             bool        `json:"showQuickTop"`
+			QuickTopTime             int         `json:"quickTopTime"`
+			QuickTopType             int         `json:"quickTopType"`
+			Location                 int         `json:"location"`
+			Position                 int         `json:"position"`
+			Experience               int         `json:"experience"`
+			Degree                   int         `json:"degree"`
+			JobType                  int         `json:"jobType"`
+			SkillRequire             string      `json:"skillRequire"`
+			PositionName             string      `json:"positionName"`
+			City                     string      `json:"city"`
+			EncryptJobID             string      `json:"encryptJobId"`
+			Insurance                int         `json:"insurance"`
+			HasDiscount              int         `json:"hasDiscount"`
+			PaidJobEndDate           interface{} `json:"paidJobEndDate"`
+			AuditingDesc             interface{} `json:"auditingDesc"`
+			DaysPerWeekText          interface{} `json:"daysPerWeekText"`
+			LeastMonthText           interface{} `json:"leastMonthText"`
+			BrandName                string      `json:"brandName"`
+			ProxyJob                 int         `json:"proxyJob"`
+			ProxyType                int         `json:"proxyType"`
+			ComID                    int         `json:"comId"`
+			BrandID                  int         `json:"brandId"`
+			BrandLogo                string      `json:"brandLogo"`
+			Anonymous                int         `json:"anonymous"`
+			NewUnpass                bool        `json:"newUnpass"`
+			IntermediaryAuditingText interface{} `json:"intermediaryAuditingText"`
+			ExtendShowBar            struct {
+				Type     int         `json:"type"`
+				TipText  string      `json:"tipText"`
+				TipDesc  interface{} `json:"tipDesc"`
+				LeftTime int         `json:"leftTime"`
+			} `json:"extendShowBar"`
+			Urged           bool        `json:"urged"`
+			UpgradeType     int         `json:"upgradeType"`
+			NeedSupplyQuest bool        `json:"needSupplyQuest"`
+			JobShowBar      interface{} `json:"jobShowBar"`
+			SystemCloseTip  interface{} `json:"systemCloseTip"`
+			ShowPriority    bool        `json:"showPriority"`
+		} `json:"data"`
+		HasNewUnpassJobs   bool `json:"hasNewUnpassJobs"`
+		DelayDeadLine      int  `json:"delayDeadLine"`
+		HasCertFailAddress bool `json:"hasCertFailAddress"`
+		BossJdQmpLibState  int  `json:"bossJdQmpLibState"`
+		OperateJobForbid   struct {
+			Type    int         `json:"type"`
+			Title   interface{} `json:"title"`
+			Content interface{} `json:"content"`
+		} `json:"operateJobForbid"`
+	} `json:"zpData"`
+}
+
+type Job struct {
+	JobId   string
+	JobName string
+}

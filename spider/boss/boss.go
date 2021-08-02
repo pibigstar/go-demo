@@ -15,6 +15,8 @@ import (
 	"net/smtp"
 	"net/url"
 	"os"
+	"path/filepath"
+	"runtime"
 	"sort"
 	"strconv"
 	"strings"
@@ -28,13 +30,6 @@ const (
 
 	requestTypeToMe   = "3" // 牛人向我发简历
 	requestTypeToGeek = "4" // 我向牛人发求简历
-
-	cookieFile    = "cookie.txt"
-	school985File = "985.txt"
-	school211File = "211.txt"
-	jobsFile      = "jobs.txt"
-	companyFile   = "company.txt"
-	bossLog       = "boss.log"
 )
 
 var (
@@ -45,18 +40,25 @@ var (
 	notFriend = errors.New("好友关系校验失败")
 	notLogin  = errors.New("当前登录状态已失效")
 
-	runningTime = time.Minute * 3 // 3分钟候选人选择
-
 	school985   []string
 	school211   []string
 	goodCompany []string
 	cookie      string
 
-	logFile, _ = os.OpenFile(bossLog, os.O_RDWR|os.O_CREATE, 0664)
-	log        = logs.New(os.Stdout, "", logs.Ldate|logs.Ltime)
+	cookieFile    = "cookie.txt"
+	school985File = "985.txt"
+	school211File = "211.txt"
+	jobsFile      = "jobs.txt"
+	companyFile   = "company.txt"
+	bossLog       = "boss.log"
+
+	//logFile, _ = os.OpenFile(bossLog, os.O_RDWR|os.O_CREATE, 0664)
+	log = logs.New(os.Stdout, "", logs.Ldate|logs.Ltime)
 )
 
 func init() {
+	// 设置当前运行目录
+	setFilePath()
 	// 读取cookie信息
 	readCookie()
 	// 监听cookie文件
@@ -72,42 +74,96 @@ func init() {
 }
 
 func main() {
-	Hiring()
-}
+	if len(jobIds) == 0 {
+		inputJobs()
+	}
+	if len(jobIds) == 0 {
+		fmt.Println("暂时没有需要沟通的职位~")
+		return
+	}
 
-// 招人
-func Hiring() {
 	var wg sync.WaitGroup
 	for jobId, jobName := range jobIds {
-		fmt.Println("正在沟通职位:", jobName)
 		wg.Add(1)
+		fmt.Println("正在沟通职位:", jobName)
 		go func(jobId, jobName string) {
 			defer wg.Done()
 			defer func() {
 				if e := recover(); e != nil {
 					log.Println("recover", e)
 				}
+				Hiring(jobId, jobName)
 			}()
-			var (
-				geeksQueue []*Geek
-				ctx, _     = context.WithTimeout(context.Background(), runningTime)
-				t          = time.NewTicker(5 * time.Second) // 5秒一次，防止被反爬
-			)
-			for {
-				select {
-				case <-ctx.Done():
-					// 打招呼并请求简历
-					helloAndRequestResumes(jobId, geeksQueue)
-					return
-				case <-t.C:
-					geeks := searchGeekByJobId(jobId, jobName)
-					geeksQueue = append(geeksQueue, geeks...)
-				}
-			}
-
 		}(jobId, jobName)
 	}
 	wg.Wait()
+}
+
+// 输入存储job信息
+func inputJobs() {
+	if len(jobIds) > 0 {
+		return
+	}
+	jobs := listJobs()
+	if len(jobs) == 0 {
+		fmt.Println("你没有开放的职位")
+		return
+	}
+	for i, j := range jobs {
+		fmt.Printf("编号:%d 职位: %s \n", i, j.JobName)
+	}
+	inputReader := bufio.NewReader(os.Stdin)
+	fmt.Printf("请输入你要沟通的职位编号:")
+
+	input, err := inputReader.ReadString('\n')
+	if err != nil {
+		fmt.Println("输入错误!")
+		return
+	}
+	ids := strings.Split(input, ",")
+	var str string
+	for _, id := range ids {
+		id = strings.ReplaceAll(id, "\n", "")
+		id = strings.TrimSpace(id)
+		i, err := strconv.Atoi(id)
+		if err != nil || i >= len(jobs) {
+			fmt.Printf("%s 编号有误 \n", id)
+			continue
+		}
+		jobId := jobs[i].JobId
+		jobName := jobs[i].JobName
+		jobIds[jobId] = jobName
+		str += fmt.Sprintf("%s   //%s \n", jobId, jobName)
+	}
+
+	// 储存
+	err = ioutil.WriteFile(jobsFile, []byte(str), 0666)
+	if err != nil {
+		log.Println("存储jobId信息失败", err.Error())
+	}
+}
+
+// 招人
+func Hiring(jobId, jobName string) {
+	var (
+		// 3分钟候选人选择
+		ctx, _     = context.WithTimeout(context.Background(), time.Minute*3)
+		t          = time.NewTicker(5 * time.Second) // 5秒一次，防止被反爬
+		geeksQueue []*Geek
+	)
+	for {
+		select {
+		case <-t.C:
+			// 5秒取一次候选人列表
+			geeks := searchGeekByJobId(jobId, jobName)
+			geeksQueue = append(geeksQueue, geeks...)
+
+		case <-ctx.Done():
+			// 打招呼并请求简历
+			helloAndRequestResumes(jobId, geeksQueue)
+			return
+		}
+	}
 }
 
 // 打招呼并轮询请求简历
@@ -144,7 +200,7 @@ func helloAndRequestResumes(jobId string, geeksQueue []*Geek) {
 			}
 		}(l.GeekCard.SecurityID)
 
-		time.Sleep(5 * time.Second) // 睡5秒，防止被反爬
+		time.Sleep(10 * time.Second) // 睡10秒，防止被反爬
 	}
 
 	wg.Wait()
@@ -155,7 +211,7 @@ func searchGeekByJobId(jobId, jobName string) []*Geek {
 	geekList, err := listRecommend(jobId)
 	if err != nil {
 		if err == notLogin {
-			sendEmail()
+			//sendEmail()
 			panic(err)
 		}
 	}
@@ -316,9 +372,7 @@ func requestResumes(securityId string) error {
 	}
 	defer resp.Body.Close()
 	bs, _ := ioutil.ReadAll(resp.Body)
-	fmt.Println(string(bs))
-	str := string(bs)
-	if strings.Contains(str, "好友关系校验失败") {
+	if strings.Contains(string(bs), "好友关系校验失败") {
 		return notFriend
 	}
 	return nil
@@ -454,7 +508,10 @@ func readCompany() {
 }
 
 func readJobs() {
-	bs, _ := ioutil.ReadFile(jobsFile)
+	bs, err := ioutil.ReadFile(jobsFile)
+	if err != nil {
+		return
+	}
 	br := bufio.NewReader(bytes.NewReader(bs))
 	for {
 		a, _, c := br.ReadLine()
@@ -563,9 +620,129 @@ Subject: Boss登录状态失效
 
 boss登录状态已失效，请及时更改
 `)
-
 	err := smtp.SendMail(addr, auth, user, to, msg)
 	if err != nil {
 		log.Println("发送邮件提醒失败:", err.Error())
 	}
+}
+
+//  扫码登录
+func getQRId(ctx context.Context) {
+	// 取qrId
+	uri := "https://login.zhipin.com/wapi/zppassport/captcha/randkey"
+	values := url.Values{}
+	values.Add("pk", "cpc_user_sign_up")
+	req, _ := http.NewRequest(http.MethodPost, uri, strings.NewReader(values.Encode()))
+	addHeader(req)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		log.Println("get qr id", err.Error())
+		return
+	}
+	defer resp.Body.Close()
+
+	bs, _ := ioutil.ReadAll(resp.Body)
+	var msg *QRMsg
+	if err = json.Unmarshal(bs, &msg); err != nil {
+		log.Println("unmarshal qr msg", err.Error())
+		return
+	}
+	// 取qrId
+	qrId := msg.ZpData.QrID
+
+	newCtx, _ := context.WithTimeout(ctx, 10*time.Minute)
+	go func(qrId string) {
+		t := time.NewTicker(5 * time.Second)
+		for {
+			select {
+			case <-t.C:
+				// 获取set-cookie
+				if err := setCookie(qrId); err == nil {
+					t.Stop()
+					return
+				}
+			case <-newCtx.Done():
+				return
+			}
+		}
+
+	}(qrId)
+
+}
+
+func setCookie(qrId string) error {
+	uri := "https://login.zhipin.com/wapi/zppassport/qrcode/dispatcher?"
+	values := url.Values{}
+	values.Add("qrId", qrId)
+	values.Add("_", fmt.Sprintf("%d", time.Now().Unix()))
+	req, _ := http.NewRequest(http.MethodGet, uri, strings.NewReader(values.Encode()))
+	addHeader(req)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		log.Println("get cookie", err.Error())
+		return err
+	}
+	defer resp.Body.Close()
+
+	var setCookie string
+	for _, c := range resp.Header["Set-Cookie"] {
+		setCookie += c
+		setCookie += ";"
+	}
+	if setCookie == "" {
+		return fmt.Errorf("no cookie")
+	}
+	return nil
+}
+
+// 获取job列表
+func listJobs() []*Job {
+	uri := "https://www.zhipin.com/wapi/zpjob/job/data/list?"
+	values := url.Values{}
+	values.Add("position", "0")
+	values.Add("searchStr", "0")
+	values.Add("page", "1")
+	values.Add("_", fmt.Sprintf("%d", time.Now().Unix()))
+
+	req, _ := http.NewRequest(http.MethodGet, uri, strings.NewReader(values.Encode()))
+	addHeader(req)
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		log.Println("list job", err.Error())
+		return nil
+	}
+	defer resp.Body.Close()
+
+	bs, _ := ioutil.ReadAll(resp.Body)
+
+	var jResp *JobListResp
+	if err = json.Unmarshal(bs, &jResp); err != nil {
+		log.Println("unmarshal list job", err.Error())
+		return nil
+	}
+	var jobs []*Job
+	for _, j := range jResp.ZpData.Data {
+		if j.JobStatus == 0 {
+			jobs = append(jobs, &Job{
+				JobId:   j.EncryptJobID,
+				JobName: j.JobName,
+			})
+		}
+	}
+	return jobs
+}
+
+func setFilePath() {
+	_, currentFile, _, _ := runtime.Caller(0)
+	basePath := filepath.Dir(currentFile)
+
+	cookieFile = filepath.Join(basePath, cookieFile)
+	school985File = filepath.Join(basePath, school985File)
+	school211File = filepath.Join(basePath, school211File)
+	jobsFile = filepath.Join(basePath, jobsFile)
+	companyFile = filepath.Join(basePath, companyFile)
+	bossLog = filepath.Join(basePath, bossLog)
 }

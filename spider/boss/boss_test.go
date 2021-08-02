@@ -1,12 +1,15 @@
 package main
 
 import (
+	"context"
 	"testing"
 )
 
 // 测试招人
 func TestHiring(t *testing.T) {
-	Hiring()
+	for jobId, jobName := range jobIds {
+		Hiring(jobId, jobName)
+	}
 }
 
 func TestReadSchool(t *testing.T) {
@@ -52,4 +55,19 @@ func TestReadCompany(t *testing.T) {
 
 func TestSendEmail(t *testing.T) {
 	sendEmail()
+}
+
+func TestGetQR(t *testing.T) {
+	getQRId(context.Background())
+}
+
+func TestListJob(t *testing.T) {
+	jobs := listJobs()
+	for _, j := range jobs {
+		t.Log(j.JobName, j.JobId)
+	}
+}
+
+func TestInputJobs(t *testing.T) {
+	inputJobs()
 }
