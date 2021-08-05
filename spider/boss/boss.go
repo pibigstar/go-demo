@@ -186,19 +186,20 @@ func helloAndRequestResumes(jobId string, geeksQueue []*Geek) {
 
 		// 轮询向牛人直接请求简历直到对方回复我们建立好友关系
 		wg.Add(1)
-		go func(securityId string) {
+		go func(name, securityId string) {
 			defer wg.Done()
 			t := time.NewTicker(time.Minute * 1)
 			for {
 				select {
 				case <-t.C:
-					if err := requestResumes(securityId); err == nil {
+					log.Printf("正在索求候选人:%s的简历 \n", name)
+					if err := requestResumes(name, securityId); err == nil {
 						t.Stop()
 						return
 					}
 				}
 			}
-		}(l.GeekCard.SecurityID)
+		}(l.GeekCard.GeekName, l.GeekCard.SecurityID)
 
 		time.Sleep(10 * time.Second) // 睡10秒，防止被反爬
 	}
@@ -278,8 +279,11 @@ func selectGeek(geek *Geek, jobName string) bool {
 	// 岗位匹配
 	expectPositionName := strings.ToLower(geek.GeekCard.ExpectPositionName)
 	jobName = strings.ToLower(jobName)
-	if strings.Contains(jobName, expectPositionName) {
+	if strings.Contains(jobName, expectPositionName) || strings.Contains(expectPositionName, jobName) {
 		geek.Weight += 3
+	} else {
+		// 岗位不匹配
+		geek.Weight -= 2
 	}
 	// 今日活跃
 	if strings.Contains(geek.ActiveTimeDesc, "今日活跃") {
@@ -358,7 +362,7 @@ func acceptResumes(mid, securityId string) error {
 
 // 向牛人请求简历
 // 每隔一段时间请求一次，直到对方回复我们，建立好友关系为止
-func requestResumes(securityId string) error {
+func requestResumes(name, securityId string) error {
 	uri := "https://www.zhipin.com/wapi/zpchat/exchange/request"
 	urlQuery := url.Values{}
 	urlQuery.Add("type", requestTypeToGeek)
@@ -375,6 +379,14 @@ func requestResumes(securityId string) error {
 	if strings.Contains(string(bs), "好友关系校验失败") {
 		return notFriend
 	}
+	var temp *RequestResumesResp
+	if err = json.Unmarshal(bs, &temp); err != nil {
+		return err
+	}
+	if fmt.Sprintf("%d", temp.ZpData.Type) != requestTypeToGeek {
+		return notFriend
+	}
+	log.Printf("请求候选人:%s的简历成功 \n", name)
 	return nil
 }
 
@@ -606,7 +618,7 @@ func setHelloMsg() {
 func sendEmail() {
 	var (
 		username = "741047261@qq.com"
-		password = ""
+		password = "kekfghkotuhpbeda"
 		host     = "smtp.qq.com"
 		addr     = "smtp.qq.com:25"
 	)

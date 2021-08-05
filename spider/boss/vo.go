@@ -333,3 +333,12 @@ type Job struct {
 	JobId   string
 	JobName string
 }
+
+type RequestResumesResp struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+	ZpData  struct {
+		Type   int `json:"type"`
+		Status int `json:"status"`
+	} `json:"zpData"`
+}
