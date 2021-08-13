@@ -148,7 +148,7 @@ func Hiring(jobId, jobName string) {
 	var (
 		// 3分钟候选人选择
 		ctx, _     = context.WithTimeout(context.Background(), time.Minute*3)
-		t          = time.NewTicker(5 * time.Second) // 5秒一次，防止被反爬
+		t          = time.NewTicker(10 * time.Second) // 10秒一次，防止被反爬
 		geeksQueue []*Geek
 	)
 	for {
@@ -188,7 +188,7 @@ func helloAndRequestResumes(jobId string, geeksQueue []*Geek) {
 		wg.Add(1)
 		go func(name, securityId string) {
 			defer wg.Done()
-			t := time.NewTicker(time.Minute * 1)
+			t := time.NewTicker(time.Minute * 3)
 			for {
 				select {
 				case <-t.C:
@@ -201,7 +201,7 @@ func helloAndRequestResumes(jobId string, geeksQueue []*Geek) {
 			}
 		}(l.GeekCard.GeekName, l.GeekCard.SecurityID)
 
-		time.Sleep(10 * time.Second) // 睡10秒，防止被反爬
+		time.Sleep(30 * time.Second) // 睡30秒，防止被反爬
 	}
 
 	wg.Wait()
@@ -236,54 +236,50 @@ func selectGeek(geek *Geek, jobName string) bool {
 	if geek.Cooperate == communicatedYes {
 		return false
 	}
+	// 岗位匹配
+	if !matchJob(jobName, geek) {
+		return false
+	}
 	//  是否是本科
 	if geek.GeekCard.GeekDegree == "本科" {
-		geek.Weight += 2
+		geek.Weight += 3
 	}
 	//  是否是硕士
 	if geek.GeekCard.GeekDegree == "硕士" {
-		geek.Weight += 3
+		geek.Weight += 4
 	}
 	// 是否是211
 	if isContains(school211, geek.GeekCard.GeekEdu.School) {
-		geek.Weight += 2
+		geek.Weight += 3
 	}
 	// 是否是985
 	if isContains(school985, geek.GeekCard.GeekEdu.School) {
-		geek.Weight += 3
+		geek.Weight += 4
 	}
 	// 是否在大厂
 	for _, w := range geek.GeekCard.GeekWorks {
 		if isContains(goodCompany, w.Company) {
-			geek.Weight += 3
+			geek.Weight += 5
 			break
 		}
 	}
 	// 工作年限大于3年
-	str := strings.ReplaceAll(geek.GeekCard.GeekWorkYear, "年", "")
-	if years, err := strconv.Atoi(str); err == nil && years >= 3 {
-		geek.Weight += 2
+	workStr := strings.ReplaceAll(geek.GeekCard.GeekWorkYear, "年", "")
+	if years, err := strconv.Atoi(workStr); err == nil && years >= 3 {
+		geek.Weight += 3
 	}
-	// 在职-暂不考虑
-	if strings.Contains(geek.GeekCard.ApplyStatusDesc, "暂不考虑") {
-		geek.Weight += 1
+	// 年龄
+	ageStr := strings.ReplaceAll(geek.GeekCard.AgeDesc, "岁", "")
+	if age, err := strconv.Atoi(ageStr); err == nil && age >= 26 && age <= 35 {
+		geek.Weight += 3
 	}
 	// 在职-月内到岗
 	if strings.Contains(geek.GeekCard.ApplyStatusDesc, "月内到岗") {
-		geek.Weight += 2
+		geek.Weight += 3
 	}
 	// 离职-随时到岗
 	if strings.Contains(geek.GeekCard.ApplyStatusDesc, "离职") {
-		geek.Weight += 3
-	}
-	// 岗位匹配
-	expectPositionName := strings.ToLower(geek.GeekCard.ExpectPositionName)
-	jobName = strings.ToLower(jobName)
-	if strings.Contains(jobName, expectPositionName) || strings.Contains(expectPositionName, jobName) {
-		geek.Weight += 3
-	} else {
-		// 岗位不匹配
-		geek.Weight -= 2
+		geek.Weight += 4
 	}
 	// 今日活跃
 	if strings.Contains(geek.ActiveTimeDesc, "今日活跃") {
@@ -294,6 +290,28 @@ func selectGeek(geek *Geek, jobName string) bool {
 		geek.Weight += 3
 	}
 	return true
+}
+
+// 岗位是否匹配
+func matchJob(jobName string, geek *Geek) bool {
+	expectPositionName := strings.ToLower(geek.GeekCard.ExpectPositionName)
+	jobName = strings.ToLower(jobName)
+	// 期望职位是否匹配
+	if strings.Contains(jobName, expectPositionName) || strings.Contains(expectPositionName, jobName) {
+		return true
+	}
+	// 个人描述里面是否有该岗位
+	if strings.Contains(geek.GeekCard.GeekDesc.Content, jobName) {
+		return true
+	}
+	// 历史工作里面是否有该岗位
+	for _, j := range geek.GeekCard.GeekWorks {
+		j.PositionName = strings.ToLower(j.PositionName)
+		if strings.Contains(j.PositionName, jobName) || strings.Contains(jobName, j.PositionName) {
+			return true
+		}
+	}
+	return false
 }
 
 func isContains(arrs []string, arr string) bool {
