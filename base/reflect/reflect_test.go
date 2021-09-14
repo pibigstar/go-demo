@@ -97,3 +97,43 @@ func TestGetTag(t *testing.T) {
 		fmt.Println(f.Tag.Get("json"))
 	}
 }
+
+// 处理不定数量的chan
+func TestChan(t *testing.T) {
+	ch1 := make(chan string, 10)
+	ch2 := make(chan string, 10)
+	ch3 := make(chan string, 10)
+	cases := createCases(ch1, ch2, ch3)
+
+	// 进行10次select
+	for i := 0; i < 10; i++ {
+		// 从cases里随机选择一个可用case
+		chosen, recv, ok := reflect.Select(cases)
+		// 是否是接收
+		if recv.IsValid() && ok {
+			t.Log("recv:", recv)
+		} else {
+			t.Log("send:", cases[chosen].Send)
+		}
+	}
+}
+
+func createCases(chs ...chan string) []reflect.SelectCase {
+	var cases []reflect.SelectCase
+	// create receiver case
+	for _, ch := range chs {
+		cases = append(cases, reflect.SelectCase{
+			Dir:  reflect.SelectRecv,
+			Chan: reflect.ValueOf(ch),
+		})
+	}
+	// create send case
+	for i, ch := range chs {
+		cases = append(cases, reflect.SelectCase{
+			Dir:  reflect.SelectSend,
+			Chan: reflect.ValueOf(ch),
+			Send: reflect.ValueOf(fmt.Sprintf("Hello: %d", i)), // 发送的send值
+		})
+	}
+	return cases
+}

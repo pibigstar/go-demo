@@ -11,6 +11,7 @@
 - [encode](encode): 中文编码与解码
 - [env](env): 当前环境判断
 - [gops](gops): 获取服务器CPU内存使用情况
+- [govaluate](govaluate): 表达式
 - [hystrix](hystrix): 熔断
 - [i18n](i18n): i18n使用
 - [image](images): 图片常用操作

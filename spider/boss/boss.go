@@ -36,9 +36,14 @@ var (
 	jobIds = make(map[string]string) // 工作Id
 	talked sync.Map                  // 已经沟通过的人
 
-	maxLimit  = errors.New("今日沟通已达上限")
-	notFriend = errors.New("好友关系校验失败")
-	notLogin  = errors.New("当前登录状态已失效")
+	client = http.Client{
+		Timeout: 5 * time.Second,
+	}
+
+	maxLimit       = errors.New("今日沟通已达上限")
+	notFriend      = errors.New("好友关系校验失败")
+	notLogin       = errors.New("当前登录状态已失效")
+	accountUnusual = errors.New("账号异常")
 
 	school985   []string
 	school211   []string
@@ -146,15 +151,15 @@ func inputJobs() {
 // 招人
 func Hiring(jobId, jobName string) {
 	var (
-		// 3分钟候选人选择
-		ctx, _     = context.WithTimeout(context.Background(), time.Minute*3)
-		t          = time.NewTicker(10 * time.Second) // 10秒一次，防止被反爬
+		// 10分钟候选人选择
+		ctx, _     = context.WithTimeout(context.Background(), time.Minute*10)
+		t          = time.NewTicker(30 * time.Second) // 30秒一次，防止被反爬
 		geeksQueue []*Geek
 	)
 	for {
 		select {
 		case <-t.C:
-			// 5秒取一次候选人列表
+			// 30秒取一次候选人列表
 			geeks := searchGeekByJobId(jobId, jobName)
 			geeksQueue = append(geeksQueue, geeks...)
 
@@ -215,6 +220,9 @@ func searchGeekByJobId(jobId, jobName string) []*Geek {
 			//sendEmail()
 			panic(err)
 		}
+	}
+	if len(geekList) == 0 {
+		panic(accountUnusual)
 	}
 	for _, geek := range geekList {
 		log.Printf("候选人: %s  期待职位：%s \n", geek.GeekCard.GeekName, geek.GeekCard.ExpectPositionName)
@@ -294,9 +302,9 @@ func selectGeek(geek *Geek, jobName string) bool {
 
 // 岗位是否匹配
 func matchJob(jobName string, geek *Geek) bool {
-	expectPositionName := strings.ToLower(geek.GeekCard.ExpectPositionName)
 	jobName = strings.ToLower(jobName)
-	// 期望职位是否匹配
+	expectPositionName := strings.ToLower(geek.GeekCard.ExpectPositionName)
+	// 期望职位是否匹配（todo: 这个不准）
 	if strings.Contains(jobName, expectPositionName) || strings.Contains(expectPositionName, jobName) {
 		return true
 	}
@@ -437,7 +445,7 @@ func listRecommend(jobId string) ([]*Geek, error) {
 	req, _ := http.NewRequest(http.MethodGet, uri, nil)
 	addHeader(req)
 
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := client.Do(req)
 	if err != nil {
 		log.Println("ListRecommend request", err.Error())
 		return nil, err
