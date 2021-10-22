@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+func TestMain(m *testing.M) {
+	m.Run()
+}
+
 // 测试招人
 func TestHiring(t *testing.T) {
 	for jobId, jobName := range jobIds {
@@ -70,4 +74,8 @@ func TestListJob(t *testing.T) {
 
 func TestInputJobs(t *testing.T) {
 	inputJobs()
+}
+
+func TestSendFeiShu(t *testing.T) {
+	sendFeiShu("Boss当前登录登录状态失效")
 }

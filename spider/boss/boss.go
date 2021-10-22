@@ -33,8 +33,9 @@ const (
 )
 
 var (
-	jobIds = make(map[string]string) // 工作Id
-	talked sync.Map                  // 已经沟通过的人
+	jobIds  = make(map[string]string) // 工作Id
+	talked  sync.Map                  // 已经沟通过的人
+	logFile *os.File
 
 	client = http.Client{
 		Timeout: 5 * time.Second,
@@ -57,11 +58,11 @@ var (
 	companyFile   = "company.txt"
 	bossLog       = "boss.log"
 
-	//logFile, _ = os.OpenFile(bossLog, os.O_RDWR|os.O_CREATE, 0664)
+	//log = logs.New(logFile, "", logs.Ldate|logs.Ltime)
 	log = logs.New(os.Stdout, "", logs.Ldate|logs.Ltime)
 )
 
-func init() {
+func initBoss() {
 	// 设置当前运行目录
 	setFilePath()
 	// 读取cookie信息
@@ -79,6 +80,9 @@ func init() {
 }
 
 func main() {
+
+	initBoss()
+
 	if len(jobIds) == 0 {
 		inputJobs()
 	}
@@ -151,17 +155,32 @@ func inputJobs() {
 // 招人
 func Hiring(jobId, jobName string) {
 	var (
+		// 10秒一次，防止被反爬
+		t = time.NewTicker(10 * time.Second)
 		// 10分钟候选人选择
-		ctx, _     = context.WithTimeout(context.Background(), time.Minute*10)
-		t          = time.NewTicker(30 * time.Second) // 30秒一次，防止被反爬
-		geeksQueue []*Geek
+		ctx, cancel = context.WithTimeout(context.Background(), time.Minute*3)
+		geeksQueue  []*Geek
 	)
+	defer cancel()
+
 	for {
 		select {
 		case <-t.C:
-			// 30秒取一次候选人列表
-			geeks := searchGeekByJobId(jobId, jobName)
+			geeks, err := searchGeekByJobId(jobId, jobName)
+			if err != nil {
+				if err == notLogin {
+					sendFeiShu("Boss当前登录状态失效")
+				}
+				// 通知可以去打招呼了
+				cancel()
+				t.Stop()
+			}
 			geeksQueue = append(geeksQueue, geeks...)
+			// 有10个候选人就没必要继续跑了
+			if len(geeksQueue) == 10 {
+				cancel()
+				t.Stop()
+			}
 
 		case <-ctx.Done():
 			// 打招呼并请求简历
@@ -176,24 +195,34 @@ func helloAndRequestResumes(jobId string, geeksQueue []*Geek) {
 	// 按权重排序
 	sort.Sort(SortGeek(geeksQueue))
 	var wg sync.WaitGroup
+	// 进行一小时的请求简历
+	rrCtx, cancel := context.WithTimeout(context.Background(), time.Hour)
+	defer cancel()
+
 	for _, l := range geeksQueue {
 		if _, ok := talked.Load(l.GeekCard.GeekID); ok {
 			continue
 		}
-		log.Printf("正在与: %s 打招呼, 分值: %d\n", l.GeekCard.GeekName, l.Weight)
 		err := hello(jobId, l.GeekCard.EncryptGeekID, l.GeekCard.Lid, l.GeekCard.SecurityID, l.GeekCard.ExpectID)
-		if err == maxLimit {
-			log.Println("今日已达上限")
-			break
+		if err != nil {
+			if err == maxLimit {
+				log.Println("今日已达上限")
+				break
+			}
+			log.Printf("打招呼失败，候选人: %s, 分值: %d err: %s\n", l.GeekCard.GeekName, l.Weight, err.Error())
+			continue
 		}
-		// 标记
-		talked.Store(l.GeekCard.GeekID, "")
+
+		log.Printf("正在与: %s 打招呼, 分值: %d\n", l.GeekCard.GeekName, l.Weight)
+
+		// 标记已经打过招呼了
+		talked.Store(l.GeekCard.GeekID, 1)
 
 		// 轮询向牛人直接请求简历直到对方回复我们建立好友关系
 		wg.Add(1)
 		go func(name, securityId string) {
 			defer wg.Done()
-			t := time.NewTicker(time.Minute * 3)
+			t := time.NewTicker(time.Minute * 5)
 			for {
 				select {
 				case <-t.C:
@@ -202,36 +231,51 @@ func helloAndRequestResumes(jobId string, geeksQueue []*Geek) {
 						t.Stop()
 						return
 					}
+				case <-rrCtx.Done():
+					t.Stop()
+					return
 				}
 			}
 		}(l.GeekCard.GeekName, l.GeekCard.SecurityID)
 
-		time.Sleep(30 * time.Second) // 睡30秒，防止被反爬
+		time.Sleep(5 * time.Second)
 	}
 
 	wg.Wait()
+
+	log.Println("====本次招聘任务结束====")
 }
 
-func searchGeekByJobId(jobId, jobName string) []*Geek {
+func searchGeekByJobId(jobId, jobName string) ([]*Geek, error) {
 	var geeks []*Geek
 	geekList, err := listRecommend(jobId)
 	if err != nil {
-		if err == notLogin {
-			//sendEmail()
-			panic(err)
-		}
+		return nil, err
 	}
 	if len(geekList) == 0 {
-		panic(accountUnusual)
+		sendFeiShu("Boss当前需要重新验证")
+		return nil, accountUnusual
 	}
+
 	for _, geek := range geekList {
 		log.Printf("候选人: %s  期待职位：%s \n", geek.GeekCard.GeekName, geek.GeekCard.ExpectPositionName)
 		if selectGeek(geek, jobName) {
+			// 分高的直接去打招呼，防止中途被反爬导致程序提前退出
+			if geek.Weight >= 15 {
+				go func(geek *Geek) {
+					err := hello(jobId, geek.GeekCard.EncryptGeekID, geek.GeekCard.Lid, geek.GeekCard.SecurityID, geek.GeekCard.ExpectID)
+					if err != nil {
+						log.Printf("候选人: %s打招呼失败, 分值: %d\n", geek.GeekCard.GeekName, geek.Weight)
+					}
+				}(geek)
+				continue
+			}
+			// 分值低于 15 的才需要进行比较
 			log.Printf("候选人: %s  进入队列, 分值: %d\n", geek.GeekCard.GeekName, geek.Weight)
 			geeks = append(geeks, geek)
 		}
 	}
-	return geeks
+	return geeks, nil
 }
 
 // 筛选并打分
@@ -279,23 +323,23 @@ func selectGeek(geek *Geek, jobName string) bool {
 	// 年龄
 	ageStr := strings.ReplaceAll(geek.GeekCard.AgeDesc, "岁", "")
 	if age, err := strconv.Atoi(ageStr); err == nil && age >= 26 && age <= 35 {
-		geek.Weight += 3
+		geek.Weight += 2
 	}
 	// 在职-月内到岗
 	if strings.Contains(geek.GeekCard.ApplyStatusDesc, "月内到岗") {
-		geek.Weight += 3
+		geek.Weight += 2
 	}
 	// 离职-随时到岗
 	if strings.Contains(geek.GeekCard.ApplyStatusDesc, "离职") {
-		geek.Weight += 4
+		geek.Weight += 3
 	}
 	// 今日活跃
 	if strings.Contains(geek.ActiveTimeDesc, "今日活跃") {
-		geek.Weight += 2
+		geek.Weight += 1
 	}
 	// 刚刚活跃
 	if strings.Contains(geek.ActiveTimeDesc, "刚刚活跃") {
-		geek.Weight += 3
+		geek.Weight += 2
 	}
 	return true
 }
@@ -452,7 +496,7 @@ func listRecommend(jobId string) ([]*Geek, error) {
 	}
 	defer resp.Body.Close()
 	bs, _ := ioutil.ReadAll(resp.Body)
-	if strings.Contains(string(bs), "当前登录状态已失效") {
+	if strings.Contains(string(bs), "登录状态已失效") {
 		return nil, notLogin
 	}
 	var temp *GeekListResp
@@ -644,7 +688,7 @@ func setHelloMsg() {
 func sendEmail() {
 	var (
 		username = "741047261@qq.com"
-		password = "kekfghkotuhpbeda"
+		password = ""
 		host     = "smtp.qq.com"
 		addr     = "smtp.qq.com:25"
 	)
@@ -782,5 +826,21 @@ func setFilePath() {
 	school211File = filepath.Join(basePath, school211File)
 	jobsFile = filepath.Join(basePath, jobsFile)
 	companyFile = filepath.Join(basePath, companyFile)
-	bossLog = filepath.Join(basePath, bossLog)
+	logFile, _ = os.OpenFile(filepath.Join(basePath, bossLog), os.O_RDWR|os.O_CREATE, 0664)
+}
+
+func sendFeiShu(msg string) {
+	uri := "https://open.feishu.cn/open-apis/bot/v2/hook/9b46f934-2e77-499e-81e8-af02b4b27cde"
+	text := fmt.Sprintf(`
+	{
+		"msg_type": "text",
+		"content": {
+			"text": "%s"
+		}
+	}`, msg)
+
+	_, err := http.Post(uri, "application/json", strings.NewReader(text))
+	if err != nil {
+		log.Println("发送飞书提醒失败, msg:", msg)
+	}
 }
