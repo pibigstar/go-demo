@@ -3,12 +3,13 @@ package elastic
 import (
 	"context"
 	"fmt"
+	"github.com/olivere/elastic"
 	"log"
 	"net/http"
 	"os"
 	"time"
 
-	"github.com/olivere/elastic"
+	"github.com/olivere/elastic/v7"
 )
 
 var client *esClient
@@ -63,6 +64,7 @@ func init() {
 }
 
 // insert a document to the index
+// test http://ip/index
 func (client *esClient) Insert(index string, value interface{}) (*elastic.IndexResponse, error) {
 	// access by the http://localhost:9700/pibigstar/employee/id
 	response, err := client.Index().
