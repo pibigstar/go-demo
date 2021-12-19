@@ -10,13 +10,13 @@ import (
 // 任何指针都可以转换为unsafe.Pointer
 // unsafe.Pointer可以转换为任何指针
 func TestPointer(t *testing.T) {
-	i := 10
-	ip := &i
+	i := 10  // 声明一个地址和数据
+	ip := &i // 取得这个数据的地址
 	// 将 *int 转为 *float64
-	var fp = (*float64)(unsafe.Pointer(ip))
-
-	*fp = *fp * 3
-	t.Log(i)
+	var fp = (*float64)(unsafe.Pointer(ip)) // 把地址值给fp
+	t.Logf("%p", &i)
+	*fp = *fp * 3    // 把地址值的数据乘以3
+	t.Logf("%p", fp) // float64
 }
 
 // uintptr可以转换为unsafe.Pointer

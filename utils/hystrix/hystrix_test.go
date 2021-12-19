@@ -10,7 +10,7 @@ import (
 
 func TestHystrix(t *testing.T) {
 	hystrix.ConfigureCommand("test", hystrix.CommandConfig{
-		MaxConcurrentRequests:  1,    // 最大并发量
+		MaxConcurrentRequests:  10,   // 最大并发量
 		Timeout:                3000, // 单次请求超时时间，如果超过3s将认为服务不可用
 		RequestVolumeThreshold: 1,    // 10秒内如果出现1次错误就触发熔断
 		ErrorPercentThreshold:  1,    // 按百分比，如果出现1%的错误就触发熔断

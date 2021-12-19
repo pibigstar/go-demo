@@ -45,9 +45,12 @@ func TestTimeParse(t *testing.T) {
 }
 
 func TestTimeFirstAndLast(t *testing.T) {
-	now := time.Now()
-	t.Log(FirstMonth(now))
-	t.Log(FirstMonthUnix(now))
-	t.Log(LastMonth(now))
-	t.Log(LastMonthUnix(now))
+	st, err := ParseTime("2020-09-10 15:22:00")
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(FirstMonth(st))
+	t.Log(FirstMonthUnix(st))
+	t.Log(LastMonth(st))
+	t.Log(LastMonthUnix(st))
 }
