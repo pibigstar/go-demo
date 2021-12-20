@@ -22,7 +22,6 @@ int SayHello(blob* pblob) {
     return 0;
 }
 */
-
 import "C"
 import (
 	"fmt"

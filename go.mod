@@ -18,6 +18,7 @@ require (
 	github.com/antchfx/xpath v1.1.8 // indirect
 	github.com/astaxie/beego v1.12.0 // indirect
 	github.com/axgle/mahonia v0.0.0-20180208002826-3358181d7394
+	github.com/charmbracelet/lipgloss v0.1.1
 	github.com/codahale/hdrhistogram v0.0.0-20161010025455-3a0bb77429bd // indirect
 	github.com/coreos/etcd v3.3.18+incompatible
 	github.com/coreos/go-systemd v0.0.0-20191104093116-d3cd4ed1dbcf // indirect
@@ -37,6 +38,7 @@ require (
 	github.com/gocolly/colly v1.2.0
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
+	github.com/golang-module/carbon v1.3.7 // indirect
 	github.com/golang/mock v1.3.1
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/go-cmp v0.4.0
@@ -83,6 +85,7 @@ require (
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
 	github.com/smartwalle/alipay/v3 v3.0.9
+	github.com/smartystreets/goconvey v1.6.4
 	github.com/soheilhy/cmux v0.1.4
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
@@ -90,7 +93,6 @@ require (
 	github.com/uber/jaeger-client-go v2.23.1+incompatible
 	github.com/uber/jaeger-lib v2.2.0+incompatible // indirect
 	github.com/unidoc/unioffice v1.2.0
-	github.com/varstr/uaparser v0.0.0-20170929040706-6aabb7c4e98c
 	github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c // indirect
 	github.com/xdg/stringprep v1.0.0 // indirect
 	github.com/xuri/excelize v1.4.0
@@ -103,7 +105,6 @@ require (
 	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
-	golang.org/x/sys v0.0.0-20200515095857-1151b9dac4a9 // indirect
 	golang.org/x/text v0.3.2
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
 	google.golang.org/appengine v1.6.6 // indirect
