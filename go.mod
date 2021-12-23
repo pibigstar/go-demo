@@ -30,6 +30,7 @@ require (
 	github.com/fatih/camelcase v1.0.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-ldap/ldap v3.0.2+incompatible
 	github.com/go-redis/redis v6.15.6+incompatible
 	github.com/go-session/session v3.1.2+incompatible
 	github.com/go-sql-driver/mysql v1.5.0 // indirect
@@ -38,10 +39,8 @@ require (
 	github.com/gocolly/colly v1.2.0
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
 	github.com/goinggo/mapstructure v0.0.0-20140717182941-194205d9b4a9
-	github.com/golang-module/carbon v1.3.7 // indirect
 	github.com/golang/mock v1.3.1
-	github.com/golang/protobuf v1.4.2 // indirect
-	github.com/google/go-cmp v0.4.0
+	github.com/google/go-cmp v0.5.6
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/mux v1.6.2
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
@@ -68,11 +67,12 @@ require (
 	github.com/nicksnyder/go-i18n/v2 v2.0.3
 	github.com/nsqio/go-nsq v1.0.7
 	github.com/olivere/elastic v6.2.18+incompatible
-	github.com/opentracing/opentracing-go v1.1.0
+	github.com/olivere/elastic/v7 v7.0.30
+	github.com/opentracing/opentracing-go v1.2.0
 	github.com/panjf2000/ants/v2 v2.3.1
 	github.com/pibigstar/go-sdk v0.0.0-20190727082016-c4f5d238d8f5
 	github.com/pierrec/lz4 v2.0.7+incompatible // indirect
-	github.com/pkg/errors v0.8.1
+	github.com/pkg/errors v0.9.1
 	github.com/qianlnk/pgbar v0.0.0-20190929032005-46c23acad4ed
 	github.com/qianlnk/to v0.0.0-20191230085244-91e712717368 // indirect
 	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac
@@ -85,7 +85,6 @@ require (
 	github.com/skip2/go-qrcode v0.0.0-20190110000554-dc11ecdae0a9
 	github.com/smallnest/rpcx v0.0.0-20170601021420-329cf0078113
 	github.com/smartwalle/alipay/v3 v3.0.9
-	github.com/smartystreets/goconvey v1.6.4
 	github.com/soheilhy/cmux v0.1.4
 	github.com/sony/sonyflake v1.0.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
@@ -101,16 +100,16 @@ require (
 	go.mongodb.org/mongo-driver v1.2.0
 	go.uber.org/ratelimit v0.1.0
 	go.uber.org/zap v1.13.0 // indirect
-	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d
-	golang.org/x/net v0.0.0-20200602114024-627f9648deb9
+	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
+	golang.org/x/net v0.0.0-20211209124913-491a49abca63
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
-	golang.org/x/text v0.3.2
+	golang.org/x/text v0.3.6
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
 	google.golang.org/appengine v1.6.6 // indirect
-	google.golang.org/grpc v1.27.0
+	google.golang.org/grpc v1.33.2
 	google.golang.org/protobuf v1.24.0 // indirect
-	gopkg.in/Knetic/govaluate.v3 v3.0.0 // indirect
+	gopkg.in/Knetic/govaluate.v3 v3.0.0
 	gopkg.in/go-oauth2/redis.v3 v3.2.1
 	gopkg.in/go-playground/pool.v3 v3.1.1
 	gopkg.in/oauth2.v3 v3.12.0
@@ -118,3 +117,5 @@ require (
 	gopkg.in/yaml.v2 v2.2.8
 	sigs.k8s.io/yaml v1.1.0 // indirect
 )
+
+replace google.golang.org/grpc => google.golang.org/grpc v1.26.0
