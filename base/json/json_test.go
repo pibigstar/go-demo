@@ -1,18 +1,25 @@
 package json
 
 import (
+	"encoding/json"
+	"strings"
 	"testing"
 )
 
+type Info struct {
+	Age     int    `json:"age"`
+	Address string `json:"address"`
+}
+
 type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	Info `json:",inline"` // 嵌套，该tag可不加，默认就是
+	ID   string           `json:"id"`
+	Name string           `json:"name,omitempty"`
 }
 
 var (
 	strJSON string
 	user    *User
-	m       map[string]interface{}
 )
 
 func init() {
@@ -20,8 +27,25 @@ func init() {
 		ID:   "1",
 		Name: "pibigstar",
 	}
-	m = make(map[string]interface{})
 	strJSON = `{"id":"1","name":"pibigstar"}`
+}
+
+func TestJson(t *testing.T) {
+	user = &User{
+		ID: "1",
+	}
+	bs, _ := json.Marshal(user)
+	if strings.Contains(string(bs), "name") {
+		t.Error("have name")
+	}
+	str := `{"id":"1","age":18}`
+	err := json.Unmarshal([]byte(str), &user)
+	if err != nil {
+		t.Error(err)
+	}
+	if user.Age != 18 {
+		t.Error("age show get 18")
+	}
 }
 
 func TestStructToJson(t *testing.T) {
