@@ -28,6 +28,27 @@ func TestReserve(t *testing.T) {
 	}
 }
 
+// 单链表反转-递归
+func TestReserve2(t *testing.T) {
+	head := getHead()
+	newNode := reverse2(head)
+
+	for newNode != nil {
+		t.Log(newNode.Val)
+		newNode = newNode.Next
+	}
+}
+
+// 单链表反转前N个节点-递归
+func TestReserveN(t *testing.T) {
+	head := getHead()
+	newNode := reverseN(head, 3)
+	for newNode != nil {
+		t.Log(newNode.Val)
+		newNode = newNode.Next
+	}
+}
+
 // 链表倒数第k个节点
 func TestFindFromEnd(t *testing.T) {
 	head := getHead()

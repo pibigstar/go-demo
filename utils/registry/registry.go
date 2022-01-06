@@ -10,7 +10,7 @@ import (
 // 操作注册表
 func main() {
 	// 创建：指定路径的项
-	// 路径：HKEY_CURRENT_USER\Software\Hello Go
+	// 路径：HKEY_CURRENT_USER\Software\Test
 	key, exists, _ := registry.CreateKey(registry.CURRENT_USER, `SOFTWARE\Test`, registry.ALL_ACCESS)
 	defer func() {
 		_ = key.Close()

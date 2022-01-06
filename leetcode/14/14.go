@@ -2,36 +2,14 @@ package main
 
 import (
 	"fmt"
+	"go-demo/leetcode/common/tree"
 	"math"
 )
-
-type TreeNode struct {
-	Val   int
-	Depth int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
-func NewTreeNode(val int, left *TreeNode, right *TreeNode) *TreeNode {
-	return &TreeNode{
-		Val:   val,
-		Left:  left,
-		Right: right,
-	}
-}
 
 // 二叉树最小深度
 
 func main() {
-	node8 := NewTreeNode(8, nil, nil)
-	node7 := NewTreeNode(7, nil, nil)
-	node6 := NewTreeNode(6, node7, nil)
-	node5 := NewTreeNode(5, nil, nil)
-	node4 := NewTreeNode(4, node8, nil)
-	node3 := NewTreeNode(3, node6, nil)
-	node2 := NewTreeNode(2, node4, node5)
-	node1 := NewTreeNode(1, node2, node3)
-
+	node1 := tree.GetTree()
 	// 深度优先
 	fmt.Println(minDepth(node1))
 	// 广度优先
@@ -40,7 +18,7 @@ func main() {
 
 // 深度优先
 // 把叶子节点标记为1，从下往上找
-func minDepth(root *TreeNode) int {
+func minDepth(root *tree.TreeNode) int {
 	if root == nil {
 		return 0
 	}
@@ -73,13 +51,13 @@ func minDepth(root *TreeNode) int {
 // 广度优先
 // 把root节点标记为1，逐次遍历每层节点
 // 维护一个先进先出的队列
-func minDepth2(root *TreeNode) int {
+func minDepth2(root *tree.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 
 	// 维护一个先进先出的队列
-	var queue []*TreeNode
+	var queue []*tree.TreeNode
 	root.Depth = 1
 	queue = append(queue, root)
 	for {

@@ -33,6 +33,34 @@ func reverse(head *Node) *Node {
 	return prev
 }
 
+// 链表反转-递归版
+func reverse2(head *Node) *Node {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	last := reverse2(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return last
+}
+
+// 后驱节点
+// 记录反转之前最后一个节点的后一个节点
+// 帮助把反转之后的前N个节点能续上后续节点
+var successor *Node
+
+// 反转链表前N个节点-递归版
+func reverseN(head *Node, n int) *Node {
+	if n == 1 {
+		successor = head.Next
+		return head
+	}
+	last := reverseN(head.Next, n-1)
+	head.Next.Next = head
+	head.Next = successor
+	return last
+}
+
 // 链表倒数第k个节点
 func findFromEnd(head *Node, k int) *Node {
 	p1 := head
