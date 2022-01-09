@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"syscall"
 )
 
 // 使用ioutil读取文件
@@ -36,9 +37,11 @@ func WriteFile(fileName, data string) {
 // 追加内容到文件末尾
 func AppendToFile(fileName, data string) {
 	file, err := os.OpenFile(fileName, os.O_WRONLY|os.O_APPEND, os.ModePerm)
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 	check(err)
-	file.Write([]byte("data"))
+	_, _ = file.Write([]byte(data))
 }
 
 // 创建文件并返回文件指针
@@ -46,7 +49,9 @@ func CreateFile(fileName string) {
 	// 如果源文件已存在，会清空该文件的内容
 	// 如果多级目录，某一个目录不存在，则会返回PathError
 	file, err := os.Create(fileName)
-	defer file.Close()
+	defer func() {
+		_ = file.Close()
+	}()
 	check(err)
 }
 
@@ -54,7 +59,7 @@ func CreateFile(fileName string) {
 func MkOneDir(dir string) {
 	err := os.Mkdir(dir, os.ModePerm)
 	check(err)
-	os.RemoveAll(dir)
+	_ = os.RemoveAll(dir)
 }
 
 // 创建多层文件夹
@@ -63,7 +68,7 @@ func MkAllDir(dirs string) {
 	if !IsExist(dirs) {
 		err := os.MkdirAll(dirs, os.ModePerm)
 		check(err)
-		os.RemoveAll(strings.Split(dirs, "/")[0])
+		_ = os.RemoveAll(strings.Split(dirs, "/")[0])
 	}
 }
 
@@ -91,9 +96,22 @@ func IsExist(filePath string) bool {
 }
 
 // 返回该文件的绝对路径
-func FileAbs(path string) string {
+func GetFileAbs(path string) string {
 	if absPath, err := filepath.Abs(path); err == nil {
 		return absPath
 	}
 	return ""
+}
+
+// 获取文件inode号
+func Inode(fileName string) uint64 {
+	fileInfo, err := os.Stat(fileName)
+	if os.IsNotExist(err) {
+		return 0
+	}
+	stat, ok := fileInfo.Sys().(*syscall.Stat_t)
+	if !ok {
+		return 0
+	}
+	return stat.Ino
 }

@@ -44,5 +44,17 @@ func TestDeleteFile(t *testing.T) {
 }
 
 func TestFileAbs(t *testing.T) {
-	t.Log(FileAbs("file"))
+	t.Log(GetFileAbs("file_demo.go"))
+}
+
+func TestInode(t *testing.T) {
+	t.Log(Inode("file_demo.go"))
+}
+
+func TestCopy(t *testing.T) {
+	fileMd5, err := GetFileMd5("file_demo.go")
+	if err != nil {
+		t.Error(err)
+	}
+	t.Log(fileMd5)
 }
