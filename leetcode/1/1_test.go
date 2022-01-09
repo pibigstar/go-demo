@@ -13,6 +13,15 @@ func getHead() *Node {
 	return node1
 }
 
+// 1 -> 2 -> 2 -> 1 -> nil
+func getPalindromes() *Node {
+	node4 := NewNode(1, nil)
+	node3 := NewNode(2, node4)
+	node2 := NewNode(2, node3)
+	node1 := NewNode(1, node2)
+	return node1
+}
+
 func TestMain(m *testing.M) {
 	m.Run()
 }
@@ -61,4 +70,13 @@ func TestMiddleNode(t *testing.T) {
 	head := getHead()
 	node := middleNode(head)
 	t.Log(node.Val)
+}
+
+// 链表是否是回文
+func TestPalindromes(t *testing.T) {
+	t.Log(palindromes(getHead()))
+	t.Log(palindromes(getPalindromes()))
+
+	t.Log(isPalindromes(getHead()))
+	t.Log(isPalindromes(getPalindromes()))
 }

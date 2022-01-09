@@ -93,3 +93,40 @@ func middleNode(head *Node) *Node {
 	}
 	return p2
 }
+
+// 判断链表是否是回文链表
+func palindromes(head *Node) bool {
+	// 因为链表没法从后往前遍历，所以我们可以先将链表反转一下
+	last := reverse(head)
+
+	for head != nil {
+		if head.Val != last.Val {
+			return false
+		}
+		head = head.Next
+		last = last.Next
+	}
+	return true
+}
+
+// 判断链表是否是回文链表
+// 后续遍历法，树本质就是一个特殊的链表罢了
+var left *Node
+
+func isPalindromes(head *Node) bool {
+	temp := *head
+	left = &temp
+	return palindromes2(head)
+}
+
+func palindromes2(right *Node) bool {
+	if right == nil {
+		return true
+	}
+	// 将节点入栈
+	b := palindromes2(right.Next)
+	// 出栈时左右进行比较
+	b = b && right.Val == left.Val
+	left = left.Next
+	return b
+}
