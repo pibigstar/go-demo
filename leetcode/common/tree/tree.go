@@ -26,3 +26,14 @@ func GetTree() *TreeNode {
 	node1 := NewTreeNode(1, node2, node3)
 	return node1
 }
+
+func GetHaveDuplicateTree() *TreeNode {
+	node444 := NewTreeNode(4, nil, nil)
+	node44 := NewTreeNode(4, nil, nil)
+	node22 := NewTreeNode(2, node44, nil)
+	node4 := NewTreeNode(4, nil, nil)
+	node3 := NewTreeNode(3, node22, node444)
+	node2 := NewTreeNode(2, node4, nil)
+	node1 := NewTreeNode(1, node2, node3)
+	return node1
+}
