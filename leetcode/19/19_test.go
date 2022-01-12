@@ -19,8 +19,30 @@ func TestFindDuplicateSubTree(t *testing.T) {
 // 翻转二叉树
 func TestInvertTree(t *testing.T) {
 	root := tree.GetTree()
-	t.Log(drawTree(root))
+	t.Log(drawTreeAfter(root))
 	// 翻转
 	root = invertTree(root)
-	t.Log(drawTree(root))
+	t.Log(drawTreeAfter(root))
+}
+
+// 构造最大二叉树
+func TestConstructMaximumBinaryTree(t *testing.T) {
+	root := constructMaximumBinaryTree([]int{3, 2, 1, 6, 2, 5})
+	t.Log(drawTreePreorder(root))
+}
+
+// 根据前序和中序遍历结果，构建二叉树
+func TestBuildTreeByPreAndInOrder(t *testing.T) {
+	preorder := []int{3, 9, 20, 15, 7}
+	inorder := []int{9, 3, 15, 20, 7}
+	root := buildTreeByPreAndInOrder(preorder, inorder, 0, len(preorder)-1, 0, len(inorder)-1)
+	t.Log(drawTreePreorder(root))
+}
+
+// 根据后序和中序遍历结果，构建二叉树
+func TestBuildTreeByAfterAndInOrder(t *testing.T) {
+	afterOrder := []int{9, 15, 7, 20, 3}
+	inorder := []int{9, 3, 15, 20, 7}
+	root := buildTreeByAfterAndInOrder(afterOrder, inorder, 0, len(afterOrder)-1, 0, len(inorder)-1)
+	t.Log(drawTreePreorder(root))
 }
