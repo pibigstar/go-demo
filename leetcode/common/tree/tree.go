@@ -40,13 +40,10 @@ func GetHaveDuplicateTree() *TreeNode {
 
 // 返回一个二叉搜索树
 func GetBstTree() *TreeNode {
-	node8 := NewTreeNode(8, nil, nil)
 	node7 := NewTreeNode(7, nil, nil)
-	node6 := NewTreeNode(6, node7, nil)
-	node5 := NewTreeNode(5, nil, nil)
-	node4 := NewTreeNode(4, node8, nil)
-	node3 := NewTreeNode(3, node6, nil)
-	node2 := NewTreeNode(2, node4, node5)
-	node1 := NewTreeNode(1, node2, node3)
-	return node1
+	node3 := NewTreeNode(3, nil, nil)
+	node1 := NewTreeNode(1, nil, nil)
+	node2 := NewTreeNode(2, node1, node3)
+	root := NewTreeNode(4, node2, node7)
+	return root
 }

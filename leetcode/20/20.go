@@ -25,3 +25,19 @@ func kthSmallest(root *tree.TreeNode, k int) {
 	}
 	kthSmallest(root.Right, k)
 }
+
+// 在 BST 中搜索元素
+func searchByBST(root *tree.TreeNode, target int) *tree.TreeNode {
+	if root == nil {
+		return nil
+	}
+	// 去左子树搜索
+	if root.Val > target {
+		return searchByBST(root.Left, target)
+	}
+	// 去右子树搜索
+	if root.Val < target {
+		return searchByBST(root.Right, target)
+	}
+	return root
+}
