@@ -88,7 +88,7 @@ func invertTree(root *tree.TreeNode) *tree.TreeNode {
 	return root
 }
 
-// 二叉树的最大 深度
+// 二叉树的最大深度
 // https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/
 func maxDepth(root *tree.TreeNode) int {
 	if root == nil {

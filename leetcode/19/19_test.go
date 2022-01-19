@@ -10,6 +10,11 @@ func TestCountNode(t *testing.T) {
 	t.Log(countNode(tree.GetTree()))
 }
 
+// 二叉树的最大深度
+func TestMaxDepth(t *testing.T) {
+	t.Log(maxDepth(tree.GetTree()))
+}
+
 // 寻找重复的子树（中等）
 func TestFindDuplicateSubTree(t *testing.T) {
 	findDuplicateSubTree(tree.GetHaveDuplicateTree())
