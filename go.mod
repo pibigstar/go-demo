@@ -87,6 +87,7 @@ require (
 	github.com/smartwalle/alipay/v3 v3.0.9
 	github.com/soheilhy/cmux v0.1.4
 	github.com/sony/sonyflake v1.0.0
+	github.com/spaolacci/murmur3 v1.1.0
 	github.com/streadway/amqp v0.0.0-20190404075320-75d898a42a94
 	github.com/temoto/robotstxt v1.1.1 // indirect
 	github.com/uber/jaeger-client-go v2.23.1+incompatible
@@ -104,7 +105,7 @@ require (
 	golang.org/x/net v0.0.0-20211209124913-491a49abca63
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
-	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
+	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e
 	golang.org/x/text v0.3.6
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4
 	google.golang.org/appengine v1.6.6 // indirect
