@@ -15,6 +15,11 @@ func TestMaxDepth(t *testing.T) {
 	t.Log(maxDepth(tree.GetTree()))
 }
 
+// 是否是平衡二叉树
+func TestIsBalance(t *testing.T) {
+	t.Log(isBalance(tree.GetBstTree()))
+}
+
 // 寻找重复的子树（中等）
 func TestFindDuplicateSubTree(t *testing.T) {
 	findDuplicateSubTree(tree.GetHaveDuplicateTree())

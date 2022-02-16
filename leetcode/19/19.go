@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go-demo/leetcode/common/tree"
+	"math"
 )
 
 // 统计树有多少个节点
@@ -203,4 +204,36 @@ func buildTreeByAfterAndInOrder(after []int, in []int, afterStar, afterEnd int, 
 	// 构建右子树
 	root.Right = buildTreeByAfterAndInOrder(after, in, afterLeftEnd, afterEnd-1, index+1, inEnd)
 	return root
+}
+
+// 是否是平衡二叉树
+// 它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。
+
+func isBalance(root *tree.TreeNode) bool {
+	return getDepth(root) != -1
+}
+
+func getDepth(root *tree.TreeNode) float64 {
+	if root == nil {
+		return 0
+	}
+
+	// 递归计算当前root左右子树的高度差
+	left := getDepth(root.Left)
+	// 当前节点左子树不平衡,则该树不平衡
+	// 相当于可行性剪枝，没必要遍历所有节点
+	if left < 0 {
+		return -1
+	}
+	right := getDepth(root.Right)
+	if right < 0 {
+		return -1
+	}
+	// 当它的左右两个子树的高度差的绝对值超过1时
+	// 那么它肯定不是平衡二叉树
+	if math.Abs(right-left) > 1 {
+		return -1
+	}
+	// 左右子树中高度较大的作为当前节点高度
+	return math.Max(left, right) + 1
 }
