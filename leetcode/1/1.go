@@ -16,19 +16,17 @@ func NewNode(val int, next *Node) *Node {
 
 // 链表反转
 func reverse(head *Node) *Node {
-	curr := head
 	var prev *Node
 	var next *Node
-
-	for curr != nil {
+	for head != nil {
 		// 保存当前节点的下一个节点
-		next = curr.Next
+		next = head.Next
 		// 反转当前节点
-		curr.Next = prev
+		head.Next = prev
 		// 将当前节点保存为prev
-		prev = curr
+		prev = head
 		// 进行下一节点设置
-		curr = next
+		head = next
 	}
 	return prev
 }
