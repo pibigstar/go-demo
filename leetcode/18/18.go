@@ -46,3 +46,21 @@ func AfterOderByRecursion(root *tree.TreeNode) {
 	AfterOderByRecursion(root.Right) // 将右节点入栈
 	fmt.Println(root.Val)            // 后序：第三次在栈顶时就打印
 }
+
+var dfsList map[int][]int
+
+func printDFS(root *tree.TreeNode) map[int][]int {
+	dfsList = make(map[int][]int)
+	dfs(root, 0)
+	return dfsList
+}
+
+// 层序遍历
+func dfs(root *tree.TreeNode, level int) {
+	if root == nil {
+		return
+	}
+	dfsList[level] = append(dfsList[level], root.Val)
+	dfs(root.Left, level+1)
+	dfs(root.Right, level+1)
+}

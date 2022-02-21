@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"go-demo/leetcode/common/tree"
 	"testing"
 )
@@ -21,4 +22,16 @@ func TestInorderByRecursion(t *testing.T) {
 func TestAfterOderByRecursion(t *testing.T) {
 	root := tree.GetTree()
 	AfterOderByRecursion(root)
+}
+
+func TestPrintDFS(t *testing.T) {
+	list := printDFS(tree.GetTree())
+	for i := 0; i < len(list); i++ {
+		vs := list[i]
+		fmt.Printf("第%d层 \n", i)
+		for _, v := range vs {
+			fmt.Printf("%d,", v)
+		}
+		fmt.Println()
+	}
 }
