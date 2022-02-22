@@ -1,23 +1,11 @@
 package main
 
-// 单链表相关
-
-type Node struct {
-	Val  int
-	Next *Node
-}
-
-func NewNode(val int, next *Node) *Node {
-	return &Node{
-		Val:  val,
-		Next: next,
-	}
-}
+import "go-demo/leetcode/common/list"
 
 // 链表反转
-func reverse(head *Node) *Node {
-	var prev *Node
-	var next *Node
+func reverse(head *list.Node) *list.Node {
+	var prev *list.Node
+	var next *list.Node
 	for head != nil {
 		// 保存当前节点的下一个节点
 		next = head.Next
@@ -32,7 +20,7 @@ func reverse(head *Node) *Node {
 }
 
 // 链表反转-递归版
-func reverse2(head *Node) *Node {
+func reverse2(head *list.Node) *list.Node {
 	if head == nil || head.Next == nil {
 		return head
 	}
@@ -45,10 +33,10 @@ func reverse2(head *Node) *Node {
 // 后驱节点
 // 记录反转之前最后一个节点的后一个节点
 // 帮助把反转之后的前N个节点能续上后续节点
-var successor *Node
+var successor *list.Node
 
 // 反转链表前N个节点-递归版
-func reverseN(head *Node, n int) *Node {
+func reverseN(head *list.Node, n int) *list.Node {
 	if n == 1 {
 		successor = head.Next
 		return head
@@ -60,7 +48,7 @@ func reverseN(head *Node, n int) *Node {
 }
 
 // 链表倒数第k个节点
-func findFromEnd(head *Node, k int) *Node {
+func findFromEnd(head *list.Node, k int) *list.Node {
 	p1 := head
 	p2 := head
 
@@ -79,7 +67,7 @@ func findFromEnd(head *Node, k int) *Node {
 }
 
 // 单链表中点
-func middleNode(head *Node) *Node {
+func middleNode(head *list.Node) *list.Node {
 	p1 := head
 	p2 := head
 
@@ -93,7 +81,7 @@ func middleNode(head *Node) *Node {
 }
 
 // 判断链表是否是回文链表
-func palindromes(head *Node) bool {
+func palindromes(head *list.Node) bool {
 	// 因为链表没法从后往前遍历，所以我们可以先将链表反转一下
 	last := reverse(head)
 
@@ -109,15 +97,15 @@ func palindromes(head *Node) bool {
 
 // 判断链表是否是回文链表
 // 后续遍历法，树本质就是一个特殊的链表罢了
-var left *Node
+var left *list.Node
 
-func isPalindromes(head *Node) bool {
+func isPalindromes(head *list.Node) bool {
 	temp := *head
 	left = &temp
 	return palindromes2(head)
 }
 
-func palindromes2(right *Node) bool {
+func palindromes2(right *list.Node) bool {
 	if right == nil {
 		return true
 	}
@@ -130,8 +118,8 @@ func palindromes2(right *Node) bool {
 }
 
 // 合并两个有序链表
-func merge(l1 *Node, l2 *Node) *Node {
-	head := &Node{} // 虚拟头节点
+func merge(l1 *list.Node, l2 *list.Node) *list.Node {
+	head := &list.Node{} // 虚拟头节点
 	pre := head
 	for l1 != nil && l2 != nil {
 		if l1.Val <= l2.Val {
@@ -152,7 +140,7 @@ func merge(l1 *Node, l2 *Node) *Node {
 }
 
 // 合并两个有序链表， 递归版
-func merge2(l1 *Node, l2 *Node) *Node {
+func merge2(l1 *list.Node, l2 *list.Node) *list.Node {
 	// 当l1为空时递归结束，直接将l2链接到Next上即可
 	if l1 == nil {
 		return l2
@@ -167,4 +155,38 @@ func merge2(l1 *Node, l2 *Node) *Node {
 		l2.Next = merge2(l1, l2.Next)
 		return l2
 	}
+}
+
+// 环形链表
+// 判断该链表中是否存在环
+// 只要一个元素出现两次，那么必定是有环的
+func hasCycle(head *list.Node) bool {
+	exist := make(map[*list.Node]bool)
+	for head != nil {
+		if _, ok := exist[head]; ok {
+			return true
+		}
+		exist[head] = true
+		head = head.Next
+	}
+	return false
+}
+
+// 使用双指针，优化空间复杂度
+func hasCycle2(head *list.Node) bool {
+	if head == nil || head.Next == nil {
+		return false
+	}
+
+	slow := head
+	quick := head.Next
+	for slow != quick {
+		if quick == nil || quick.Next == nil {
+			return false
+		}
+		// 快指针要比慢指针走快点
+		quick = quick.Next.Next
+		slow = slow.Next
+	}
+	return true
 }
