@@ -4,6 +4,7 @@ import (
 	"testing"
 )
 
+// 1 -> 2 -> 3 -> 4 -> 5
 func getHead() *Node {
 	node5 := NewNode(5, nil)
 	node4 := NewNode(4, node5)
@@ -11,6 +12,13 @@ func getHead() *Node {
 	node2 := NewNode(2, node3)
 	node1 := NewNode(1, node2)
 	return node1
+}
+
+func getHead2() *Node {
+	node7 := NewNode(7, nil)
+	node6 := NewNode(6, node7)
+	node0 := NewNode(0, node6)
+	return node0
 }
 
 // 1 -> 2 -> 2 -> 1 -> nil
@@ -79,4 +87,26 @@ func TestPalindromes(t *testing.T) {
 
 	t.Log(isPalindromes(getHead()))
 	t.Log(isPalindromes(getPalindromes()))
+}
+
+func TestMergeList(t *testing.T) {
+	l1 := getHead()
+	l2 := getHead2()
+
+	l3 := merge(l1, l2)
+	for l3 != nil {
+		t.Log(l3.Val)
+		l3 = l3.Next
+	}
+}
+
+func TestMergeList2(t *testing.T) {
+	l1 := getHead()
+	l2 := getHead2()
+
+	l3 := merge2(l1, l2)
+	for l3 != nil {
+		t.Log(l3.Val)
+		l3 = l3.Next
+	}
 }

@@ -128,3 +128,43 @@ func palindromes2(right *Node) bool {
 	left = left.Next
 	return b
 }
+
+// 合并两个有序链表
+func merge(l1 *Node, l2 *Node) *Node {
+	head := &Node{} // 虚拟头节点
+	pre := head
+	for l1 != nil && l2 != nil {
+		if l1.Val <= l2.Val {
+			pre.Next = l1
+			l1 = l1.Next
+		} else {
+			pre.Next = l2
+			l2 = l2.Next
+		}
+		pre = pre.Next
+	}
+	if l1 == nil {
+		pre.Next = l2
+	} else {
+		pre.Next = l1
+	}
+	return head.Next
+}
+
+// 合并两个有序链表， 递归版
+func merge2(l1 *Node, l2 *Node) *Node {
+	// 当l1为空时递归结束，直接将l2链接到Next上即可
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	if l1.Val <= l2.Val {
+		l1.Next = merge2(l1.Next, l2)
+		return l1
+	} else {
+		l2.Next = merge2(l1, l2.Next)
+		return l2
+	}
+}
