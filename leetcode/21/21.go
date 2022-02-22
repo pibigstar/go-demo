@@ -1,5 +1,7 @@
 package main
 
+import "strconv"
+
 // 给你一个字符串表达式s ，实现一个基本计算器来计算并返回它的值
 // 思路：用一个栈保存，所有运算最后都是一个个数做加法
 func calculate(s string) int {
@@ -17,7 +19,9 @@ func calculate(s string) int {
 		}
 
 		if c >= '0' && c <= '9' {
-			currNum = currNum*10 + int(s[i]-'0')
+			n, _ := strconv.Atoi(string(c))
+			// n := int(s[i] - '0')
+			currNum = currNum*10 + n
 		}
 
 		switch prevOp {
