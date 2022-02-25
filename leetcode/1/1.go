@@ -1,6 +1,9 @@
 package main
 
-import "go-demo/leetcode/common/list"
+import (
+	"go-demo/leetcode/common/list"
+	"sort"
+)
 
 // 链表反转
 func reverse(head *list.Node) *list.Node {
@@ -155,6 +158,38 @@ func merge2(l1 *list.Node, l2 *list.Node) *list.Node {
 		l2.Next = merge2(l1, l2.Next)
 		return l2
 	}
+}
+
+// 合并k个有序链表
+func mergeKList(nodes []*list.Node) *list.Node {
+	var ans *list.Node
+	for i := 0; i < len(nodes); i++ {
+		ans = merge(ans, nodes[i])
+	}
+	return ans
+}
+
+// 合并k个有序链表
+// 合到一个数组后，排序返回
+func mergeKList2(lists []*list.Node) *list.Node {
+	var nodes []*list.Node
+	for _, node := range lists {
+		for node != nil {
+			nodes = append(nodes, node)
+			node = node.Next
+		}
+	}
+	sort.Slice(nodes, func(i, j int) bool {
+		return nodes[i].Val < nodes[j].Val
+	})
+
+	head := &list.Node{}
+	pre := head
+	for _, node := range nodes {
+		pre.Next = node
+		pre = pre.Next
+	}
+	return head.Next
 }
 
 // 环形链表

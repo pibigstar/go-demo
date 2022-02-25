@@ -30,6 +30,14 @@ func GetHead2() *Node {
 	return node0
 }
 
+// 9 -> 11 -> 18
+func GetHead3() *Node {
+	node18 := NewNode(18, nil)
+	node11 := NewNode(11, node18)
+	node9 := NewNode(9, node11)
+	return node9
+}
+
 // 1 -> 2 -> 2 -> 1 -> nil
 func GetPalindromes() *Node {
 	node4 := NewNode(1, nil)

@@ -88,6 +88,38 @@ func TestMergeList2(t *testing.T) {
 	}
 }
 
+// 合并k个有序链表
+func TestMergeKList(t *testing.T) {
+	l1 := list.GetHead()
+	l2 := list.GetHead2()
+	l3 := list.GetHead3()
+
+	lists := []*list.Node{
+		l1, l2, l3,
+	}
+	result := mergeKList(lists)
+	for result != nil {
+		t.Log(result.Val)
+		result = result.Next
+	}
+}
+
+// 合并k个有序链表
+func TestMergeKList2(t *testing.T) {
+	l1 := list.GetHead()
+	l2 := list.GetHead2()
+	l3 := list.GetHead3()
+
+	lists := []*list.Node{
+		l1, l2, l3,
+	}
+	result := mergeKList2(lists)
+	for result != nil {
+		t.Log(result.Val)
+		result = result.Next
+	}
+}
+
 // 判断链表是否有环
 func TestHasCircle(t *testing.T) {
 	t.Log(hasCycle(list.GetCycle()))
