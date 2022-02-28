@@ -99,12 +99,13 @@ require (
 	github.com/yanyiwu/gojieba v1.1.2
 	github.com/youzan/go-nsq v1.3.1
 	go.mongodb.org/mongo-driver v1.2.0
+	go.uber.org/goleak v1.1.12
 	go.uber.org/ratelimit v0.1.0
 	go.uber.org/zap v1.13.0 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
 	golang.org/x/net v0.0.0-20211209124913-491a49abca63
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
-	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
+	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
 	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e
 	golang.org/x/text v0.3.6
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4

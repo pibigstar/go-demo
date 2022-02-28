@@ -10,6 +10,7 @@
 - [disk](disk): 获取系统和U盘盘符
 - [encode](encode): 中文编码与解码
 - [env](env): 当前环境判断
+- [goleak](goleak): goroutine泄漏检测
 - [gops](gops): 获取服务器CPU内存使用情况
 - [govaluate](govaluate): 表达式
 - [hystrix](hystrix): 熔断
