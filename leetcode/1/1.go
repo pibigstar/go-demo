@@ -225,3 +225,30 @@ func hasCycle2(head *list.Node) bool {
 	}
 	return true
 }
+
+// 链表求和
+// https://leetcode-cn.com/problems/sum-lists-lcci/
+func SumList(l1, l2 *list.Node) *list.Node {
+	head := &list.Node{}
+	prev := head
+
+	t := 0 // 进位
+	for l1 != nil || l2 != nil || t != 0 {
+		num := t
+		if l1 != nil {
+			num += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			num += l2.Val
+			l2 = l2.Next
+		}
+		prev.Next = &list.Node{
+			Val: num % 10,
+		}
+		prev = prev.Next
+
+		t = num / 10 // 逢10进位
+	}
+	return head.Next
+}

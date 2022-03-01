@@ -127,3 +127,14 @@ func TestHasCircle(t *testing.T) {
 	// 双指针法
 	t.Log(hasCycle2(list.GetCycle()))
 }
+
+func TestSumList(t *testing.T) {
+	l1 := list.GetHead()
+	l2 := list.GetHead()
+
+	result := SumList(l1, l2)
+	for result != nil {
+		t.Log(result.Val)
+		result = result.Next
+	}
+}
