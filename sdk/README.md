@@ -1,5 +1,13 @@
 # 使用Go语言对接第三方工具
 
+
+## 框架
+- [x] [gin](gin)
+- [ ] [gf](gf)
+- [ ] [beego](beego)
+- [ ] [kite](kite)
+- [x] [wire](wire)
+
 ## 数据库
 - [x] [Mysql](mysql)
 - [x] [Redis](redis)
@@ -15,6 +23,7 @@
 - [x] [Nsq](nsq)
 - [x] [Mqtt](mqtt)
 - [x] [RabbitMQ](rabbitmq)
+- [x] [rocketmq](rocketmq)
 
 ## 第三方登陆
 - [x] [QQ登录](qq)
