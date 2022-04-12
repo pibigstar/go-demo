@@ -3,7 +3,7 @@
 
 ## 框架
 - [x] [gin](gin)
-- [ ] [gf](gf)
+- [x] [gf](gf)
 - [ ] [beego](beego)
 - [ ] [kite](kite)
 - [x] [wire](wire)
