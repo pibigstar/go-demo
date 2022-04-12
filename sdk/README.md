@@ -4,8 +4,9 @@
 ## 框架
 - [x] [gin](gin)
 - [x] [gf](gf)
+- [ ] [kit](kit)
 - [ ] [beego](beego)
-- [ ] [kite](kite)
+- [x] [kite](kite)
 - [x] [wire](wire)
 
 ## 数据库

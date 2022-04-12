@@ -135,11 +135,16 @@ require (
 	github.com/hashicorp/go-rootcerts v1.0.0 // indirect
 	github.com/hashicorp/golang-lru v0.5.0 // indirect
 	github.com/hashicorp/serf v0.8.2 // indirect
+	github.com/igm/sockjs-go v3.0.2+incompatible // indirect
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
 	github.com/jinzhu/now v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
+	github.com/juju/ratelimit v1.0.1 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
+	github.com/koding/cache v0.0.0-20161222233015-e8a81b0b3f20 // indirect
+	github.com/koding/kite v0.0.0-20180710021347-baa1a54919e3
+	github.com/koding/logging v0.0.0-20160720134017-8b5a689ed69b // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.1.1 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
