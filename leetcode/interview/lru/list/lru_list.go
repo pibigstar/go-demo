@@ -51,19 +51,18 @@ func (l *LRUList) Put(key, value interface{}) {
 		l.moveToFirst(node)
 	} else {
 		// 到达最大容量了，删除最后面的值
-		if l.len == l.cap {
+		if l.len >= l.cap {
 			delete(l.nodes, l.last.key)
 			l.removeLast(node)
-		} else {
-			l.len++
 		}
+		node := &Node{
+			key:   key,
+			value: value,
+		}
+		l.nodes[key] = node
+		l.insertToFirst(node)
+		l.len++
 	}
-	node := &Node{
-		key:   key,
-		value: value,
-	}
-	l.nodes[key] = node
-	l.insertToFirst(node)
 }
 
 func (l *LRUList) moveToFirst(node *Node) {

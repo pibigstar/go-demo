@@ -38,7 +38,8 @@ func (l *LRUArray) findValue(value int) int {
 
 func (l *LRUArray) insertToFirst(value int) {
 	if l.len > 1 {
-		for i := l.len - 1; i > -1; i-- {
+		// 将所有元素的位置往后挪一下
+		for i := l.len - 1; i >= 0; i-- {
 			l.arrays[i+1] = l.arrays[i]
 		}
 	}
