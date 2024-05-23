@@ -28,14 +28,10 @@ func ReplaceWithStyle(file string) error {
 		return err
 	}
 	paragraphs := []document.Paragraph{}
-	for _, p := range doc.Paragraphs() {
-		paragraphs = append(paragraphs, p)
-	}
+	paragraphs = append(paragraphs, doc.Paragraphs()...)
 
 	for _, sdt := range doc.StructuredDocumentTags() {
-		for _, p := range sdt.Paragraphs() {
-			paragraphs = append(paragraphs, p)
-		}
+		paragraphs = append(paragraphs, sdt.Paragraphs()...)
 	}
 
 	for _, p := range paragraphs {
