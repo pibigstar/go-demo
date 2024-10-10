@@ -30,6 +30,7 @@
 - [multiconfig](multiconfig): 读取配置文件操作
 - [name](name): 自动生成姓名
 - [oauth2](oauth2): oauth2授权中心
+- [ocr](ocr): 图片识别文字
 - [pinyin](pinyin): 汉字转拼音
 - [pool](pool): 批量操作线程池
 - [qrcode](qrcode): 二维码生成工具
@@ -42,6 +43,7 @@
 - [walk](walk): Go使用walk写GUI
 - [word](word): Go操作docx文件
 - [xlsx](xlsx): Go操作xlsx文件
+- [inject](inject): Go对象注入
 
 
 
