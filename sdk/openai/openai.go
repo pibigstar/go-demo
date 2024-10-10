@@ -17,8 +17,7 @@ import (
 // token计算：https://platform.openai.com/tokenizer
 // 支持的token最大长度为4097
 
-// const token = "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"
-const token = "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"
+const token = "xxx"
 
 func TestChatCompletion(t *testing.T) {
 	client := openai.NewClient(token)
