@@ -1,11 +1,11 @@
 package main
 
 import (
-	_ "embed"
 	"fmt"
-	"github.com/go-ego/gse/hmm/idf"
 	"regexp"
 	"strings"
+
+	"github.com/go-ego/gse/hmm/idf"
 
 	"github.com/go-ego/gse"
 )
