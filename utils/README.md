@@ -19,7 +19,11 @@
 - [image](images): 图片常用操作
 - [ip](ip): 获取本地IP与公网IP并得到地址
 - [jieba](jieba): 中文分词
+- [gse](gse): gse中文分词
+- [jsonpath](jsonpath): jsonpath操作
+- [jsondiff](jsondiff): jsondiff操作
 - [js](js): Go调用JavaScript脚本
+- [kmeans](kmeans): kmeans聚类算法
 - [markdown](markdown): Go解析markdown
 - [metadata](metadata): 上下文Context操作
 - [mock](mock): mock工具使用
