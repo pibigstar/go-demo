@@ -19,13 +19,18 @@
 - [image](images): 图片常用操作
 - [ip](ip): 获取本地IP与公网IP并得到地址
 - [jieba](jieba): 中文分词
+- [gse](gse): gse中文分词
+- [jsonpath](jsonpath): jsonpath操作
+- [jsondiff](jsondiff): jsondiff操作
 - [js](js): Go调用JavaScript脚本
+- [kmeans](kmeans): kmeans聚类算法
 - [markdown](markdown): Go解析markdown
 - [metadata](metadata): 上下文Context操作
 - [mock](mock): mock工具使用
 - [multiconfig](multiconfig): 读取配置文件操作
 - [name](name): 自动生成姓名
 - [oauth2](oauth2): oauth2授权中心
+- [ocr](ocr): 图片识别文字
 - [pinyin](pinyin): 汉字转拼音
 - [pool](pool): 批量操作线程池
 - [qrcode](qrcode): 二维码生成工具
@@ -38,6 +43,7 @@
 - [walk](walk): Go使用walk写GUI
 - [word](word): Go操作docx文件
 - [xlsx](xlsx): Go操作xlsx文件
+- [inject](inject): Go对象注入
 
 
 
