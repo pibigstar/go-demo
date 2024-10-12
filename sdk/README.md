@@ -39,3 +39,4 @@
 - [x] [链路跟踪](trace)
 - [x] [consul使用](consul)
 - [x] [websocket](websocket)
+- [x] [openai](openai)

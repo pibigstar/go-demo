@@ -94,6 +94,11 @@ require (
 )
 
 require (
+	github.com/huandu/xstrings v1.4.0 // indirect
+	github.com/vcaesar/cedar v0.20.2 // indirect
+)
+
+require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/DataDog/zstd v1.3.5 // indirect
