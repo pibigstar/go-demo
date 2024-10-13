@@ -9,6 +9,7 @@
 - [crypto](crypto): 签名与加密工具类
 - [ctxkit](ctxkit): context工具包
 - [disk](disk): 获取系统和U盘盘符
+- [daemon](daemon): 进程守护
 - [encode](encode): 中文编码与解码
 - [env](env): 当前环境判断
 - [goleak](goleak): goroutine泄漏检测
