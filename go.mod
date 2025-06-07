@@ -162,6 +162,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/juju/ratelimit v1.0.1 // indirect
+	github.com/kardianos/osext v0.0.0-20190222173326-2bc1f35cddc0 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/koding/cache v0.0.0-20161222233015-e8a81b0b3f20 // indirect
 	github.com/koding/logging v0.0.0-20160720134017-8b5a689ed69b // indirect
@@ -201,6 +202,7 @@ require (
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/sashabaranov/go-openai v1.32.0
 	github.com/satori/go.uuid v1.2.0 // indirect
+	github.com/sevlyar/go-daemon v0.1.6
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/shurcooL/sanitized_anchor_name v1.0.0 // indirect
 	github.com/sirupsen/logrus v1.4.2 // indirect
